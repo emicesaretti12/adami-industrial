@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { empresa } from "@/lib/adami-data";
 
+const HERO_BG = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920&q=80";
+
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -28,7 +30,7 @@ export default function Hero() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(/manus-storage/hero-industrial_debcfda4.jpg)`,
+            backgroundImage: `url(${HERO_BG})`,
             backgroundSize: "cover",
             backgroundPosition: "center 40%",
           }}

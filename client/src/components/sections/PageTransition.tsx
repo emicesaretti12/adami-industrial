@@ -24,7 +24,7 @@ export default function PageLoader() {
         className="flex items-center gap-4"
       >
         <img
-          src="/manus-storage/adami-logo_11c9fab3.png"
+          src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663751686161/MKadoAWFfElgzipt.webp"
           alt="ADAMI"
           className="h-12 w-12"
         />

@@ -49,7 +49,7 @@ export default function Navbar() {
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <img
-            src="/manus-storage/adami-logo_11c9fab3.png"
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663751686161/MKadoAWFfElgzipt.webp"
             alt="ADAMI"
             className="h-8 w-8 lg:h-10 lg:w-10 transition-all duration-300"
           />

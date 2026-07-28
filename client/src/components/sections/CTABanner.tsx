@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
+const CTA_BG = "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1920&q=80";
+
 export default function CTABanner() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -19,7 +21,7 @@ export default function CTABanner() {
           <div
             className="absolute inset-0 scale-100 group-hover:scale-105 transition-transform duration-[2000ms] ease-out"
             style={{
-              backgroundImage: `url(/manus-storage/metrology-faro_0e318265.jpg)`,
+              backgroundImage: `url(${CTA_BG})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

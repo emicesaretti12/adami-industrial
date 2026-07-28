@@ -69,7 +69,7 @@ export const servicios = {
         "Gestión de proyectos industriales",
         "Software de medición PolyWorks",
       ],
-      imagen: "/manus-storage/precision-machining_fe2b6ca5.jpg",
+      imagen: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80",
     },
     {
       id: "metalurgicos",
@@ -90,7 +90,7 @@ export const servicios = {
         { area: "Soldadura", superficie: "100 m² cubiertos" },
         { area: "Pintura", superficie: "200 m² cubiertos", detalle: "Capacidad para contener grandes proyectos, con horno de secado que permite cumplir los tiempos de entrega independientemente de las condiciones climáticas" },
       ],
-      imagen: "/manus-storage/robot-assembly_0e189a81.jpg",
+      imagen: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80",
     },
     {
       id: "industriales",
@@ -113,7 +113,7 @@ export const servicios = {
         equipos: ["Brazo FARO Platinum", "Laser Tracker FARO"],
         software: ["PolyWorks"],
       },
-      imagen: "/manus-storage/metrology-faro_0e318265.jpg",
+      imagen: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80",
     },
   ],
 };
