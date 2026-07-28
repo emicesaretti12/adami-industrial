@@ -1,103 +1,123 @@
-import { Target, Eye, Award } from "lucide-react";
-import RevealSection from "@/components/RevealSection";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { empresa } from "@/lib/adami-data";
+import { Award, Eye, Target } from "lucide-react";
 
-/**
- * Empresa section — about ADAMI with vision, mission, and quality policy.
- */
+const cards = [
+  { icon: Eye, title: "Visión", description: empresa.vision, color: "from-blue-500/10 to-cyan-500/10" },
+  { icon: Target, title: "Misión", description: empresa.mision, color: "from-purple-500/10 to-pink-500/10" },
+  { icon: Award, title: "Calidad", description: empresa.politicaCalidad.compromiso, color: "from-amber-500/10 to-orange-500/10" },
+];
+
 export default function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [120, -120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0.3, 1, 1]);
+
   return (
-    <section id="empresa" className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 tech-grid opacity-5" />
+    <section id="empresa" className="relative py-36 lg:py-48 overflow-hidden" ref={containerRef}>
+      {/* Ambient glow */}
+      <motion.div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-primary/3 blur-[180px] -z-10"
+        style={{ y }}
+      />
 
-      <div className="container relative z-10">
-        {/* Section header */}
-        <RevealSection className="max-w-3xl mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-12 bg-primary" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-              01 / Empresa
-            </span>
+      <motion.div className="container" style={{ opacity }}>
+        {/* Header with reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          className="max-w-4xl mb-24"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <motion.div
+              className="h-px bg-primary"
+              initial={{ scaleX: 0, originX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              style={{ width: "50px" }}
+            />
+            <span className="font-sans text-[11px] font-semibold tracking-[0.3em] text-primary uppercase">01 / Empresa</span>
           </div>
-          <h2 className="font-display font-600 text-foreground leading-tight"
-              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
-            Una organización argentina <span className="text-amber-gradient">centrada en la integración</span> de tecnologías
+          <h2 className="font-display font-700 text-foreground leading-[0.92] tracking-tight" style={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)" }}>
+            Más de tres décadas
+            <br />
+            <span className="text-muted-foreground">de excelencia industrial</span>
           </h2>
-        </RevealSection>
-
-        {/* Main description */}
-        <RevealSection delay={100} className="mb-20">
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl">
+          <motion.p
+            className="mt-10 text-lg text-muted-foreground leading-[1.8] font-light max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          >
             {empresa.quienesSomos}
-          </p>
-        </RevealSection>
+          </motion.p>
+        </motion.div>
 
-        {/* Vision, Mission, Quality cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Vision */}
-          <RevealSection delay={0}>
-            <div className="industrial-card bg-card border border-border p-8 h-full rounded-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <Eye className="text-primary" size={24} />
-                <h3 className="font-display font-500 text-xl text-foreground uppercase tracking-wide">Visión</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                {empresa.vision}
-              </p>
-            </div>
-          </RevealSection>
-
-          {/* Mission */}
-          <RevealSection delay={100}>
-            <div className="industrial-card bg-card border border-border p-8 h-full rounded-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="text-primary" size={24} />
-                <h3 className="font-display font-500 text-xl text-foreground uppercase tracking-wide">Misión</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                {empresa.mision}
-              </p>
-            </div>
-          </RevealSection>
-
-          {/* Quality */}
-          <RevealSection delay={200}>
-            <div className="industrial-card bg-card border border-border p-8 h-full rounded-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="text-primary" size={24} />
-                <h3 className="font-display font-500 text-xl text-foreground uppercase tracking-wide">Calidad</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm mb-4">
-                {empresa.politicaCalidad.compromiso}
-              </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-sm">
-                <span className="font-mono text-xs text-primary font-500">ISO 9001:2015</span>
-              </div>
-            </div>
-          </RevealSection>
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {cards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, delay: i * 0.2, ease: [0.23, 1, 0.32, 1] }}
+                className="group relative p-8 lg:p-10 rounded-3xl border border-white/5 hover:border-white/15 transition-all duration-700 overflow-hidden"
+              >
+                {/* Hover gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                
+                <div className="relative z-10">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-white/10 transition-colors duration-500"
+                  >
+                    <Icon className="text-primary" size={24} strokeWidth={1.5} />
+                  </motion.div>
+                  <h3 className="font-display text-xl font-600 text-foreground mb-4 tracking-tight">{card.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-[1.7] font-light">{card.description}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Quality pillars */}
-        <RevealSection delay={300} className="mt-16">
-          <div className="cut-line mb-12" />
-          <h3 className="font-display font-500 text-2xl text-foreground mb-8 uppercase tracking-wide">
-            Pilares de Calidad
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {empresa.politicaCalidad.pilaresCalidad.map((pilar, i) => (
-              <div
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-28"
+        >
+          <div className="flex items-center gap-3 mb-10">
+            <div className="h-px w-6 bg-white/20" />
+            <h3 className="font-display text-xs font-semibold text-muted-foreground uppercase tracking-[0.25em]">Pilares de calidad</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+            {empresa.politicaCalidad.pilaresCalidad.map((pillar, i) => (
+              <motion.div
                 key={i}
-                className="flex items-start gap-3 p-4 bg-secondary/50 border border-border rounded-sm hover:border-primary/50 transition-colors duration-300"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
+                className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 text-center hover:bg-white/[0.05] hover:border-white/15 hover:-translate-y-1 transition-all duration-300"
               >
-                <span className="font-mono text-xs text-primary mt-0.5 shrink-0">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-sm text-muted-foreground">{pilar}</span>
-              </div>
+                <span className="font-sans text-xs font-medium text-muted-foreground leading-relaxed block">{pillar}</span>
+              </motion.div>
             ))}
           </div>
-        </RevealSection>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

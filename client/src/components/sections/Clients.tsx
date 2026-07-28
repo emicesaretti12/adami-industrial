@@ -1,111 +1,114 @@
-import { Handshake } from "lucide-react";
-import RevealSection from "@/components/RevealSection";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { clientes } from "@/lib/adami-data";
 
-/**
- * Clients section — featured clients in a marquee, strategic alliances,
- * and a full client list.
- */
 export default function Clients() {
-  // Duplicate for seamless marquee
-  const marqueeClients = [...clientes.destacados, ...clientes.destacados];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0.3, 1, 1]);
 
   return (
-    <section id="clientes" className="relative py-24 lg:py-32 bg-card border-y border-border overflow-hidden">
-      <div className="absolute inset-0 tech-grid opacity-5" />
+    <section id="clientes" className="relative py-36 lg:py-48 overflow-hidden" ref={containerRef}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="container relative z-10">
+      <motion.div className="container" style={{ opacity }}>
         {/* Header */}
-        <RevealSection className="max-w-3xl mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-12 bg-primary" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-              04 / Clientes
-            </span>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          className="max-w-4xl mb-24"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <motion.div
+              className="h-px bg-primary"
+              initial={{ scaleX: 0, originX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              style={{ width: "50px" }}
+            />
+            <span className="font-sans text-[11px] font-semibold tracking-[0.3em] text-primary uppercase">04 / Clientes</span>
           </div>
-          <h2 className="font-display font-600 text-foreground leading-tight"
-              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
-            La industria nos <span className="text-amber-gradient">respalda</span>
+          <h2 className="font-display font-700 text-foreground leading-[0.92] tracking-tight" style={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)" }}>
+            Empresas que
+            <br />
+            <span className="text-muted-foreground">confían en nosotros</span>
           </h2>
-        </RevealSection>
+          <p className="mt-8 text-lg text-muted-foreground leading-[1.7] font-light max-w-2xl">
+            Trabajamos junto a las principales empresas de la industria automotriz, aeronáutica, aeroespacial y más.
+          </p>
+        </motion.div>
 
-        {/* Strategic alliances */}
-        <RevealSection delay={100} className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <Handshake className="text-primary" size={20} />
-            <h3 className="font-display font-500 text-lg text-foreground uppercase tracking-wide">
-              Alianzas Estratégicas
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-4">
-            {clientes.alianzasEstrategicas.map((aliado, i) => (
-              <div
-                key={i}
-                className="px-6 py-3 bg-primary/10 border border-primary/30 rounded-sm font-display font-600 text-lg text-primary uppercase tracking-wide"
-              >
-                {aliado}
-              </div>
-            ))}
-          </div>
-        </RevealSection>
-      </div>
+        {/* Featured clients — large grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-12"
+        >
+          {clientes.destacados.map((client, i) => (
+            <motion.div
+              key={client}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.04, ease: [0.23, 1, 0.32, 1] }}
+              className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/15 hover:-translate-y-0.5 transition-all duration-300 text-center"
+            >
+              <span className="font-display text-sm font-500 text-muted-foreground hover:text-foreground transition-colors duration-300">
+                {client}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
 
-      {/* Marquee — full width */}
-      <RevealSection delay={200} className="mb-16">
-        <div className="relative overflow-hidden py-8 border-y border-border bg-background">
+        {/* Marquee of other clients */}
+        <div className="overflow-hidden py-10 border-t border-b border-white/5">
           <div className="flex animate-marquee whitespace-nowrap">
-            {marqueeClients.map((client, i) => (
+            {[...clientes.otros, ...clientes.otros].map((client, i) => (
               <span
                 key={i}
-                className="inline-flex items-center mx-8 font-display font-500 text-2xl text-muted-foreground/40 hover:text-primary transition-colors duration-300"
+                className="mx-8 font-sans text-xs font-medium text-muted-foreground/30 whitespace-nowrap"
               >
                 {client}
               </span>
             ))}
           </div>
         </div>
-      </RevealSection>
 
-      {/* Full client list */}
-      <div className="container relative z-10">
-        <RevealSection delay={100}>
-          <h3 className="font-mono text-xs uppercase tracking-widest text-primary mb-6">
-            Clientes destacados
-          </h3>
-        </RevealSection>
-        <RevealSection delay={200}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
-            {clientes.destacados.map((client, i) => (
-              <div
+        {/* Alliances */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-14"
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px w-6 bg-white/20" />
+            <h3 className="font-display text-xs font-semibold text-muted-foreground uppercase tracking-[0.25em]">
+              Alianzas estratégicas
+            </h3>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {clientes.alianzasEstrategicas.map((alliance, i) => (
+              <motion.span
                 key={i}
-                className="flex items-center gap-2 py-2 border-b border-border/50 hover:border-primary/30 transition-colors"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 font-display text-sm font-500 text-foreground hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
               >
-                <span className="font-mono text-[10px] text-primary/50">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-sm text-muted-foreground">{client}</span>
-              </div>
+                {alliance}
+              </motion.span>
             ))}
           </div>
-        </RevealSection>
-
-        {/* Other clients */}
-        <RevealSection delay={300} className="mt-12">
-          <details className="group">
-            <summary className="flex items-center gap-2 cursor-pointer font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
-              <span className="inline-block w-4 h-4 border border-current rounded-sm group-open:rotate-45 transition-transform duration-200 flex items-center justify-center text-xs leading-none">+</span>
-              Ver listado completo de clientes ({clientes.otros.length})
-            </summary>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
-              {clientes.otros.map((client, i) => (
-                <div key={i} className="text-sm text-muted-foreground/70 py-1">
-                  {client}
-                </div>
-              ))}
-            </div>
-          </details>
-        </RevealSection>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
