@@ -1,25 +1,33 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Hero from "@/components/sections/Hero";
+import Stats from "@/components/sections/Stats";
+import About from "@/components/sections/About";
+import Services from "@/components/sections/Services";
+import Industries from "@/components/sections/Industries";
+import CTABanner from "@/components/sections/CTABanner";
+import Clients from "@/components/sections/Clients";
+import Contact from "@/components/sections/Contact";
 
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * ADAMI — Home Page
+ * Composes all sections into a single-page scrolling experience.
  */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-background">
+      <Navbar />
       <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+        <Hero />
+        <Stats />
+        <About />
+        <Services />
+        <Industries />
+        <CTABanner />
+        <Clients />
+        <Contact />
       </main>
+      <Footer />
     </div>
   );
 }
