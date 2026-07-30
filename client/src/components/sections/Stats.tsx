@@ -10,38 +10,32 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
   useEffect(() => {
     if (!isInView) return;
     let start: number | null = null;
-    const duration = 2500;
+    const duration = 2000;
     const animate = (ts: number) => {
       if (!start) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
+      const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * value));
       if (progress < 1) requestAnimationFrame(animate);
     };
-    const timer = setTimeout(() => requestAnimationFrame(animate), index * 200);
+    const timer = setTimeout(() => requestAnimationFrame(animate), index * 150);
     return () => clearTimeout(timer);
   }, [isInView, value, index]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.15, ease: [0.23, 1, 0.32, 1] }}
-      className="relative text-center lg:text-left"
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Decorative line */}
-      <div className="hidden lg:block absolute left-0 top-0 w-px h-full bg-gradient-to-b from-white/10 to-transparent" />
-      
-      <div className="lg:pl-8">
-        <div className="font-display text-6xl lg:text-8xl font-700 tracking-tighter text-foreground">
-          <span>{count}</span>
-          <span className="text-primary">{suffix}</span>
-        </div>
-        <div className="mt-4 font-sans text-sm font-medium text-muted-foreground tracking-wide">
-          {label}
-        </div>
+      <div className="font-display text-5xl lg:text-7xl font-semibold tracking-tight text-foreground">
+        <span>{count}</span>
+        <span className="text-accent">{suffix}</span>
+      </div>
+      <div className="mt-2 font-sans text-sm text-muted-foreground">
+        {label}
       </div>
     </motion.div>
   );
@@ -49,12 +43,9 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
 
 export default function Stats() {
   return (
-    <section className="relative py-28 lg:py-36">
-      {/* Top gradient border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      
-      <div className="container">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20">
+    <section className="border-t border-border">
+      <div className="container py-16 lg:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
           {stats.map((stat, i) => (
             <StatItem key={i} {...stat} index={i} />
           ))}

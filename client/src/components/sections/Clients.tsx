@@ -1,77 +1,58 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { clientes } from "@/lib/adami-data";
 
 export default function Clients() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0.3, 1, 1]);
-
   return (
-    <section id="clientes" className="relative py-36 lg:py-48 overflow-hidden" ref={containerRef}>
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-      <motion.div className="container" style={{ opacity }}>
+    <section id="clientes" className="py-24 lg:py-32 border-t border-border">
+      <div className="container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="max-w-4xl mb-24"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-16"
         >
-          <div className="flex items-center gap-4 mb-8">
-            <motion.div
-              className="h-px bg-primary"
-              initial={{ scaleX: 0, originX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-              style={{ width: "50px" }}
-            />
-            <span className="font-sans text-[11px] font-semibold tracking-[0.3em] text-primary uppercase">04 / Clientes</span>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-accent" />
+            <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Clientes</span>
           </div>
-          <h2 className="font-display font-700 text-foreground leading-[0.92] tracking-tight" style={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)" }}>
-            Empresas que
-            <br />
+          <h2 className="font-display text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
+            Empresas que{" "}
             <span className="text-muted-foreground">confían en nosotros</span>
           </h2>
-          <p className="mt-8 text-lg text-muted-foreground leading-[1.7] font-light max-w-2xl">
+          <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
             Trabajamos junto a las principales empresas de la industria automotriz, aeronáutica, aeroespacial y más.
           </p>
         </motion.div>
 
-        {/* Featured clients — large grid */}
+        {/* Featured clients grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-12"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 mb-10"
         >
           {clientes.destacados.map((client, i) => (
-            <motion.div
+            <div
               key={client}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.04, ease: [0.23, 1, 0.32, 1] }}
-              className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/15 hover:-translate-y-0.5 transition-all duration-300 text-center"
+              className="p-4 card-clean text-center flex items-center justify-center"
             >
-              <span className="font-display text-sm font-500 text-muted-foreground hover:text-foreground transition-colors duration-300">
+              <span className="font-sans text-xs font-medium text-muted-foreground">
                 {client}
               </span>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
 
         {/* Marquee of other clients */}
-        <div className="overflow-hidden py-10 border-t border-b border-white/5">
+        <div className="overflow-hidden py-8 border-y border-border">
           <div className="flex animate-marquee whitespace-nowrap">
             {[...clientes.otros, ...clientes.otros].map((client, i) => (
               <span
                 key={i}
-                className="mx-8 font-sans text-xs font-medium text-muted-foreground/30 whitespace-nowrap"
+                className="mx-6 font-sans text-xs text-muted-foreground/40 whitespace-nowrap"
               >
                 {client}
               </span>
@@ -81,34 +62,30 @@ export default function Clients() {
 
         {/* Alliances */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-          className="mt-14"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12"
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px w-6 bg-white/20" />
-            <h3 className="font-display text-xs font-semibold text-muted-foreground uppercase tracking-[0.25em]">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-6 h-px bg-muted-foreground/30" />
+            <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">
               Alianzas estratégicas
             </h3>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {clientes.alianzasEstrategicas.map((alliance, i) => (
-              <motion.span
+              <span
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 font-display text-sm font-500 text-foreground hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
+                className="px-4 py-2 rounded border border-border font-sans text-sm text-foreground"
               >
                 {alliance}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

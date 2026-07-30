@@ -23,8 +23,8 @@ export default function CursorEffect() {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 8);
-      cursorY.set(e.clientY - 8);
+      cursorX.set(e.clientX - 6);
+      cursorY.set(e.clientY - 6);
     };
 
     const handleHoverStart = () => setIsHovering(true);
@@ -32,7 +32,6 @@ export default function CursorEffect() {
 
     attachListeners();
 
-    // Re-attach listeners when DOM changes
     const observer = new MutationObserver(() => {
       attachListeners();
     });
@@ -48,26 +47,15 @@ export default function CursorEffect() {
 
   return (
     <>
-      {/* Main cursor dot */}
+      {/* Main cursor dot — refined and subtle */}
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 rounded-full bg-primary pointer-events-none z-[9999] mix-blend-difference hidden lg:block"
+        className="fixed top-0 left-0 w-[10px] h-[10px] rounded-full bg-accent pointer-events-none z-[9999] hidden lg:block"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          scale: isHovering ? 3 : 1,
-          opacity: isHovering ? 0.7 : 0.5,
+          scale: isHovering ? 1.2 : 1,
+          opacity: isHovering ? 1 : 0.8,
         }}
-      />
-      {/* Outer ring */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/20 pointer-events-none z-[9998] mix-blend-difference hidden lg:block"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          scale: isHovering ? 1.5 : 0.8,
-          opacity: isHovering ? 0.4 : 0.15,
-        }}
-        transition={{ type: "spring", stiffness: 150, damping: 15 }}
       />
     </>
   );

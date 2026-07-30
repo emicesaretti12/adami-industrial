@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Car, Plane, Rocket, Atom, Wheat, Tractor, Fuel } from "lucide-react";
 import { industrias } from "@/lib/adami-data";
 
@@ -14,84 +13,61 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function Industries() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0.3, 1, 1]);
-
   return (
-    <section id="industrias" className="relative py-36 lg:py-48 overflow-hidden" ref={containerRef}>
-      {/* Subtle divider */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-      <motion.div className="container" style={{ opacity }}>
+    <section id="industrias" className="py-24 lg:py-32 border-t border-border">
+      <div className="container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="max-w-4xl mb-24"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-16"
         >
-          <div className="flex items-center gap-4 mb-8">
-            <motion.div
-              className="h-px bg-primary"
-              initial={{ scaleX: 0, originX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-              style={{ width: "50px" }}
-            />
-            <span className="font-sans text-[11px] font-semibold tracking-[0.3em] text-primary uppercase">03 / Industrias</span>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-accent" />
+            <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Industrias</span>
           </div>
-          <h2 className="font-display font-700 text-foreground leading-[0.92] tracking-tight" style={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)" }}>
-            Sectores que
-            <br />
+          <h2 className="font-display text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
+            Sectores que{" "}
             <span className="text-muted-foreground">transformamos</span>
           </h2>
-          <p className="mt-8 text-lg text-muted-foreground leading-[1.7] font-light max-w-2xl">
+          <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
             {industrias.descripcionGeneral}
           </p>
         </motion.div>
 
-        {/* Industry grid — Apple-style bento */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">
+        {/* Industry grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
           {industrias.sectores.map((sector, i) => {
             const Icon = iconMap[sector.icon] || Atom;
             const isLarge = i === 0;
             return (
               <motion.div
                 key={sector.nombre}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
-                className={`group relative rounded-3xl border border-white/5 hover:border-white/20 transition-all duration-500 cursor-default overflow-hidden ${
-                  isLarge ? "md:col-span-2 md:row-span-2 p-8 lg:p-12" : "p-6 lg:p-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                className={`card-clean flex flex-col items-center justify-center text-center gap-3 ${
+                  isLarge ? "md:col-span-2 md:row-span-2 p-10 lg:p-12" : "p-6 lg:p-8"
                 }`}
               >
-                {/* Hover gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative z-10 flex flex-col items-center text-center h-full justify-center gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.15, rotate: -5 }}
-                    className={`rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-500 ${
-                      isLarge ? "w-20 h-20 lg:w-24 lg:h-24" : "w-14 h-14 lg:w-16 lg:h-16"
-                    }`}
-                  >
-                    <Icon className="text-primary" size={isLarge ? 36 : 24} strokeWidth={1.5} />
-                  </motion.div>
-                  <h3 className={`font-display font-600 text-foreground tracking-tight ${
-                    isLarge ? "text-xl lg:text-2xl" : "text-sm lg:text-base"
-                  }`}>
-                    {sector.nombre}
-                  </h3>
+                <div className={`rounded bg-accent/10 flex items-center justify-center ${
+                  isLarge ? "w-16 h-16 lg:w-20 lg:h-20" : "w-12 h-12"
+                }`}>
+                  <Icon className="text-accent" size={isLarge ? 28 : 20} strokeWidth={1.5} />
                 </div>
+                <h3 className={`font-display font-semibold text-foreground tracking-tight ${
+                  isLarge ? "text-lg lg:text-xl" : "text-sm"
+                }`}>
+                  {sector.nombre}
+                </h3>
               </motion.div>
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

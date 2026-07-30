@@ -40,84 +40,91 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Oswald", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
-  /* ADAMI — Industrial Brutalism Design System */
-  /* Paleta Correcta: Negro Acero + Ámbar Incandescente */
-  --radius: 0.5rem;
-  --background: oklch(0.15 0.005 260);
-  --foreground: oklch(0.95 0.005 80);
-  --card: oklch(0.20 0.006 260);
-  --card-foreground: oklch(0.95 0.005 80);
-  --popover: oklch(0.20 0.006 260);
-  --popover-foreground: oklch(0.95 0.005 80);
-  --secondary: oklch(0.25 0.006 260);
-  --secondary-foreground: oklch(0.90 0.005 80);
-  --muted: oklch(0.30 0.006 260);
-  --muted-foreground: oklch(0.60 0.01 260);
-  /* ÁMBAR INCANDESCENTE - Color Primario Correcto */
-  --accent: oklch(0.68 0.18 55);
-  --accent-foreground: oklch(0.15 0.005 260);
+  /* ADAMI — Industrial Design System v2
+     Paleta: Graphite + Ember + Warm White
+     Inspirado en diseño industrial premium: minimalismo, jerarquía, respiración */
+  --radius: 0.25rem;
+
+  /* Background: Deep graphite, casi negro pero con calidez */
+  --background: oklch(0.14 0.005 250);
+  --foreground: oklch(0.94 0.01 85);
+  --card: oklch(0.18 0.006 250);
+  --card-foreground: oklch(0.94 0.01 85);
+  --popover: oklch(0.18 0.006 250);
+  --popover-foreground: oklch(0.94 0.01 85);
+  --secondary: oklch(0.22 0.006 250);
+  --secondary-foreground: oklch(0.88 0.01 85);
+  --muted: oklch(0.25 0.006 250);
+  --muted-foreground: oklch(0.62 0.01 250);
+
+  /* Accent: Ember — warm amber-orange, el color de la chispa industrial */
+  --accent: oklch(0.65 0.18 55);
+  --accent-foreground: oklch(0.14 0.005 250);
+  --primary: oklch(0.65 0.18 55);
+  --primary-foreground: oklch(0.14 0.005 250);
+
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.25 0.006 260);
-  --input: oklch(0.25 0.006 260);
-  --ring: oklch(0.68 0.18 55);
-  --sidebar: oklch(0.12 0.005 260);
-  --sidebar-foreground: oklch(0.95 0.005 80);
-  --sidebar-accent: oklch(0.25 0.006 260);
-  --sidebar-accent-foreground: oklch(0.95 0.005 80);
-  --sidebar-border: oklch(0.25 0.006 260);
-  --sidebar-ring: oklch(0.68 0.18 55);
-  --primary: oklch(0.68 0.18 55);
-  --primary-foreground: oklch(0.15 0.005 260);
-  --chart-1: oklch(0.68 0.18 55);
-  --chart-2: oklch(0.60 0.15 55);
-  --chart-3: oklch(0.45 0.01 260);
-  --chart-4: oklch(0.35 0.01 260);
-  --chart-5: oklch(0.25 0.01 260);
-  --sidebar-primary: oklch(0.68 0.18 55);
-  --sidebar-primary-foreground: oklch(0.15 0.005 260);
+  --border: oklch(0.22 0.006 250);
+  --input: oklch(0.22 0.006 250);
+  --ring: oklch(0.65 0.18 55);
+
+  --sidebar: oklch(0.12 0.005 250);
+  --sidebar-foreground: oklch(0.94 0.01 85);
+  --sidebar-accent: oklch(0.22 0.006 250);
+  --sidebar-accent-foreground: oklch(0.94 0.01 85);
+  --sidebar-border: oklch(0.22 0.006 250);
+  --sidebar-ring: oklch(0.65 0.18 55);
+  --sidebar-primary: oklch(0.65 0.18 55);
+  --sidebar-primary-foreground: oklch(0.14 0.005 250);
+
+  --chart-1: oklch(0.65 0.18 55);
+  --chart-2: oklch(0.55 0.15 55);
+  --chart-3: oklch(0.45 0.01 250);
+  --chart-4: oklch(0.35 0.01 250);
+  --chart-5: oklch(0.25 0.01 250);
 }
 
 .dark {
-  --radius: 0.5rem;
-  --background: oklch(0.15 0.005 260);
-  --foreground: oklch(0.95 0.005 80);
-  --card: oklch(0.20 0.006 260);
-  --card-foreground: oklch(0.95 0.005 80);
-  --popover: oklch(0.20 0.006 260);
-  --popover-foreground: oklch(0.95 0.005 80);
-  --secondary: oklch(0.25 0.006 260);
-  --secondary-foreground: oklch(0.90 0.005 80);
-  --muted: oklch(0.30 0.006 260);
-  --muted-foreground: oklch(0.60 0.01 260);
-  --accent: oklch(0.68 0.18 55);
-  --accent-foreground: oklch(0.15 0.005 260);
+  --radius: 0.25rem;
+  --background: oklch(0.14 0.005 250);
+  --foreground: oklch(0.94 0.01 85);
+  --card: oklch(0.18 0.006 250);
+  --card-foreground: oklch(0.94 0.01 85);
+  --popover: oklch(0.18 0.006 250);
+  --popover-foreground: oklch(0.94 0.01 85);
+  --secondary: oklch(0.22 0.006 250);
+  --secondary-foreground: oklch(0.88 0.01 85);
+  --muted: oklch(0.25 0.006 250);
+  --muted-foreground: oklch(0.62 0.01 250);
+  --accent: oklch(0.65 0.18 55);
+  --accent-foreground: oklch(0.14 0.005 250);
+  --primary: oklch(0.65 0.18 55);
+  --primary-foreground: oklch(0.14 0.005 250);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.25 0.006 260);
-  --input: oklch(0.25 0.006 260);
-  --ring: oklch(0.68 0.18 55);
-  --chart-1: oklch(0.68 0.18 55);
-  --chart-2: oklch(0.60 0.15 55);
-  --chart-3: oklch(0.45 0.01 260);
-  --chart-4: oklch(0.35 0.01 260);
-  --chart-5: oklch(0.25 0.01 260);
-  --sidebar: oklch(0.12 0.005 260);
-  --sidebar-foreground: oklch(0.95 0.005 80);
-  --sidebar-accent: oklch(0.25 0.006 260);
-  --sidebar-accent-foreground: oklch(0.95 0.005 80);
-  --sidebar-border: oklch(0.25 0.006 260);
-  --sidebar-ring: oklch(0.68 0.18 55);
-  --primary: oklch(0.68 0.18 55);
-  --primary-foreground: oklch(0.15 0.005 260);
-  --sidebar-primary: oklch(0.68 0.18 55);
-  --sidebar-primary-foreground: oklch(0.15 0.005 260);
+  --border: oklch(0.22 0.006 250);
+  --input: oklch(0.22 0.006 250);
+  --ring: oklch(0.65 0.18 55);
+  --chart-1: oklch(0.65 0.18 55);
+  --chart-2: oklch(0.55 0.15 55);
+  --chart-3: oklch(0.45 0.01 250);
+  --chart-4: oklch(0.35 0.01 250);
+  --chart-5: oklch(0.25 0.01 250);
+  --sidebar: oklch(0.12 0.005 250);
+  --sidebar-foreground: oklch(0.94 0.01 85);
+  --sidebar-accent: oklch(0.22 0.006 250);
+  --sidebar-accent-foreground: oklch(0.94 0.01 85);
+  --sidebar-border: oklch(0.22 0.006 250);
+  --sidebar-ring: oklch(0.65 0.18 55);
+  --sidebar-primary: oklch(0.65 0.18 55);
+  --sidebar-primary-foreground: oklch(0.14 0.005 250);
 }
 
 @layer base {
@@ -132,8 +139,8 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.035em;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -183,122 +190,106 @@
     }
   }
 
-  /* Ámbar Gradient - Signature ADAMI */
+  /* Amber accent gradient — used sparingly for emphasis */
   .text-gradient {
-    background: linear-gradient(135deg, oklch(0.68 0.18 55), oklch(0.60 0.15 55), oklch(0.75 0.20 50));
+    background: linear-gradient(135deg, oklch(0.72 0.18 50), oklch(0.65 0.18 55));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Glass morphism - Industrial refinement */
-  .glass {
-    background: rgba(232, 160, 32, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(232, 160, 32, 0.08);
+  /* Subtle border — industrial precision */
+  .border-subtle {
+    border: 1px solid oklch(0.22 0.006 250);
   }
 
-  .glass-strong {
-    background: rgba(232, 160, 32, 0.05);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(232, 160, 32, 0.12);
+  /* Clean card style */
+  .card-clean {
+    background: oklch(0.18 0.006 250);
+    border: 1px solid oklch(0.22 0.006 250);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  .card-clean:hover {
+    border-color: oklch(0.30 0.01 250);
+    background: oklch(0.20 0.006 250);
   }
 
-  /* Premium card hover - Industrial precision */
-  .premium-card {
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
-                box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
-                border-color 0.3s ease,
-                background-color 0.3s ease;
-  }
-  .premium-card:hover {
-    transform: translateY(-4px);
-    border-color: oklch(0.68 0.18 55 / 0.4);
-    box-shadow: 0 20px 60px -10px oklch(0.68 0.18 55 / 0.2), 
-                inset 0 1px 0 rgba(232, 160, 32, 0.1);
-    background-color: rgba(232, 160, 32, 0.02);
+  /* Industrial line accent */
+  .line-accent {
+    height: 1px;
+    background: linear-gradient(90deg, oklch(0.65 0.18 55), transparent);
   }
 
-  /* Magnetic button - Industrial responsiveness */
-  .magnetic-btn {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-                box-shadow 0.3s ease;
-  }
-  .magnetic-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(232, 160, 32, 0.2), rgba(232, 160, 32, 0.1));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .magnetic-btn:hover::before {
-    opacity: 1;
-  }
-  .magnetic-btn:active {
-    transform: scale(0.97);
+  /* Section divider */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, oklch(0.25 0.006 250), transparent);
   }
 
-  /* Scrollbar styling - Industrial aesthetic */
+  /* Form input style */
+  .input-industrial {
+    @apply bg-transparent border-b font-light text-base focus:outline-none transition-colors duration-300;
+    border-bottom: 1px solid oklch(0.30 0.006 250);
+    padding: 1rem 0;
+  }
+  .input-industrial:focus {
+    border-bottom-color: oklch(0.65 0.18 55);
+  }
+  .input-industrial::placeholder {
+    color: oklch(0.45 0.01 250);
+  }
+
+  /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: oklch(0.30 0.01 260);
-    border-radius: 4px;
+    background: oklch(0.30 0.01 250);
+    border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.68 0.18 55);
+    background: oklch(0.40 0.01 250);
   }
 
-  /* Selection - Ámbar highlight */
+  /* Selection */
   ::selection {
-    background: oklch(0.68 0.18 55 / 0.3);
+    background: oklch(0.65 0.18 55 / 0.25);
     color: var(--foreground);
   }
 
-  /* Smooth scroll */
   html {
     scroll-behavior: smooth;
   }
+}
 
-  /* CNC Cut Line - Signature divider */
-  .cnc-divider {
-    height: 2px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      oklch(0.68 0.18 55) 10%, 
-      oklch(0.68 0.18 55) 90%, 
-      transparent);
-    margin: 3rem 0;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
-
-  /* Industrial grid background */
-  .grid-bg {
-    background-image: 
-      linear-gradient(rgba(232, 160, 32, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232, 160, 32, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Premium animations - Industrial motion */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes marquee {
@@ -306,111 +297,22 @@
   100% { transform: translateX(-50%); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { 
-    opacity: 0.5; 
-    box-shadow: 0 0 20px rgba(232, 160, 32, 0.1), 
-                inset 0 0 20px rgba(232, 160, 32, 0.05);
-  }
-  50% { 
-    opacity: 1; 
-    box-shadow: 0 0 40px rgba(232, 160, 32, 0.3), 
-                inset 0 0 30px rgba(232, 160, 32, 0.1);
-  }
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes reveal {
-  from {
-    opacity: 0;
-    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  }
-  to {
-    opacity: 1;
-    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
-  }
+.animate-fade-in {
+  animation: fade-in 0.6s ease forwards;
 }
 
-@keyframes glow-pulse {
-  0%, 100% {
-    text-shadow: 0 0 10px rgba(232, 160, 32, 0.3);
-  }
-  50% {
-    text-shadow: 0 0 20px rgba(232, 160, 32, 0.6), 
-                 0 0 30px rgba(232, 160, 32, 0.3);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.animate-reveal {
-  animation: reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.animate-glow-pulse {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -422,7 +324,6 @@
   }
 }
 
-/* Responsive typography */
 @media (max-width: 640px) {
   h1 {
     font-size: clamp(1.875rem, 5vw, 3rem);
@@ -431,6 +332,6 @@
     font-size: clamp(1.5rem, 4vw, 2.25rem);
   }
   h3 {
-    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
   }
 }
