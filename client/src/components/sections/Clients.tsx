@@ -3,25 +3,24 @@ import { clientes } from "@/lib/adami-data";
 
 export default function Clients() {
   return (
-    <section id="clientes" className="py-24 lg:py-32 border-t border-border">
+    <section id="clientes" className="py-20 lg:py-28 bg-gray-50 border-t border-gray-200">
       <div className="container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl mb-16"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-accent" />
-            <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Clientes</span>
+            <div className="w-6 h-0.5 bg-red-500" />
+            <span className="font-sans text-xs font-bold tracking-widest text-red-600 uppercase">Clientes</span>
           </div>
-          <h2 className="font-display text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
-            Empresas que{" "}
-            <span className="text-muted-foreground">confían en nosotros</span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+            Empresas que confían en nosotros
           </h2>
-          <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
+          <p className="text-base text-muted-foreground leading-relaxed">
             Trabajamos junto a las principales empresas de la industria automotriz, aeronáutica, aeroespacial y más.
           </p>
         </motion.div>
@@ -32,14 +31,14 @@ export default function Clients() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 mb-10"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-12"
         >
-          {clientes.destacados.map((client, i) => (
+          {clientes.destacados.map((client) => (
             <div
               key={client}
-              className="p-4 card-clean text-center flex items-center justify-center"
+              className="p-4 card-clean text-center flex items-center justify-center min-h-20"
             >
-              <span className="font-sans text-xs font-medium text-muted-foreground">
+              <span className="font-sans text-xs font-medium text-muted-foreground text-center">
                 {client}
               </span>
             </div>
@@ -47,12 +46,12 @@ export default function Clients() {
         </motion.div>
 
         {/* Marquee of other clients */}
-        <div className="overflow-hidden py-8 border-y border-border">
+        <div className="overflow-hidden py-8 border-y border-gray-300">
           <div className="flex animate-marquee whitespace-nowrap">
             {[...clientes.otros, ...clientes.otros].map((client, i) => (
               <span
                 key={i}
-                className="mx-6 font-sans text-xs text-muted-foreground/40 whitespace-nowrap"
+                className="mx-6 font-sans text-xs text-muted-foreground/60 whitespace-nowrap"
               >
                 {client}
               </span>
@@ -69,16 +68,16 @@ export default function Clients() {
           className="mt-12"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-6 h-px bg-muted-foreground/30" />
-            <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">
-              Alianzas estratégicas
+            <div className="w-6 h-0.5 bg-red-500" />
+            <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">
+              Alianzas Estratégicas
             </h3>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {clientes.alianzasEstrategicas.map((alliance, i) => (
+          <div className="flex flex-wrap gap-3">
+            {clientes.alianzasEstrategicas.map((alliance) => (
               <span
-                key={i}
-                className="px-4 py-2 rounded border border-border font-sans text-sm text-foreground"
+                key={alliance}
+                className="px-4 py-2 rounded border border-gray-300 font-sans text-sm text-foreground bg-white"
               >
                 {alliance}
               </span>

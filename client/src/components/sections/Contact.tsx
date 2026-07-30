@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-import { Phone, Mail, MapPin, Send, Clock, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Send, Clock } from "lucide-react";
 import { empresa } from "@/lib/adami-data";
 
 export default function Contact() {
@@ -27,25 +27,24 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contacto" className="py-24 lg:py-32 border-t border-border" ref={containerRef}>
+    <section id="contacto" className="py-20 lg:py-28 bg-white border-t border-gray-200" ref={containerRef}>
       <div className="container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl mb-16"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-accent" />
-            <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Contacto</span>
+            <div className="w-6 h-0.5 bg-red-500" />
+            <span className="font-sans text-xs font-bold tracking-widest text-red-600 uppercase">Contacto</span>
           </div>
-          <h2 className="font-display text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
-            Hablemos de su{" "}
-            <span className="text-gradient">próximo proyecto</span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+            Hablemos de su próximo proyecto
           </h2>
-          <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
+          <p className="text-base text-muted-foreground leading-relaxed">
             Cuéntenos sobre su proyecto. Nuestro equipo de innovación tecnológica analizará su demanda y le propondrá la mejor solución.
           </p>
         </motion.div>
@@ -57,12 +56,12 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5 }}
             className="space-y-8"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
-                <label className="block font-sans text-[10px] font-semibold text-muted-foreground mb-3 tracking-[0.15em] uppercase">
+                <label className="block font-sans text-xs font-bold text-muted-foreground mb-3 tracking-widest uppercase">
                   Nombre *
                 </label>
                 <input
@@ -75,7 +74,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="block font-sans text-[10px] font-semibold text-muted-foreground mb-3 tracking-[0.15em] uppercase">
+                <label className="block font-sans text-xs font-bold text-muted-foreground mb-3 tracking-widest uppercase">
                   Empresa
                 </label>
                 <input
@@ -90,7 +89,7 @@ export default function Contact() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
-                <label className="block font-sans text-[10px] font-semibold text-muted-foreground mb-3 tracking-[0.15em] uppercase">
+                <label className="block font-sans text-xs font-bold text-muted-foreground mb-3 tracking-widest uppercase">
                   Email *
                 </label>
                 <input
@@ -103,7 +102,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="block font-sans text-[10px] font-semibold text-muted-foreground mb-3 tracking-[0.15em] uppercase">
+                <label className="block font-sans text-xs font-bold text-muted-foreground mb-3 tracking-widest uppercase">
                   Teléfono
                 </label>
                 <input
@@ -117,7 +116,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block font-sans text-[10px] font-semibold text-muted-foreground mb-3 tracking-[0.15em] uppercase">
+              <label className="block font-sans text-xs font-bold text-muted-foreground mb-3 tracking-widest uppercase">
                 Mensaje *
               </label>
               <textarea
@@ -133,12 +132,11 @@ export default function Contact() {
             <button
               type="submit"
               disabled={submitted}
-              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-background font-sans text-sm font-medium hover:opacity-90 transition-opacity duration-200 disabled:opacity-50"
+              className="btn-primary inline-flex items-center gap-2"
             >
               {submitted ? "Enviado ✓" : (
                 <>
-                  <Send size={15} /> Enviar consulta
-                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  <Send size={16} /> Enviar consulta
                 </>
               )}
             </button>
@@ -149,24 +147,24 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-8"
           >
             {contactInfo.map((info, i) => {
               const Icon = info.icon;
               return (
                 <div key={i} className="flex items-start gap-4">
-                  <div className="w-9 h-9 rounded bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon className="text-accent" size={16} strokeWidth={1.5} />
+                  <div className="w-10 h-10 rounded bg-blue-50 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="text-accent" size={20} strokeWidth={1.5} />
                   </div>
                   <div>
-                    <div className="font-sans text-[10px] font-semibold text-muted-foreground tracking-wider uppercase mb-1">{info.label}</div>
+                    <div className="font-sans text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">{info.label}</div>
                     {info.label === "Email" ? (
-                      <a href={`mailto:${info.value}`} className="text-sm text-foreground hover:text-accent transition-colors">
+                      <a href={`mailto:${info.value}`} className="text-base text-foreground hover:text-accent transition-colors font-medium">
                         {info.value}
                       </a>
                     ) : (
-                      <div className="text-sm text-foreground">{info.value}</div>
+                      <div className="text-base text-foreground font-medium">{info.value}</div>
                     )}
                   </div>
                 </div>
@@ -174,12 +172,12 @@ export default function Contact() {
             })}
 
             {/* Map */}
-            <div className="relative h-64 rounded-sm overflow-hidden border border-border">
+            <div className="relative h-64 rounded overflow-hidden border border-gray-300">
               <iframe
                 src={empresa.contacto.googleMapsEmbed}
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(0.8)" }}
+                style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -188,9 +186,9 @@ export default function Contact() {
             </div>
 
             {/* Hours */}
-            <div className="flex items-center gap-3 p-4 rounded-sm border border-border bg-background/50">
-              <Clock className="text-accent shrink-0" size={16} strokeWidth={1.5} />
-              <span className="text-sm text-muted-foreground">
+            <div className="flex items-center gap-3 p-4 rounded border border-gray-300 bg-gray-50">
+              <Clock className="text-accent shrink-0" size={20} strokeWidth={1.5} />
+              <span className="text-sm text-muted-foreground font-medium">
                 Lun — Vie · 08:00 a 17:00 hs · {empresa.ciudad}, {empresa.pais}
               </span>
             </div>

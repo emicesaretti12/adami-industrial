@@ -25,16 +25,17 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="text-center"
     >
-      <div className="font-display text-5xl lg:text-7xl font-semibold tracking-tight text-foreground">
+      <div className="font-display text-5xl lg:text-6xl font-bold tracking-tight text-accent mb-2">
         <span>{count}</span>
-        <span className="text-accent">{suffix}</span>
+        <span className="text-red-600">{suffix}</span>
       </div>
-      <div className="mt-2 font-sans text-sm text-muted-foreground">
+      <div className="font-sans text-sm text-muted-foreground font-medium">
         {label}
       </div>
     </motion.div>
@@ -43,9 +44,9 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
 
 export default function Stats() {
   return (
-    <section className="border-t border-border">
-      <div className="container py-16 lg:py-20">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
+    <section className="bg-white border-t border-gray-200">
+      <div className="container py-16 lg:py-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, i) => (
             <StatItem key={i} {...stat} index={i} />
           ))}

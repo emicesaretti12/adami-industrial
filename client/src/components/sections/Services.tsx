@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Settings, Wrench, Ruler } from "lucide-react";
+import { Settings, Wrench, Ruler } from "lucide-react";
 import { servicios } from "@/lib/adami-data";
 
 const icons: Record<string, React.ElementType> = {
@@ -10,25 +10,24 @@ const icons: Record<string, React.ElementType> = {
 
 export default function Services() {
   return (
-    <section id="servicios" className="py-24 lg:py-32 border-t border-border">
+    <section id="servicios" className="py-20 lg:py-28 bg-white border-t border-gray-200">
       <div className="container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl mb-16"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-accent" />
-            <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Servicios</span>
+            <div className="w-6 h-0.5 bg-red-500" />
+            <span className="font-sans text-xs font-bold tracking-widest text-red-600 uppercase">Servicios</span>
           </div>
-          <h2 className="font-display text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
-            Soluciones{" "}
-            <span className="text-gradient">llave en mano</span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+            Soluciones llave en mano
           </h2>
-          <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
+          <p className="text-base text-muted-foreground leading-relaxed">
             Su empresa puede contar con nosotros. Todos los servicios se abordan inicialmente en nuestra unidad de innovación tecnológica.
           </p>
         </motion.div>
@@ -40,24 +39,24 @@ export default function Services() {
             return (
               <motion.div
                 key={cat.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="card-clean overflow-hidden"
               >
-                <div className="p-7 lg:p-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr,2.5fr] gap-8 lg:gap-12 items-start">
+                <div className="p-8 lg:p-10">
+                  <div className="grid grid-cols-1 lg:grid-cols-[auto,1fr] gap-8 lg:gap-12 items-start">
                     {/* Left — icon and title */}
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded bg-accent/10 flex items-center justify-center shrink-0">
-                        <Icon className="text-accent" size={20} strokeWidth={1.5} />
+                      <div className="w-14 h-14 rounded bg-blue-50 flex items-center justify-center shrink-0">
+                        <Icon className="text-accent" size={28} strokeWidth={1.5} />
                       </div>
                       <div>
-                        <span className="font-sans text-[10px] font-medium text-muted-foreground/50 tracking-wider">
+                        <span className="font-sans text-xs font-bold text-muted-foreground tracking-widest uppercase">
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <h3 className="font-display text-xl lg:text-2xl font-semibold text-foreground tracking-tight mt-1">
+                        <h3 className="font-display text-2xl lg:text-3xl font-bold text-foreground mt-2">
                           {cat.nombre}
                         </h3>
                       </div>
@@ -65,18 +64,18 @@ export default function Services() {
 
                     {/* Right — content */}
                     <div>
-                      <p className="text-sm text-muted-foreground leading-[1.7] mb-6">
+                      <p className="text-base text-muted-foreground leading-relaxed mb-6">
                         {cat.descripcionExtendida}
                       </p>
 
                       {/* Service details */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                         {cat.detalleServicios.map((srv, j) => (
                           <div
                             key={j}
-                            className="flex items-center gap-2.5 py-2"
+                            className="flex items-start gap-3"
                           >
-                            <div className="w-1 h-1 rounded-full bg-accent/50 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-2" />
                             <span className="text-sm text-muted-foreground">{srv}</span>
                           </div>
                         ))}
@@ -84,14 +83,14 @@ export default function Services() {
 
                       {/* Infrastructure */}
                       {cat.infraestructura && (
-                        <div className="grid grid-cols-3 gap-3 mb-4">
+                        <div className="grid grid-cols-3 gap-3 mb-6">
                           {cat.infraestructura.map((inf, j) => (
                             <div
                               key={j}
-                              className="p-4 rounded bg-background/50 border border-border"
+                              className="p-4 bg-gray-50 border border-gray-200 rounded"
                             >
-                              <div className="text-xs font-medium text-foreground mb-1">{inf.area}</div>
-                              <div className="font-sans text-[11px] text-accent">{inf.superficie}</div>
+                              <div className="text-xs font-bold text-foreground mb-1">{inf.area}</div>
+                              <div className="font-sans text-xs text-accent font-bold">{inf.superficie}</div>
                             </div>
                           ))}
                         </div>
@@ -103,7 +102,7 @@ export default function Services() {
                           {cat.metrologia.equipos.map((eq, j) => (
                             <span
                               key={j}
-                              className="px-3 py-1.5 rounded border border-border font-sans text-xs text-muted-foreground bg-background/50"
+                              className="px-3 py-1.5 rounded border border-gray-300 font-sans text-xs text-muted-foreground bg-white"
                             >
                               {eq}
                             </span>

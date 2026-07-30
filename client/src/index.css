@@ -40,91 +40,56 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --font-display: "Lato", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
-  /* ADAMI — Industrial Design System v2
-     Paleta: Graphite + Ember + Warm White
-     Inspirado en diseño industrial premium: minimalismo, jerarquía, respiración */
+  /* ADAMI — Corporativo Industrial Premium
+     Paleta: Blanco + Azul Adami + Rojo Acento
+     Inspirado en confianza empresarial, claridad técnica, profesionalismo */
   --radius: 0.25rem;
 
-  /* Background: Deep graphite, casi negro pero con calidez */
-  --background: oklch(0.14 0.005 250);
-  --foreground: oklch(0.94 0.01 85);
-  --card: oklch(0.18 0.006 250);
-  --card-foreground: oklch(0.94 0.01 85);
-  --popover: oklch(0.18 0.006 250);
-  --popover-foreground: oklch(0.94 0.01 85);
-  --secondary: oklch(0.22 0.006 250);
-  --secondary-foreground: oklch(0.88 0.01 85);
-  --muted: oklch(0.25 0.006 250);
-  --muted-foreground: oklch(0.62 0.01 250);
+  /* Background: Blanco puro y gris claro para secciones */
+  --background: rgb(255, 255, 255);
+  --foreground: rgb(51, 51, 51);
+  --card: rgb(255, 255, 255);
+  --card-foreground: rgb(51, 51, 51);
+  --popover: rgb(255, 255, 255);
+  --popover-foreground: rgb(51, 51, 51);
+  --secondary: rgb(242, 242, 242);
+  --secondary-foreground: rgb(51, 51, 51);
+  --muted: rgb(242, 242, 242);
+  --muted-foreground: rgb(135, 134, 138);
 
-  /* Accent: Ember — warm amber-orange, el color de la chispa industrial */
-  --accent: oklch(0.65 0.18 55);
-  --accent-foreground: oklch(0.14 0.005 250);
-  --primary: oklch(0.65 0.18 55);
-  --primary-foreground: oklch(0.14 0.005 250);
+  /* Accent: Azul Adami — identidad corporativa */
+  --accent: rgb(32, 77, 126);
+  --accent-foreground: rgb(255, 255, 255);
+  --primary: rgb(32, 77, 126);
+  --primary-foreground: rgb(255, 255, 255);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.22 0.006 250);
-  --input: oklch(0.22 0.006 250);
-  --ring: oklch(0.65 0.18 55);
+  /* Destructive: Rojo Adami para acentos y líneas */
+  --destructive: rgb(186, 86, 94);
+  --destructive-foreground: rgb(255, 255, 255);
+  --border: rgb(220, 220, 220);
+  --input: rgb(242, 242, 242);
+  --ring: rgb(32, 77, 126);
 
-  --sidebar: oklch(0.12 0.005 250);
-  --sidebar-foreground: oklch(0.94 0.01 85);
-  --sidebar-accent: oklch(0.22 0.006 250);
-  --sidebar-accent-foreground: oklch(0.94 0.01 85);
-  --sidebar-border: oklch(0.22 0.006 250);
-  --sidebar-ring: oklch(0.65 0.18 55);
-  --sidebar-primary: oklch(0.65 0.18 55);
-  --sidebar-primary-foreground: oklch(0.14 0.005 250);
+  --sidebar: rgb(32, 77, 126);
+  --sidebar-foreground: rgb(255, 255, 255);
+  --sidebar-accent: rgb(242, 242, 242);
+  --sidebar-accent-foreground: rgb(51, 51, 51);
+  --sidebar-border: rgb(220, 220, 220);
+  --sidebar-ring: rgb(32, 77, 126);
+  --sidebar-primary: rgb(32, 77, 126);
+  --sidebar-primary-foreground: rgb(255, 255, 255);
 
-  --chart-1: oklch(0.65 0.18 55);
-  --chart-2: oklch(0.55 0.15 55);
-  --chart-3: oklch(0.45 0.01 250);
-  --chart-4: oklch(0.35 0.01 250);
-  --chart-5: oklch(0.25 0.01 250);
-}
-
-.dark {
-  --radius: 0.25rem;
-  --background: oklch(0.14 0.005 250);
-  --foreground: oklch(0.94 0.01 85);
-  --card: oklch(0.18 0.006 250);
-  --card-foreground: oklch(0.94 0.01 85);
-  --popover: oklch(0.18 0.006 250);
-  --popover-foreground: oklch(0.94 0.01 85);
-  --secondary: oklch(0.22 0.006 250);
-  --secondary-foreground: oklch(0.88 0.01 85);
-  --muted: oklch(0.25 0.006 250);
-  --muted-foreground: oklch(0.62 0.01 250);
-  --accent: oklch(0.65 0.18 55);
-  --accent-foreground: oklch(0.14 0.005 250);
-  --primary: oklch(0.65 0.18 55);
-  --primary-foreground: oklch(0.14 0.005 250);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.22 0.006 250);
-  --input: oklch(0.22 0.006 250);
-  --ring: oklch(0.65 0.18 55);
-  --chart-1: oklch(0.65 0.18 55);
-  --chart-2: oklch(0.55 0.15 55);
-  --chart-3: oklch(0.45 0.01 250);
-  --chart-4: oklch(0.35 0.01 250);
-  --chart-5: oklch(0.25 0.01 250);
-  --sidebar: oklch(0.12 0.005 250);
-  --sidebar-foreground: oklch(0.94 0.01 85);
-  --sidebar-accent: oklch(0.22 0.006 250);
-  --sidebar-accent-foreground: oklch(0.94 0.01 85);
-  --sidebar-border: oklch(0.22 0.006 250);
-  --sidebar-ring: oklch(0.65 0.18 55);
-  --sidebar-primary: oklch(0.65 0.18 55);
-  --sidebar-primary-foreground: oklch(0.14 0.005 250);
+  --chart-1: rgb(32, 77, 126);
+  --chart-2: rgb(66, 102, 149);
+  --chart-3: rgb(186, 86, 94);
+  --chart-4: rgb(135, 134, 138);
+  --chart-5: rgb(220, 220, 220);
 }
 
 @layer base {
@@ -140,7 +105,8 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.01em;
+    color: rgb(32, 77, 126);
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -190,74 +156,79 @@
     }
   }
 
-  /* Amber accent gradient — used sparingly for emphasis */
-  .text-gradient {
-    background: linear-gradient(135deg, oklch(0.72 0.18 50), oklch(0.65 0.18 55));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* Línea acento rojo — elemento de marca */
+  .line-accent {
+    height: 2px;
+    background: rgb(186, 86, 94);
   }
 
-  /* Subtle border — industrial precision */
-  .border-subtle {
-    border: 1px solid oklch(0.22 0.006 250);
-  }
-
-  /* Clean card style */
+  /* Card limpia — blanca con borde sutil */
   .card-clean {
-    background: oklch(0.18 0.006 250);
-    border: 1px solid oklch(0.22 0.006 250);
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(220, 220, 220);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
   .card-clean:hover {
-    border-color: oklch(0.30 0.01 250);
-    background: oklch(0.20 0.006 250);
+    border-color: rgb(32, 77, 126);
+    box-shadow: 0 2px 8px rgba(32, 77, 126, 0.08);
   }
 
-  /* Industrial line accent */
-  .line-accent {
-    height: 1px;
-    background: linear-gradient(90deg, oklch(0.65 0.18 55), transparent);
+  /* Sección gris — para diferenciar bloques */
+  .section-gray {
+    background: rgb(242, 242, 242);
   }
 
-  /* Section divider */
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, oklch(0.25 0.006 250), transparent);
+  /* Botón primario — azul Adami */
+  .btn-primary {
+    @apply px-6 py-3 bg-accent text-white font-medium transition-all duration-200;
+    border-radius: 0.25rem;
+  }
+  .btn-primary:hover {
+    background: rgb(26, 55, 85);
+    box-shadow: 0 4px 12px rgba(32, 77, 126, 0.15);
   }
 
-  /* Form input style */
+  /* Botón secundario — outline */
+  .btn-secondary {
+    @apply px-6 py-3 border border-accent text-accent font-medium transition-all duration-200;
+    border-radius: 0.25rem;
+  }
+  .btn-secondary:hover {
+    background: rgb(242, 242, 242);
+  }
+
+  /* Input industrial — underline style */
   .input-industrial {
     @apply bg-transparent border-b font-light text-base focus:outline-none transition-colors duration-300;
-    border-bottom: 1px solid oklch(0.30 0.006 250);
-    padding: 1rem 0;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding: 0.75rem 0;
   }
   .input-industrial:focus {
-    border-bottom-color: oklch(0.65 0.18 55);
+    border-bottom-color: rgb(32, 77, 126);
   }
   .input-industrial::placeholder {
-    color: oklch(0.45 0.01 250);
+    color: rgb(135, 134, 138);
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgb(242, 242, 242);
   }
   ::-webkit-scrollbar-thumb {
-    background: oklch(0.30 0.01 250);
-    border-radius: 3px;
+    background: rgb(135, 134, 138);
+    border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.40 0.01 250);
+    background: rgb(32, 77, 126);
   }
 
   /* Selection */
   ::selection {
-    background: oklch(0.65 0.18 55 / 0.25);
-    color: var(--foreground);
+    background: rgb(32, 77, 126);
+    color: rgb(255, 255, 255);
   }
 
   html {
@@ -268,7 +239,7 @@
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -298,15 +269,15 @@
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.6s ease forwards;
+  animation: fade-in 0.5s ease forwards;
 }
 
 .animate-slide-in-left {
-  animation: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .animate-marquee {
@@ -326,12 +297,12 @@
 
 @media (max-width: 640px) {
   h1 {
-    font-size: clamp(1.875rem, 5vw, 3rem);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
   }
   h2 {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
   }
   h3 {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
   }
 }

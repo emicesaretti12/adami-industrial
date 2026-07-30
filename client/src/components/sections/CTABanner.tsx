@@ -5,15 +5,15 @@ const CTA_BG = "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1
 
 export default function CTABanner() {
   return (
-    <section className="py-24 lg:py-32 border-t border-border">
+    <section className="py-20 lg:py-28 bg-white border-t border-gray-200">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5 }}
         className="container"
       >
-        <div className="relative rounded-sm overflow-hidden border border-border">
+        <div className="relative rounded overflow-hidden border border-gray-300">
           {/* Background */}
           <div
             className="absolute inset-0"
@@ -23,24 +23,24 @@ export default function CTABanner() {
               backgroundPosition: "center",
             }}
           />
-          <div className="absolute inset-0 bg-background/90" />
+          <div className="absolute inset-0 bg-white/80" />
           
           {/* Content */}
-          <div className="relative py-16 lg:py-20 text-center">
-            <h2 className="font-display text-foreground leading-[0.95] tracking-tight"
+          <div className="relative py-16 lg:py-24 text-center">
+            <h2 className="font-display text-3xl lg:text-5xl font-bold text-foreground leading-tight"
                 style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}>
               ¿Listo para optimizar{" "}
-              <span className="text-gradient">su producción?</span>
+              <span className="text-accent">su producción?</span>
             </h2>
-            <p className="mt-6 text-muted-foreground max-w-lg mx-auto text-sm leading-relaxed">
+            <p className="mt-6 text-muted-foreground max-w-lg mx-auto text-base leading-relaxed">
               Nuestro equipo de innovación tecnológica analizará su demanda y le propondrá la mejor solución.
             </p>
             <a
               href="#contacto"
-              className="mt-8 inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-background font-sans text-sm font-medium hover:opacity-90 transition-opacity duration-200"
+              className="mt-8 inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-sans text-sm font-medium hover:bg-blue-900 transition-all duration-200"
             >
               Iniciar un proyecto
-              <ArrowRight size={15} />
+              <ArrowRight size={16} />
             </a>
           </div>
         </div>

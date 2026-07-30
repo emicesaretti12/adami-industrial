@@ -4,7 +4,6 @@ import { X, Menu } from "lucide-react";
 import { useScrollPosition } from "@/hooks/useScrollAnimation";
 
 const navLinks = [
-  { label: "Inicio", href: "/" },
   { label: "Empresa", href: "/#empresa" },
   { label: "Servicios", href: "/#servicios" },
   { label: "Industrias", href: "/#industrias" },
@@ -15,9 +14,8 @@ const navLinks = [
 export default function Navbar() {
   const scrollY = useScrollPosition();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = scrollY > 20;
+  const scrolled = scrollY > 10;
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
@@ -33,38 +31,38 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+          ? "bg-white shadow-md border-b border-gray-200"
+          : "bg-white border-b border-gray-100"
       }`}
     >
-      <nav className="container flex items-center justify-between h-16 lg:h-[72px]">
+      <nav className="container flex items-center justify-between h-16 lg:h-20">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3 group">
+        <a href="/" className="flex items-center gap-2 group">
           <img
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663751686161/MKadoAWFfElgzipt.webp"
+            src="https://www.adami.com.ar/wp-content/uploads/2016/05/adami-logo-header.png"
             alt="ADAMI"
-            className="h-8 w-8 lg:h-9 lg:w-9 transition-opacity duration-300 group-hover:opacity-80"
+            className="h-8 w-auto lg:h-10 transition-opacity duration-300 group-hover:opacity-75"
           />
-          <div className="flex flex-col leading-none">
-            <span className="font-display text-lg lg:text-xl font-semibold tracking-tight text-foreground">
+          <div className="flex flex-col leading-tight hidden sm:block">
+            <span className="font-display text-sm lg:text-base font-bold text-accent">
               ADAMI
             </span>
-            <span className="font-sans text-[9px] font-medium tracking-[0.15em] text-muted-foreground uppercase hidden sm:block mt-0.5">
-              Soluciones Industriales
+            <span className="font-sans text-[10px] font-medium text-muted-foreground">
+              Industrial Solutions
             </span>
           </div>
         </a>
 
         {/* Desktop nav */}
-        <ul className="hidden lg:flex items-center gap-1">
+        <ul className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative px-4 py-2 font-sans text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="font-sans text-sm text-foreground hover:text-accent transition-colors duration-200 font-medium"
               >
                 {link.label}
               </a>
@@ -75,9 +73,9 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="/#contacto"
-          className="hidden lg:inline-flex items-center px-6 py-2.5 text-foreground font-sans text-sm transition-all duration-200 border border-accent text-accent hover:bg-accent hover:text-background"
+          className="hidden lg:inline-flex items-center px-6 py-2.5 bg-accent text-white font-sans text-sm font-medium transition-all duration-200 hover:bg-blue-900"
         >
-          Contáctenos
+          Contacto
         </a>
 
         {/* Mobile toggle */}
@@ -86,7 +84,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
@@ -97,28 +95,28 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-background border-t border-border"
+            transition={{ duration: 0.2 }}
+            className="lg:hidden bg-white border-t border-gray-200"
           >
-            <ul className="container py-6 flex flex-col gap-1">
+            <ul className="container py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 font-display text-lg text-muted-foreground hover:text-foreground transition-colors"
+                    className="block font-sans text-base text-foreground hover:text-accent transition-colors font-medium"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
-              <li className="pt-4">
+              <li className="pt-4 border-t border-gray-200">
                 <a
                   href="/#contacto"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center px-6 py-3 border border-accent text-accent font-sans text-sm"
+                  className="inline-flex items-center px-6 py-2.5 bg-accent text-white font-sans text-sm font-medium hover:bg-blue-900 transition-all duration-200"
                 >
-                  Contáctenos
+                  Contacto
                 </a>
               </li>
             </ul>

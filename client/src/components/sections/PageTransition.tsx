@@ -13,26 +13,26 @@ export default function PageLoader() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-background flex items-center justify-center"
+      className="fixed inset-0 z-[100] bg-white flex items-center justify-center"
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4 }}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.4 }}
         className="flex items-center gap-4"
       >
         <img
-          src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663751686161/MKadoAWFfElgzipt.webp"
+          src="https://www.adami.com.ar/wp-content/uploads/2016/05/adami-logo-header.png"
           alt="ADAMI"
-          className="h-10 w-10"
+          className="h-10 w-auto"
         />
         <motion.div
           className="h-px w-12 bg-accent"
           initial={{ scaleX: 0, originX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         />
       </motion.div>
     </motion.div>
