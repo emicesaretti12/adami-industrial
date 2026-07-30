@@ -7,11 +7,19 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import CursorEffect from "./components/CursorEffect";
 import PageLoader from "./components/sections/PageTransition";
+import Services from "./pages/Services";
+import Industries from "./pages/Industries";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/servicios"} component={Services} />
+      <Route path={"/industrias"} component={Industries} />
+      <Route path={"/empresa"} component={About} />
+      <Route path={"/contacto"} component={Contact} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
