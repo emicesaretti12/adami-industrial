@@ -11,8 +11,8 @@ interface RevealSectionProps {
 }
 
 /**
- * Heavy animated section wrapper with multiple reveal directions
- * and spring-based physics for premium feel.
+ * Enhanced animated section wrapper with blur-to-focus effect.
+ * Uses spring physics for organic, premium feel.
  */
 export default function RevealSection({
   children,
@@ -42,6 +42,7 @@ export default function RevealSection({
         x: initial.x,
         scale: initial.scale,
         rotate: initial.rotate,
+        filter: "blur(6px)",
       }}
       whileInView={{
         opacity: 1,
@@ -49,8 +50,9 @@ export default function RevealSection({
         x: 0,
         scale: 1,
         rotate: 0,
+        filter: "blur(0px)",
       }}
-      viewport={{ once, margin: "-80px" }}
+      viewport={{ once, margin: "-60px" }}
       transition={{
         duration: 0.9,
         delay: delay,

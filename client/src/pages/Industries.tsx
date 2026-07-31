@@ -4,6 +4,9 @@ import { Link } from 'wouter';
 import { Plane, Car, Wheat, Rocket, Atom, UtensilsCrossed, ChevronRight, ArrowRight, Settings } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TextReveal from '@/components/TextReveal';
+import TiltCard from '@/components/TiltCard';
+import MagneticButton from '@/components/MagneticButton';
 
 const industries = [
   {
@@ -79,15 +82,15 @@ const industries = [
 
 // framer-motion variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 60, filter: 'blur(6px)' },
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: 'spring', bounce: 0.4, duration: 0.8 } }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 }
+    transition: { staggerChildren: 0.15 }
   }
 };
 
@@ -105,9 +108,9 @@ export default function Industries() {
             variants={staggerContainer}
             className="space-y-6"
           >
-            <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-bold tracking-tight text-[#1a2b3d]">
+            <TextReveal as="h1" className="text-4xl md:text-6xl font-bold tracking-tight text-[#1a2b3d]">
               Industrias que <span className="text-[#4e6e94]">Transformamos</span>
-            </motion.h1>
+            </TextReveal>
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#5a6b7c] max-w-3xl mx-auto">
               Brindamos soluciones integrales de ingeniería y fabricación para los sectores más exigentes de la industria global.
             </motion.p>
@@ -121,22 +124,24 @@ export default function Industries() {
       {/* Industries Grid/Sections */}
       <div className="flex flex-col">
         {industries.map((ind, index) => (
-          <section key={ind.id} className={`py-20 px-6 lg:px-12 ${ind.bg}`}>
+          <section key={ind.id} className={`py-20 px-6 lg:px-12 ${ind.bg} overflow-hidden`}>
             <div className="max-w-7xl mx-auto">
               <div className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
                 
                 {/* Text Content */}
                 <motion.div 
-                  initial="hidden"
-                  whileInView="visible"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -80 : 80, filter: 'blur(8px)' }}
+                  whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, margin: "-100px" }}
-                  variants={fadeInUp}
+                  transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
                   className="w-full lg:w-1/2"
                 >
                   <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-[#e2e8f0] mb-6 text-[#4e6e94]">
                     <ind.icon className="w-8 h-8" strokeWidth={1.5} />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a2b3d] mb-4">{ind.title}</h2>
+                  <TextReveal as="h2" className="text-3xl md:text-4xl font-bold text-[#1a2b3d] mb-4">
+                    {ind.title}
+                  </TextReveal>
                   <p className="text-lg text-[#5a6b7c] mb-8 leading-relaxed">
                     {ind.description}
                   </p>
@@ -148,14 +153,18 @@ export default function Industries() {
                     {ind.projects.map((project, pIdx) => (
                       <motion.li 
                         key={pIdx}
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: pIdx * 0.1 }}
-                        className="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#e2e8f0]"
+                        transition={{ delay: pIdx * 0.15 + 0.3, type: 'spring', bounce: 0.4 }}
+                        className="block"
                       >
-                        <ChevronRight className="w-5 h-5 text-[#4e6e94] shrink-0 mt-0.5" />
-                        <span className="text-[#1a2b3d]">{project}</span>
+                        <TiltCard>
+                          <div className="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#e2e8f0]">
+                            <ChevronRight className="w-5 h-5 text-[#4e6e94] shrink-0 mt-0.5" />
+                            <span className="text-[#1a2b3d]">{project}</span>
+                          </div>
+                        </TiltCard>
                       </motion.li>
                     ))}
                   </ul>
@@ -163,16 +172,18 @@ export default function Industries() {
                 
                 {/* Visual / Decorative */}
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.9, x: index % 2 === 0 ? 80 : -80, filter: 'blur(8px)' }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ type: 'spring', bounce: 0.3, duration: 0.9, delay: 0.2 }}
                   className="w-full lg:w-1/2"
                 >
-                  <div className="relative aspect-square md:aspect-[4/3] rounded-3xl bg-gradient-to-br from-[#f5f7fa] to-white border border-[#e2e8f0] shadow-lg overflow-hidden flex items-center justify-center group">
-                    <div className="absolute inset-0 bg-[#4e6e94] opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
-                    <ind.icon className="w-32 h-32 text-[#e2e8f0] group-hover:text-[#4e6e94] transition-colors duration-500 group-hover:scale-110 transform" strokeWidth={1} />
-                  </div>
+                  <TiltCard>
+                    <div className="relative aspect-square md:aspect-[4/3] rounded-3xl bg-gradient-to-br from-[#f5f7fa] to-white border border-[#e2e8f0] shadow-lg overflow-hidden flex items-center justify-center group">
+                      <div className="absolute inset-0 bg-[#4e6e94] opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                      <ind.icon className="w-32 h-32 text-[#e2e8f0] group-hover:text-[#4e6e94] transition-colors duration-500 group-hover:scale-110 transform" strokeWidth={1} />
+                    </div>
+                  </TiltCard>
                 </motion.div>
 
               </div>
@@ -195,17 +206,19 @@ export default function Industries() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+            <TextReveal as="h2" className="text-3xl md:text-5xl font-bold mb-6">
               ¿Listo para optimizar su producción?
-            </motion.h2>
+            </TextReveal>
             <motion.p variants={fadeInUp} className="text-[#f5f7fa] text-lg md:text-xl mb-10 opacity-90">
               Contáctenos para discutir cómo nuestras soluciones de ingeniería pueden impulsar la eficiencia de su empresa.
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/contacto">
-                <a className="inline-flex items-center gap-2 bg-white text-[#4e6e94] px-8 py-4 rounded-full font-semibold hover:bg-[#f5f7fa] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
-                  Contactar a un asesor <ArrowRight className="w-5 h-5" />
-                </a>
+                <MagneticButton>
+                  <a className="inline-flex items-center gap-2 bg-white text-[#4e6e94] px-8 py-4 rounded-full font-semibold hover:bg-[#f5f7fa] transition-colors shadow-lg hover:shadow-xl transform duration-300">
+                    Contactar a un asesor <ArrowRight className="w-5 h-5" />
+                  </a>
+                </MagneticButton>
               </Link>
             </motion.div>
           </motion.div>
