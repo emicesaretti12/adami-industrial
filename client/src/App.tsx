@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import CursorEffect from "./components/CursorEffect";
-import PageLoader from "./components/sections/PageTransition";
+import PageTransition from "./components/sections/PageTransition";
 import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import About from "./pages/About";
@@ -33,7 +33,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <CursorEffect />
-          <PageLoader />
+          <PageTransition />
           <Router />
         </TooltipProvider>
       </ThemeProvider>

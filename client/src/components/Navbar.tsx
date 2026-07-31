@@ -1,128 +1,168 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Menu } from "lucide-react";
-import { useScrollPosition } from "@/hooks/useScrollAnimation";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Empresa", href: "/#empresa" },
-  { label: "Servicios", href: "/#servicios" },
-  { label: "Industrias", href: "/#industrias" },
-  { label: "Clientes", href: "/#clientes" },
-  { label: "Contacto", href: "/#contacto" },
+  { name: "Inicio", href: "/" },
+  { name: "Servicios", href: "/servicios" },
+  { name: "Industrias", href: "/industrias" },
+  { name: "Empresa", href: "/empresa" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 export default function Navbar() {
-  const scrollY = useScrollPosition();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = scrollY > 10;
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
     };
-  }, [mobileOpen]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-md border-b border-gray-200"
-          : "bg-white border-b border-gray-100"
+        isScrolled
+          ? "bg-[#050810]/80 backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/20"
+          : "bg-transparent border-transparent"
       }`}
     >
-      <nav className="container flex items-center justify-between h-16 lg:h-20">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2 group">
-          <img
-            src="https://www.adami.com.ar/wp-content/uploads/2016/05/adami-logo-header.png"
-            alt="ADAMI"
-            className="h-8 w-auto lg:h-10 transition-opacity duration-300 group-hover:opacity-75"
-          />
-          <div className="flex flex-col leading-tight hidden sm:block">
-            <span className="font-display text-sm lg:text-base font-bold text-accent">
-              ADAMI
-            </span>
-            <span className="font-sans text-[10px] font-medium text-muted-foreground">
-              Industrial Solutions
-            </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          {/* Logo */}
+          <Link href="/">
+            <div className="flex flex-col justify-center cursor-pointer group">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-6 bg-red-600 rounded-sm group-hover:h-8 transition-all duration-300"></div>
+                <span className="text-2xl font-bold tracking-tighter text-white">ADAMI</span>
+              </div>
+              <span className="text-[10px] font-medium tracking-[0.3em] text-gray-400 uppercase pl-3.5">
+                Industrial
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => {
+              const isActive = location === link.href;
+              return (
+                <Link key={link.name} href={link.href}>
+                  <div className="relative py-2 group cursor-pointer">
+                    <span
+                      className={`text-sm font-medium tracking-wide transition-colors ${
+                        isActive ? "text-white" : "text-gray-300 group-hover:text-white"
+                      }`}
+                    >
+                      {link.name}
+                    </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="navbar-active-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
           </div>
-        </a>
 
-        {/* Desktop nav */}
-        <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="font-sans text-sm text-foreground hover:text-accent transition-colors duration-200 font-medium"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA */}
-        <a
-          href="/#contacto"
-          className="hidden lg:inline-flex items-center px-6 py-2.5 bg-accent text-white font-sans text-sm font-medium transition-all duration-200 hover:bg-blue-900"
-        >
-          Contacto
-        </a>
-
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden text-foreground p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white border-t border-gray-200"
-          >
-            <ul className="container py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block font-sans text-base text-foreground hover:text-accent transition-colors font-medium"
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-300 hover:text-white focus:outline-none p-2"
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              <li className="pt-4 border-t border-gray-200">
-                <a
-                  href="/#contacto"
-                  onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center px-6 py-2.5 bg-accent text-white font-sans text-sm font-medium hover:bg-blue-900 transition-all duration-200"
-                >
-                  Contacto
-                </a>
-              </li>
-            </ul>
+                    <X size={24} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={24} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden fixed top-[64px] left-0 right-0 bottom-0 bg-[#050810]/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+          >
+            <div className="flex flex-col px-6 pt-8 pb-24 space-y-6 overflow-y-auto h-full">
+              {navLinks.map((link, i) => {
+                const isActive = location === link.href;
+                return (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, delay: i * 0.1 }}
+                  >
+                    <Link href={link.href}>
+                      <div
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`text-3xl font-bold tracking-tight cursor-pointer ${
+                          isActive ? "text-blue-500" : "text-white hover:text-gray-300"
+                        }`}
+                      >
+                        {link.name}
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+              
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+                className="mt-auto pt-10 border-t border-white/10"
+              >
+                <p className="text-gray-400 text-sm mb-2">Contacto Directo</p>
+                <p className="text-white font-medium">+54 351 4666050</p>
+                <p className="text-white font-medium">info@adami.com.ar</p>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </motion.nav>
   );
 }

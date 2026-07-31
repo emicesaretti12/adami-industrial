@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-interface Spark {
+interface Particle {
   x: number;
   y: number;
   vx: number;
@@ -8,28 +8,31 @@ interface Spark {
   life: number;
   maxLife: number;
   size: number;
+  hue: number;
 }
 
 /**
- * Canvas-based animated sparks effect for the hero section.
- * Simulates welding/industrial sparks floating upward.
+ * Canvas-based industrial sparks / welding particles.
+ * Two color modes: blue and amber, rising from bottom.
  */
-export default function SparksCanvas({ className = "" }: { className?: string }) {
+export default function SparksCanvas({
+  className = "",
+}: {
+  className?: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Check for reduced motion preference
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
+    // Respect reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let animationId: number;
-    let sparks: Spark[] = [];
+    const particles: Particle[] = [];
     let width = 0;
     let height = 0;
 
@@ -37,66 +40,83 @@ export default function SparksCanvas({ className = "" }: { className?: string })
       const rect = canvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
-    const createSpark = (): Spark => {
-      const x = Math.random() * width;
-      const y = height + 10;
-      const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.6;
-      const speed = 1 + Math.random() * 3;
+    const createParticle = (): Particle => {
+      const isBlue = Math.random() > 0.4;
       return {
-        x,
-        y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
+        x: Math.random() * width,
+        y: height + Math.random() * 20,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: -(Math.random() * 2.5 + 0.8),
         life: 0,
-        maxLife: 60 + Math.random() * 80,
-        size: 1 + Math.random() * 2,
+        maxLife: 80 + Math.random() * 120,
+        size: 0.5 + Math.random() * 2,
+        hue: isBlue ? 210 + Math.random() * 20 : 35 + Math.random() * 15,
       };
     };
 
-    // Initialize sparks
-    for (let i = 0; i < 40; i++) {
-      const spark = createSpark();
-      spark.life = Math.random() * spark.maxLife;
-      sparks.push(spark);
+    // Pre-fill
+    for (let i = 0; i < 30; i++) {
+      const p = createParticle();
+      p.y = Math.random() * height;
+      p.life = Math.random() * p.maxLife;
+      particles.push(p);
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      sparks = sparks.filter((s) => s.life < s.maxLife);
-
-      // Add new sparks
-      while (sparks.length < 50) {
-        sparks.push(createSpark());
+      // Spawn
+      if (particles.length < 60 && Math.random() > 0.6) {
+        particles.push(createParticle());
       }
 
-      sparks.forEach((spark) => {
-        spark.life++;
-        spark.x += spark.vx;
-        spark.y += spark.vy;
-        spark.vy += 0.02; // slight gravity
-        spark.vx *= 0.99;
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.01; // micro gravity
+        p.vx *= 0.998;
+        p.life++;
 
-        const alpha = 1 - spark.life / spark.maxLife;
-        const hue = 35 + Math.random() * 15; // amber range
+        const progress = p.life / p.maxLife;
+        const alpha =
+          progress < 0.2
+            ? progress / 0.2
+            : 1 - (progress - 0.2) / 0.8;
 
+        if (alpha <= 0 || p.life >= p.maxLife) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        // Glow
         ctx.beginPath();
-        ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${hue}, 90%, 60%, ${alpha * 0.8})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = `hsla(${hue}, 90%, 50%, ${alpha})`;
+        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 85%, 55%, ${alpha * 0.08})`;
         ctx.fill();
-      });
 
-      ctx.shadowBlur = 0;
+        // Core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${alpha * 0.7})`;
+        ctx.fill();
+
+        // Bright center
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 80%, 85%, ${alpha * 0.9})`;
+        ctx.fill();
+      }
+
       animationId = requestAnimationFrame(animate);
     };
 
@@ -108,5 +128,11 @@ export default function SparksCanvas({ className = "" }: { className?: string })
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={`absolute inset-0 w-full h-full ${className}`}
+      aria-hidden="true"
+    />
+  );
 }
