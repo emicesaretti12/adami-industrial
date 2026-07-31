@@ -1,8 +1,8 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 
 interface TextRevealProps {
-  children: string;
+  children: ReactNode;
   className?: string;
   delay?: number;
   as?: "h1" | "h2" | "h3" | "p" | "span";
@@ -13,6 +13,7 @@ interface TextRevealProps {
  * Premium word-by-word text reveal animation.
  * Each word animates in with translateY + opacity + subtle blur.
  * Triggers on scroll into view.
+ * Accepts any ReactNode but extracts text content for splitting.
  */
 export default function TextReveal({
   children,
@@ -21,10 +22,24 @@ export default function TextReveal({
   as: Tag = "h2",
   staggerSpeed = 0.04,
 }: TextRevealProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
-  const words = children.split(" ");
+  // Safely extract text from children (handles string, number, arrays, JSX text nodes)
+  const extractText = (node: ReactNode): string => {
+    if (typeof node === "string") return node;
+    if (typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(extractText).join("");
+    if (node && typeof node === "object" && "props" in node) {
+      return extractText((node as any).props.children);
+    }
+    return "";
+  };
+
+  const text = extractText(children).trim();
+  const words = text.split(/\s+/).filter(Boolean);
+
+  if (words.length === 0) return null;
 
   const containerVariants = {
     hidden: {},
@@ -55,8 +70,8 @@ export default function TextReveal({
 
   return (
     <motion.div
-      ref={ref as any}
-      className={`overflow-hidden ${className}`}
+      ref={ref}
+      className="overflow-hidden"
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
