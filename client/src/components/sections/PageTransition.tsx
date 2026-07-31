@@ -2,9 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
-/**
- * Page transition with brand-blue bar wipe effect.
- */
 export default function PageTransition() {
   const [location] = useLocation();
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -15,12 +12,12 @@ export default function PageTransition() {
       setIsTransitioning(true);
       setPrevLocation(location);
       window.scrollTo({ top: 0 });
-      const timer = setTimeout(() => setIsTransitioning(false), 800);
+      const timer = setTimeout(() => setIsTransitioning(false), 500);
       return () => clearTimeout(timer);
     }
   }, [location, prevLocation]);
 
-  const barCount = 5;
+  const barCount = 4;
 
   return (
     <AnimatePresence>
@@ -34,9 +31,9 @@ export default function PageTransition() {
               animate={{ scaleY: [0, 1, 1, 0] }}
               exit={{ scaleY: 0 }}
               transition={{
-                duration: 0.8,
-                times: [0, 0.35, 0.65, 1],
-                delay: i * 0.04,
+                duration: 0.5,
+                times: [0, 0.3, 0.7, 1],
+                delay: i * 0.03,
                 ease: [0.23, 1, 0.32, 1],
               }}
               style={{
@@ -47,20 +44,6 @@ export default function PageTransition() {
               }}
             />
           ))}
-          <motion.div
-            className="absolute top-1/2 left-0 right-0 h-px z-10"
-            style={{
-              background: "linear-gradient(90deg, transparent, #ffffff, transparent)",
-            }}
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: [0, 1], opacity: [0, 1, 1, 0] }}
-            transition={{
-              duration: 0.8,
-              times: [0, 0.4, 0.6, 1],
-              delay: 0.1,
-              ease: [0.23, 1, 0.32, 1],
-            }}
-          />
         </div>
       )}
     </AnimatePresence>

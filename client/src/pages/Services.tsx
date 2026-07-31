@@ -34,14 +34,14 @@ const Services = () => {
         {/* HERO SECTION */}
         <section className="relative px-6 py-20 md:py-32 max-w-7xl mx-auto overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ ...springTransition, duration: 0.8 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...springTransition, duration: 0.5 }}
             className="text-center max-w-4xl mx-auto"
           >
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, ...springTransition }}
               className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#4e6e94]/30 bg-[#4e6e94]/5 text-[#4e6e94] font-semibold text-sm tracking-widest uppercase"
             >
@@ -53,8 +53,8 @@ const Services = () => {
             </TextReveal>
 
             <motion.p 
-              initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, ...springTransition }}
               className="text-lg md:text-xl text-[#5a6b7c] max-w-2xl mx-auto leading-relaxed"
             >
@@ -68,8 +68,8 @@ const Services = () => {
           
           {/* Unit 1 */}
           <motion.div
-            initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.1 }}
           >
@@ -101,8 +101,8 @@ const Services = () => {
                     ].map((item, idx) => (
                       <motion.li 
                         key={idx}
-                        initial={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
-                        whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 + 0.3, ...springTransition }}
                         className="flex items-center text-[#1a2b3d] font-medium"
@@ -119,8 +119,8 @@ const Services = () => {
 
           {/* Unit 2 */}
           <motion.div
-            initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.2 }}
           >
@@ -152,8 +152,8 @@ const Services = () => {
                     ].map((item, idx) => (
                       <motion.li 
                         key={idx}
-                        initial={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
-                        whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 + 0.3, ...springTransition }}
                         className="flex items-center text-[#1a2b3d] font-medium"
@@ -170,8 +170,8 @@ const Services = () => {
 
           {/* Unit 3 */}
           <motion.div
-            initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.3 }}
           >
@@ -204,8 +204,8 @@ const Services = () => {
                     ].map((item, idx) => (
                       <motion.li 
                         key={idx}
-                        initial={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
-                        whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 + 0.3, ...springTransition }}
                         className="flex items-center text-[#1a2b3d] font-medium"
@@ -226,8 +226,8 @@ const Services = () => {
         <section className="bg-[#f5f7fa] py-24 mt-12 border-y border-[#e2e8f0]">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div 
-              initial={{ opacity: 0, y: 60, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...springTransition }}
               className="text-center mb-16"
@@ -241,8 +241,8 @@ const Services = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Column 1 */}
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, ...springTransition }}
                 className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
@@ -266,8 +266,8 @@ const Services = () => {
 
               {/* Column 2 */}
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, ...springTransition }}
                 className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
@@ -291,8 +291,8 @@ const Services = () => {
 
               {/* Column 3 */}
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, ...springTransition }}
                 className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
@@ -320,8 +320,8 @@ const Services = () => {
         {/* CTA SECTION */}
         <section className="px-6 py-24 max-w-7xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 60, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...springTransition }}
             className="bg-[#4e6e94] rounded-3xl p-12 md:p-20 text-center relative overflow-hidden"

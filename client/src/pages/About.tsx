@@ -10,8 +10,8 @@ import MagneticButton from '@/components/MagneticButton';
 
 // framer-motion variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60, filter: 'blur(6px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: 'spring', bounce: 0.4, duration: 0.8 } }
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 0.5 } }
 };
 
 const staggerContainer = {
@@ -70,10 +70,10 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Mission */}
             <motion.div 
-              initial={{ opacity: 0, x: -60, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', bounce: 0.3, duration: 0.8 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.5 }}
             >
               <TiltCard glare={true}>
                 <div className="bg-white p-10 rounded-3xl shadow-sm border border-[#e2e8f0] h-full flex flex-col">
@@ -92,10 +92,10 @@ export default function About() {
             
             {/* Vision */}
             <motion.div 
-              initial={{ opacity: 0, x: 60, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', bounce: 0.3, duration: 0.8, delay: 0.2 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.5, delay: 0.2 }}
             >
               <TiltCard glare={true}>
                 <div className="bg-white p-10 rounded-3xl shadow-sm border border-[#e2e8f0] h-full flex flex-col">
@@ -123,8 +123,8 @@ export default function About() {
               Pilares de Calidad
             </TextReveal>
             <motion.p 
-              initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, type: 'spring', bounce: 0.4 }}
               className="text-lg text-[#5a6b7c] max-w-2xl mx-auto"
@@ -200,10 +200,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <motion.div 
-              initial={{ opacity: 0, x: -60, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', bounce: 0.3, duration: 0.8 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.5 }}
               className="lg:w-1/2"
             >
               <TextReveal as="h2" className="text-3xl md:text-5xl font-bold text-[#1a2b3d] mb-6">
@@ -237,10 +237,10 @@ export default function About() {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, x: 60, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, scale: 1, x: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, scale: 0.9, x: 30 }}
+              whileInView={{ opacity: 1, scale: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', bounce: 0.3, duration: 0.8, delay: 0.2 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.5, delay: 0.2 }}
               className="lg:w-1/2 w-full"
             >
               <TiltCard>

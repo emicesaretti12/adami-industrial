@@ -57,11 +57,10 @@ export default function Contact() {
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0, filter: 'blur(10px)' },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: 'blur(0px)',
       transition: { type: 'spring', stiffness: 100, damping: 15 }
     }
   };
@@ -73,8 +72,8 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center text-center">
         <motion.div
-          initial={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="inline-flex items-center gap-2 px-3 py-1 bg-[#f5f7fa] border border-[#e2e8f0] rounded-full mb-6"
         >
@@ -90,8 +89,8 @@ export default function Contact() {
         </TextReveal>
         
         <motion.p
-          initial={{ opacity: 0, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-[#5a6b7c] max-w-2xl text-lg"
         >
@@ -329,10 +328,10 @@ export default function Contact() {
 
             {/* Map iframe */}
             <motion.div 
-              initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
               className="mt-4 rounded-sm overflow-hidden border border-[#e2e8f0] h-[250px] relative"
             >
               <div className="absolute inset-0 bg-[#e2e8f0]/50 animate-pulse -z-10"></div>

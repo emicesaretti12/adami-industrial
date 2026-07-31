@@ -131,12 +131,11 @@ export default function Home() {
   const statsSectionY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   const sectionVariants = {
-    hidden: { y: 80, opacity: 0, filter: "blur(8px)" },
+    hidden: { y: 30, opacity: 0 },
     visible: { 
       y: 0, 
       opacity: 1, 
-      filter: "blur(0px)",
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
 
@@ -189,7 +188,7 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <MagneticButton>

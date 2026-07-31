@@ -82,8 +82,8 @@ const industries = [
 
 // framer-motion variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60, filter: 'blur(6px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: 'spring', bounce: 0.4, duration: 0.8 } }
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 0.5 } }
 };
 
 const staggerContainer = {
@@ -130,8 +130,8 @@ export default function Industries() {
                 
                 {/* Text Content */}
                 <motion.div 
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -80 : 80, filter: 'blur(8px)' }}
-                  whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
                   className="w-full lg:w-1/2"
@@ -172,8 +172,8 @@ export default function Industries() {
                 
                 {/* Visual / Decorative */}
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.9, x: index % 2 === 0 ? 80 : -80, filter: 'blur(8px)' }}
-                  whileInView={{ opacity: 1, scale: 1, x: 0, filter: 'blur(0px)' }}
+                  initial={{ opacity: 0, scale: 0.9, x: index % 2 === 0 ? 40 : -40 }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ type: 'spring', bounce: 0.3, duration: 0.9, delay: 0.2 }}
                   className="w-full lg:w-1/2"
