@@ -1,279 +1,343 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { Link } from 'wouter';
 import { 
   Lightbulb, 
   Factory, 
   Wrench, 
   CheckCircle, 
-  Monitor,
-  Settings,
-  Shield,
-  ArrowRight
+  Monitor, 
+  Settings, 
+  Shield, 
+  ArrowRight 
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useRef } from 'react';
 
-const services = [
-  {
-    id: '01',
-    title: 'Innovación Tecnológica',
-    icon: Lightbulb,
-    colorClass: 'text-blue-500',
-    bgClass: 'bg-blue-500/10',
-    borderClass: 'border-blue-500/30',
-    glowClass: 'group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]',
-    description: 'Soluciones de vanguardia en diseño, ingeniería y gestión de proyectos industriales.',
-    items: [
-      'Diseño industrial 3D y CAD-CAM',
-      'Ingeniería de procesos',
-      'Gestión de proyectos industriales',
-      'Venta de Robots Industriales'
-    ]
-  },
-  {
-    id: '02',
-    title: 'Desarrollos Metalúrgicos',
-    icon: Factory,
-    colorClass: 'text-red-500',
-    bgClass: 'bg-red-500/10',
-    borderClass: 'border-red-500/30',
-    glowClass: 'group-hover:shadow-[0_0_30px_-5px_rgba(220,38,38,0.3)]',
-    description: 'Fabricación especializada de equipos, dispositivos y soluciones metalúrgicas de alta complejidad.',
-    items: [
-      'Celdas de soldadura robotizadas',
-      'Fabricación de máquinas equipos y dispositivos especiales',
-      'Matricería y moldes especiales',
-      'Transportadores y facilidades'
-    ]
-  },
-  {
-    id: '03',
-    title: 'Servicios Industriales',
-    icon: Wrench,
-    colorClass: 'text-amber-500',
-    bgClass: 'bg-amber-500/10',
-    borderClass: 'border-amber-500/30',
-    glowClass: 'group-hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.3)]',
-    description: 'Servicios integrales de instalación, automatización y soporte técnico post-venta.',
-    items: [
-      'Instalaciones llave en mano',
-      'Automatización Industrial',
-      'Montaje de líneas y robots',
-      'Servicio de medición inteligente',
-      'Seguimiento post-venta'
-    ]
-  }
-];
+const Services = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end']
+  });
 
-const equipment = [
-  {
-    title: 'Ingeniería y Diseño',
-    icon: Monitor,
-    items: [
-      'Software de Diseño 3D y 2D',
-      'Programación CAD-CAM',
-      'Software de Simulación',
-      'Software de medición PolyWorks'
-    ]
-  },
-  {
-    title: 'Mecanizado',
-    icon: Settings,
-    items: [
-      'Centro de mecanizado HAAS VF-7',
-      'Mesa rotativa 5 ejes HAAS TR310',
-      'Centro 4 ejes HAAS HRT450',
-      'Fresas CNC'
-    ]
-  },
-  {
-    title: 'Soldadura y Pintura',
-    icon: Shield,
-    items: [
-      'Soldadura Mig-Mag',
-      'Soldadura Tig para inoxidable y aluminio',
-      'Equipamiento de pintura',
-      'Prensa hidráulica'
-    ]
-  }
-];
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
-};
-
-export default function Services() {
   return (
-    <div className="min-h-screen bg-[#050810] text-slate-200 selection:bg-blue-500/30 flex flex-col font-sans overflow-hidden">
+    <div className="min-h-screen bg-white text-[#1a2b3d] font-sans selection:bg-[#4e6e94] selection:text-white">
       <Navbar />
-
-      <main className="flex-grow pt-24">
+      
+      <main ref={containerRef} className="pt-24 pb-16">
         {/* HERO SECTION */}
-        <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 px-6 lg:px-12 max-w-7xl mx-auto">
-          {/* Background Elements */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
-          
-          <motion.div 
-            className="flex flex-col items-center text-center space-y-6"
-            initial="hidden"
-            animate="show"
-            variants={staggerContainer}
+        <section className="relative px-6 py-20 md:py-32 max-w-7xl mx-auto overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center max-w-4xl mx-auto"
           >
-            <motion.div variants={itemVariants} className="flex items-center gap-2 border border-slate-800 bg-slate-900/50 backdrop-blur-sm rounded-full px-4 py-1.5">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-xs font-mono text-slate-300 tracking-widest uppercase">Unidades de Negocio</span>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#4e6e94]/30 bg-[#4e6e94]/5 text-[#4e6e94] font-semibold text-sm tracking-widest uppercase"
+            >
+              UNIDADES DE NEGOCIO
             </motion.div>
-            
-            <motion.h1 
-              variants={itemVariants}
-              className="text-5xl md:text-7xl font-bold tracking-tight text-white max-w-4xl"
-            >
-              Soluciones Industriales <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Integrales</span>
-            </motion.h1>
-            
-            <motion.p 
-              variants={itemVariants}
-              className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed"
-            >
-              Especialistas en ingeniería, desarrollos metalúrgicos y automatización. 
-              Tres unidades de negocio trabajando en sinergia para optimizar su producción.
-            </motion.p>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#1a2b3d] tracking-tight">
+              Soluciones Industriales <span className="text-[#4e6e94]">Integrales</span>
+            </h1>
+            <p className="text-lg md:text-xl text-[#5a6b7c] max-w-2xl mx-auto leading-relaxed">
+              Impulsamos la evolución de la industria con tecnología de vanguardia, ingeniería de precisión y servicios especializados diseñados para optimizar cada etapa de producción.
+            </p>
           </motion.div>
         </section>
 
         {/* BUSINESS UNITS */}
-        <section className="px-6 lg:px-12 max-w-7xl mx-auto pb-32">
-          <div className="flex flex-col gap-12">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative flex flex-col lg:flex-row gap-8 lg:gap-12 p-8 lg:p-12 rounded-3xl border border-slate-800 bg-[#0a0f1c]/80 backdrop-blur-md overflow-hidden transition-all duration-500 ${service.glowClass}`}
-              >
-                {/* Background ambient light */}
-                <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] opacity-20 transition-opacity duration-500 group-hover:opacity-40 -z-10 ${service.bgClass.replace('/10', '')}`} />
+        <section className="px-6 py-16 max-w-7xl mx-auto space-y-16">
+          
+          {/* Unit 1 */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#4e6e94]/5 transition-all duration-500"
+          >
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+              <Lightbulb size={200} />
+            </div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-[#4e6e94]/10 flex items-center justify-center mb-6">
+                  <Lightbulb className="w-10 h-10 text-[#4e6e94]" />
+                </div>
+                <div className="text-6xl font-bold text-[#e2e8f0] mb-4">01</div>
+              </div>
+              
+              <div className="flex-grow">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Innovación Tecnológica</h2>
+                <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
+                  Desarrollamos conceptos y soluciones de ingeniería avanzada para resolver los desafíos más complejos, apoyándonos en las últimas herramientas de diseño y simulación.
+                </p>
                 
-                {/* Left Column: Info */}
-                <div className="flex-1 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl font-mono text-slate-600 font-bold">{service.id}</span>
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${service.borderClass} ${service.bgClass}`}>
-                      <service.icon className={`w-7 h-7 ${service.colorClass}`} />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-400 transition-all duration-300">
-                      {service.title}
-                    </h2>
-                    <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    "Diseño industrial 3D y CAD-CAM",
+                    "Ingeniería de procesos",
+                    "Gestión de proyectos industriales",
+                    "Venta de Robots Industriales"
+                  ].map((item, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 + 0.3 }}
+                      className="flex items-center text-[#1a2b3d] font-medium"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-3 text-[#4e6e94]" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
 
-                {/* Right Column: Items */}
-                <div className="flex-[1.2] lg:border-l border-slate-800 lg:pl-12 flex items-center">
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                    {service.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/30 transition-colors">
-                        <div className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${service.bgClass.replace('/10', '')}`} />
-                        <span className="text-slate-300 font-medium">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+          {/* Unit 2 */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#3a5a80]/5 transition-all duration-500"
+          >
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+              <Factory size={200} />
+            </div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-[#3a5a80]/10 flex items-center justify-center mb-6">
+                  <Factory className="w-10 h-10 text-[#3a5a80]" />
                 </div>
-              </motion.div>
-            ))}
-          </div>
+                <div className="text-6xl font-bold text-[#e2e8f0] mb-4">02</div>
+              </div>
+              
+              <div className="flex-grow">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Desarrollos Metalúrgicos</h2>
+                <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
+                  Materializamos proyectos con la más alta precisión. Contamos con capacidad instalada para fabricar equipos y estructuras robustas que soportan las exigencias de la industria pesada.
+                </p>
+                
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    "Celdas de soldadura robotizadas",
+                    "Fabricación de máquinas equipos y dispositivos especiales",
+                    "Matricería y moldes especiales",
+                    "Transportadores y facilidades"
+                  ].map((item, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 + 0.3 }}
+                      className="flex items-center text-[#1a2b3d] font-medium"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-3 text-[#3a5a80]" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Unit 3 */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#6b8db5]/5 transition-all duration-500"
+          >
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+              <Wrench size={200} />
+            </div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-[#6b8db5]/10 flex items-center justify-center mb-6">
+                  <Wrench className="w-10 h-10 text-[#6b8db5]" />
+                </div>
+                <div className="text-6xl font-bold text-[#e2e8f0] mb-4">03</div>
+              </div>
+              
+              <div className="flex-grow">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Servicios Industriales</h2>
+                <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
+                  Brindamos soporte integral en planta. Desde el montaje y la puesta en marcha hasta el mantenimiento y seguimiento, asegurando el óptimo rendimiento de sus instalaciones.
+                </p>
+                
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    "Instalaciones llave en mano",
+                    "Automatización Industrial",
+                    "Montaje de líneas y robots",
+                    "Servicio de medición inteligente",
+                    "Seguimiento post-venta"
+                  ].map((item, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 + 0.3 }}
+                      className="flex items-center text-[#1a2b3d] font-medium"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-3 text-[#6b8db5]" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
         </section>
 
-        {/* EQUIPMENT & INFRASTRUCTURE */}
-        <section className="relative py-32 bg-[#0a0f1c] border-y border-slate-800">
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 mix-blend-overlay pointer-events-none"></div>
-          
-          <div className="px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
+        {/* EQUIPMENT SECTION */}
+        <section className="bg-[#f5f7fa] py-24 mt-12 border-y border-[#e2e8f0]">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">Equipamiento e Infraestructura</h2>
-              <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                Contamos con tecnología de punta y maquinaria especializada para garantizar la máxima precisión en cada etapa de producción.
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1a2b3d] mb-4">Capacidad Instalada</h2>
+              <p className="text-lg text-[#5a6b7c] max-w-2xl mx-auto">
+                Infraestructura y equipamiento de última generación para dar respuesta a los requerimientos más exigentes de la industria.
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {equipment.map((category, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="bg-[#050810] border border-slate-800 p-8 rounded-2xl hover:border-slate-700 transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-6">
-                    <category.icon className="w-6 h-6 text-slate-300" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-6">{category.title}</h3>
-                  <ul className="space-y-4">
-                    {category.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                        <span className="text-slate-400 text-sm">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+              {/* Column 1 */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
+              >
+                <Monitor className="w-8 h-8 text-[#4e6e94] mb-6" />
+                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Ingeniería y Diseño</h3>
+                <ul className="space-y-4">
+                  {[
+                    "Estaciones de trabajo de alto rendimiento",
+                    "Software CAD/CAM avanzado",
+                    "Simulación de procesos robóticos",
+                    "Laboratorio de medición 3D"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-[#5a6b7c] text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Column 2 */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
+              >
+                <Settings className="w-8 h-8 text-[#4e6e94] mb-6" />
+                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Mecanizado</h3>
+                <ul className="space-y-4">
+                  {[
+                    "Centros de mecanizado CNC",
+                    "Tornos CNC de alta precisión",
+                    "Fresadoras y alesadoras",
+                    "Corte por láser y plasma"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-[#5a6b7c] text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Column 3 */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
+              >
+                <Shield className="w-8 h-8 text-[#4e6e94] mb-6" />
+                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Soldadura y Pintura</h3>
+                <ul className="space-y-4">
+                  {[
+                    "Celdas robotizadas de soldadura",
+                    "Equipos MIG/MAG y TIG",
+                    "Cabinas de pintura presurizadas",
+                    "Sistemas de secado industrial"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-[#5a6b7c] text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* CTA SECTION */}
-        <section className="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+        <section className="px-6 py-24 max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="relative rounded-3xl border border-blue-900/50 bg-gradient-to-br from-blue-900/20 to-[#0a0f1c] p-12 lg:p-20 text-center overflow-hidden"
+            className="bg-[#4e6e94] rounded-3xl p-12 md:p-20 text-center relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            
-            <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
-                ¿Necesita una solución a medida?
+            {/* Background decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+              <motion.div 
+                animate={{ rotate: 360 }} 
+                transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] border border-white/10 rounded-full" 
+              />
+              <motion.div 
+                animate={{ rotate: -360 }} 
+                transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] border border-white/10 rounded-full" 
+              />
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                ¿Listo para transformar su proceso productivo?
               </h2>
-              <p className="text-slate-400 text-lg mb-10 max-w-xl">
-                Nuestro equipo de ingenieros está listo para analizar su proyecto y diseñar la estrategia más eficiente.
+              <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-10">
+                Nuestro equipo de expertos está preparado para analizar sus necesidades y desarrollar una solución a medida que potencie su rentabilidad.
               </p>
-              
               <Link href="/contacto">
                 <motion.a 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-medium transition-colors shadow-[0_0_20px_-5px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_-5px_rgba(37,99,235,0.6)] cursor-pointer"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#4e6e94] font-bold rounded-full text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
                 >
-                  Contactar un asesor
-                  <ArrowRight className="w-5 h-5" />
+                  Contactar con un Especialista
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </motion.a>
               </Link>
             </div>
@@ -284,4 +348,6 @@ export default function Services() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Services;

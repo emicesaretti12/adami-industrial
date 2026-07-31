@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 /**
- * Premium page transition with multi-bar wipe effect.
- * Creates a cinematic transition between pages.
+ * Page transition with brand-blue bar wipe effect.
  */
 export default function PageTransition() {
   const [location] = useLocation();
@@ -43,16 +42,15 @@ export default function PageTransition() {
               style={{
                 left: `${(i / barCount) * 100}%`,
                 width: `${100 / barCount + 0.5}%`,
-                background: `linear-gradient(180deg, #0f1428 0%, #0a0f1c 100%)`,
+                background: "#4e6e94",
                 transformOrigin: i % 2 === 0 ? "top" : "bottom",
               }}
             />
           ))}
-          {/* Progress line */}
           <motion.div
             className="absolute top-1/2 left-0 right-0 h-px z-10"
             style={{
-              background: "linear-gradient(90deg, transparent, #3b82f6, transparent)",
+              background: "linear-gradient(90deg, transparent, #ffffff, transparent)",
             }}
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: [0, 1], opacity: [0, 1, 1, 0] }}

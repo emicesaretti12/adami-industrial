@@ -8,12 +8,12 @@ interface Particle {
   life: number;
   maxLife: number;
   size: number;
-  hue: number;
+  opacity: number;
 }
 
 /**
- * Canvas-based industrial sparks / welding particles.
- * Two color modes: blue and amber, rising from bottom.
+ * Very subtle brand-blue particle canvas for hero sections.
+ * Particles are barely visible against white — a refined touch.
  */
 export default function SparksCanvas({
   className = "",
@@ -28,7 +28,6 @@ export default function SparksCanvas({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Respect reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let animationId: number;
@@ -49,22 +48,18 @@ export default function SparksCanvas({
     resize();
     window.addEventListener("resize", resize);
 
-    const createParticle = (): Particle => {
-      const isBlue = Math.random() > 0.4;
-      return {
-        x: Math.random() * width,
-        y: height + Math.random() * 20,
-        vx: (Math.random() - 0.5) * 1.2,
-        vy: -(Math.random() * 2.5 + 0.8),
-        life: 0,
-        maxLife: 80 + Math.random() * 120,
-        size: 0.5 + Math.random() * 2,
-        hue: isBlue ? 210 + Math.random() * 20 : 35 + Math.random() * 15,
-      };
-    };
+    const createParticle = (): Particle => ({
+      x: Math.random() * width,
+      y: height + Math.random() * 20,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: -(Math.random() * 1.2 + 0.4),
+      life: 0,
+      maxLife: 100 + Math.random() * 140,
+      size: 0.8 + Math.random() * 1.5,
+      opacity: 0.08 + Math.random() * 0.12,
+    });
 
-    // Pre-fill
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 15; i++) {
       const p = createParticle();
       p.y = Math.random() * height;
       p.life = Math.random() * p.maxLife;
@@ -74,8 +69,7 @@ export default function SparksCanvas({
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Spawn
-      if (particles.length < 60 && Math.random() > 0.6) {
+      if (particles.length < 30 && Math.random() > 0.75) {
         particles.push(createParticle());
       }
 
@@ -83,37 +77,28 @@ export default function SparksCanvas({
         const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.01; // micro gravity
-        p.vx *= 0.998;
+        p.vx *= 0.999;
         p.life++;
 
         const progress = p.life / p.maxLife;
         const alpha =
-          progress < 0.2
-            ? progress / 0.2
-            : 1 - (progress - 0.2) / 0.8;
+          progress < 0.2 ? (progress / 0.2) * p.opacity : (1 - (progress - 0.2) / 0.8) * p.opacity;
 
         if (alpha <= 0 || p.life >= p.maxLife) {
           particles.splice(i, 1);
           continue;
         }
 
-        // Glow
+        // Soft glow
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 85%, 55%, ${alpha * 0.08})`;
+        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(78, 110, 148, ${alpha * 0.3})`;
         ctx.fill();
 
-        // Core
+        // Core dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${alpha * 0.7})`;
-        ctx.fill();
-
-        // Bright center
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 80%, 85%, ${alpha * 0.9})`;
+        ctx.fillStyle = `rgba(78, 110, 148, ${alpha * 0.6})`;
         ctx.fill();
       }
 
