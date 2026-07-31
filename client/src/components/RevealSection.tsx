@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { useInView } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 
 interface RevealSectionProps {
   children: ReactNode;
@@ -7,41 +7,41 @@ interface RevealSectionProps {
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "scale";
   id?: string;
+  once?: boolean;
 }
 
-/**
- * Animated section wrapper that reveals content on scroll.
- * Uses CSS transitions for smooth, interruptible animations.
- */
 export default function RevealSection({
   children,
   className = "",
   delay = 0,
   direction = "up",
   id,
+  once = true,
 }: RevealSectionProps) {
-  const [ref, inView] = useInView<HTMLDivElement>();
-
-  const directions: Record<string, string> = {
-    up: "translateY(40px)",
-    down: "translateY(-40px)",
-    left: "translateX(40px)",
-    right: "translateX(-40px)",
-    scale: "scale(0.95)",
+  const directionMap = {
+    up: { y: 40, x: 0, scale: 1 },
+    down: { y: -40, x: 0, scale: 1 },
+    left: { y: 0, x: 50, scale: 1 },
+    right: { y: 0, x: -50, scale: 1 },
+    scale: { y: 20, x: 0, scale: 0.95 },
   };
 
+  const initial = directionMap[direction];
+
   return (
-    <div
-      ref={ref}
+    <motion.div
       id={id}
       className={className}
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translate(0, 0) scale(1)" : directions[direction],
-        transition: `opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1) ${delay}ms, transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) ${delay}ms`,
+      initial={{ opacity: 0, y: initial.y, x: initial.x, scale: initial.scale }}
+      whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+      viewport={{ once, margin: "-40px" }}
+      transition={{
+        duration: 0.5,
+        delay,
+        ease: [0.23, 1, 0.32, 1],
       }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

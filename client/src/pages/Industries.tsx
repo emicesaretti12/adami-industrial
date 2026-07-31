@@ -1,135 +1,231 @@
-import { motion } from "framer-motion";
-import { useEffect } from "react";
-import { Car, Plane, Rocket, Atom, Wheat, Tractor, Fuel } from "lucide-react";
-import { industrias } from "@/lib/adami-data";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'wouter';
+import { Plane, Car, Wheat, Rocket, Atom, UtensilsCrossed, ChevronRight, ArrowRight, Settings } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import TextReveal from '@/components/TextReveal';
+import TiltCard from '@/components/TiltCard';
+import MagneticButton from '@/components/MagneticButton';
 
-const iconMap: Record<string, React.ElementType> = {
-  car: Car,
-  plane: Plane,
-  rocket: Rocket,
-  atom: Atom,
-  wheat: Wheat,
-  tractor: Tractor,
-  fuel: Fuel,
+const industries = [
+  {
+    id: "aeronautica",
+    title: "Aeronáutica",
+    icon: Plane,
+    description: "Herramentales para producción de piezas.",
+    projects: [
+      "Herramentales INVAR/Carbono/Aluminio/Acero",
+      "Máscaras de perforado 11C",
+      "Soporte guía para recortado",
+      "30F soporte guía para CNC"
+    ],
+    bg: "bg-white"
+  },
+  {
+    id: "automotriz",
+    title: "Automotriz",
+    icon: Car,
+    description: "Dispositivos de soldadura y automatización de procesos.",
+    projects: [
+      "Dispositivos soldadura Fiat Palio (Comau)",
+      "Sistema AGV Fiat Argentina",
+      "Celda robotizada PABSA/VW",
+      "Puesto control visión artificial VW",
+      "Automatización líneas prensas Gestamp/Ford"
+    ],
+    bg: "bg-[#f5f7fa]"
+  },
+  {
+    id: "agroindustria",
+    title: "Agroindustria",
+    icon: Wheat,
+    description: "Soluciones de ingeniería para maquinaria agrícola.",
+    projects: [
+      "CNH palas retroexcavadora",
+      "MULTIJACTO pulverizador",
+      "CRUCIANELLI sembradora PLANTOR"
+    ],
+    bg: "bg-white"
+  },
+  {
+    id: "aeroespacial",
+    title: "Aeroespacial",
+    icon: Rocket,
+    description: "Componentes de precisión para el sector aeroespacial.",
+    projects: [
+      "Mecanizados especiales torno y fresa CNC - toberas"
+    ],
+    bg: "bg-[#f5f7fa]"
+  },
+  {
+    id: "nuclear",
+    title: "Nuclear",
+    icon: Atom,
+    description: "Equipamiento de alta complejidad para centrales nucleares.",
+    projects: [
+      "Mock up feeder - Central Nuclear Embalse (NA-SA)"
+    ],
+    bg: "bg-white"
+  },
+  {
+    id: "alimenticia",
+    title: "Alimenticia",
+    icon: UtensilsCrossed,
+    description: "Sistemas de transporte y automatización para la industria alimenticia.",
+    projects: [
+      "Líneas transporte galletas - Bagley (Grupo Arcor)"
+    ],
+    bg: "bg-[#f5f7fa]"
+  }
+];
+
+// framer-motion variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 0.5 } }
 };
 
-export default function IndustriesPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
 
+export default function Industries() {
   return (
-    <motion.div
-      className="min-h-screen bg-background"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="min-h-screen bg-white text-[#1a2b3d] font-sans selection:bg-[#4e6e94] selection:text-white">
       <Navbar />
-      <main>
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24">
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-3xl"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-px bg-accent" />
-                <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Sectores Industriales</span>
-              </div>
-              <h1 className="font-display font-semibold text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)" }}>
-                Sectores que{" "}
-                <span className="text-gradient">transformamos</span>
-              </h1>
-              <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
-                Trabajamos con empresas líderes en diversos sectores industriales, aplicando soluciones tecnológicas adaptadas a cada realidad productiva.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+      
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 lg:px-12 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="space-y-6"
+          >
+            <TextReveal as="h1" className="text-4xl md:text-6xl font-bold tracking-tight text-[#1a2b3d]">
+              Industrias que <span className="text-[#4e6e94]">Transformamos</span>
+            </TextReveal>
+            <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#5a6b7c] max-w-3xl mx-auto">
+              Brindamos soluciones integrales de ingeniería y fabricación para los sectores más exigentes de la industria global.
+            </motion.p>
+          </motion.div>
+        </div>
+        
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#f5f7fa] rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      </section>
 
-        {/* Industries grid */}
-        <section className="py-20 lg:py-24 border-t border-border">
-          <div className="container">
-            {/* Description */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto mb-16 text-center"
-            >
-              <p className="text-muted-foreground leading-[1.7]">
-                {industrias.descripcionGeneral}
-              </p>
-            </motion.div>
-
-            {/* Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-              {industrias.sectores.map((sector, i) => {
-                const Icon = iconMap[sector.icon] || Atom;
-                const isLarge = i === 0;
-                return (
-                  <motion.div
-                    key={sector.nombre}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                    className={`card-clean flex flex-col items-center justify-center text-center gap-4 ${
-                      isLarge ? "md:col-span-2 md:row-span-2 p-10 lg:p-12" : "p-7 lg:p-8"
-                    }`}
-                  >
-                    <div className={`rounded bg-accent/10 flex items-center justify-center ${
-                      isLarge ? "w-18 h-18 lg:w-22 lg:h-22" : "w-14 h-14"
-                    }`}>
-                      <Icon className="text-accent" size={isLarge ? 32 : 22} strokeWidth={1.5} />
-                    </div>
-                    <h3 className={`font-display font-semibold text-foreground tracking-tight ${
-                      isLarge ? "text-lg lg:text-xl" : "text-sm"
-                    }`}>
-                      {sector.nombre}
-                    </h3>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Stats */}
-        <section className="py-20 lg:py-24 border-t border-border">
-          <div className="container">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-12">
-              {[
-                { number: "30+", label: "Años de Experiencia" },
-                { number: "500+", label: "Proyectos Completados" },
-                { number: "15+", label: "Sectores Atendidos" },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="text-center"
+      {/* Industries Grid/Sections */}
+      <div className="flex flex-col">
+        {industries.map((ind, index) => (
+          <section key={ind.id} className={`py-20 px-6 lg:px-12 ${ind.bg} overflow-hidden`}>
+            <div className="max-w-7xl mx-auto">
+              <div className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+                
+                {/* Text Content */}
+                <motion.div 
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
+                  className="w-full lg:w-1/2"
                 >
-                  <div className="font-display text-4xl lg:text-5xl font-semibold text-accent mb-2 tracking-tight">
-                    {stat.number}
+                  <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-[#e2e8f0] mb-6 text-[#4e6e94]">
+                    <ind.icon className="w-8 h-8" strokeWidth={1.5} />
                   </div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  <TextReveal as="h2" className="text-3xl md:text-4xl font-bold text-[#1a2b3d] mb-4">
+                    {ind.title}
+                  </TextReveal>
+                  <p className="text-lg text-[#5a6b7c] mb-8 leading-relaxed">
+                    {ind.description}
+                  </p>
+                  
+                  <h3 className="text-xl font-semibold text-[#3a5a80] mb-4 flex items-center gap-2">
+                    <Settings className="w-5 h-5" /> Proyectos Destacados
+                  </h3>
+                  <ul className="space-y-3">
+                    {ind.projects.map((project, pIdx) => (
+                      <motion.li 
+                        key={pIdx}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: pIdx * 0.15 + 0.3, type: 'spring', bounce: 0.4 }}
+                        className="block"
+                      >
+                        <TiltCard>
+                          <div className="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#e2e8f0]">
+                            <ChevronRight className="w-5 h-5 text-[#4e6e94] shrink-0 mt-0.5" />
+                            <span className="text-[#1a2b3d]">{project}</span>
+                          </div>
+                        </TiltCard>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </motion.div>
-              ))}
+                
+                {/* Visual / Decorative */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9, x: index % 2 === 0 ? 40 : -40 }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', bounce: 0.3, duration: 0.9, delay: 0.2 }}
+                  className="w-full lg:w-1/2"
+                >
+                  <TiltCard>
+                    <div className="relative aspect-square md:aspect-[4/3] rounded-3xl bg-gradient-to-br from-[#f5f7fa] to-white border border-[#e2e8f0] shadow-lg overflow-hidden flex items-center justify-center group">
+                      <div className="absolute inset-0 bg-[#4e6e94] opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                      <ind.icon className="w-32 h-32 text-[#e2e8f0] group-hover:text-[#4e6e94] transition-colors duration-500 group-hover:scale-110 transform" strokeWidth={1} />
+                    </div>
+                  </TiltCard>
+                </motion.div>
+
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        ))}
+      </div>
+
+      {/* CTA Section */}
+      <section className="py-24 px-6 lg:px-12 bg-[#4e6e94] text-white relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <svg className="absolute w-full h-full opacity-10" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <path d="M0,100 C20,0 50,100 100,0 L100,100 Z" fill="currentColor" />
+          </svg>
+        </div>
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <TextReveal as="h2" className="text-3xl md:text-5xl font-bold mb-6">
+              ¿Listo para optimizar su producción?
+            </TextReveal>
+            <motion.p variants={fadeInUp} className="text-[#f5f7fa] text-lg md:text-xl mb-10 opacity-90">
+              Contáctenos para discutir cómo nuestras soluciones de ingeniería pueden impulsar la eficiencia de su empresa.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Link href="/contacto">
+                <MagneticButton>
+                  <a className="inline-flex items-center gap-2 bg-white text-[#4e6e94] px-8 py-4 rounded-full font-semibold hover:bg-[#f5f7fa] transition-colors shadow-lg hover:shadow-xl transform duration-300">
+                    Contactar a un asesor <ArrowRight className="w-5 h-5" />
+                  </a>
+                </MagneticButton>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
-    </motion.div>
+    </div>
   );
 }

@@ -6,7 +6,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import CursorEffect from "./components/CursorEffect";
-import PageLoader from "./components/sections/PageTransition";
+import PageTransition from "./components/sections/PageTransition";
+import ScrollProgress from "./components/ScrollProgress";
 import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import About from "./pages/About";
@@ -29,11 +30,12 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
+          <ScrollProgress />
           <CursorEffect />
-          <PageLoader />
+          <PageTransition />
           <Router />
         </TooltipProvider>
       </ThemeProvider>

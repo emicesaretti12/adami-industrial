@@ -1,53 +1,55 @@
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * Subtle cursor glow effect for light theme.
+ * Soft brand-blue radial gradient follows the cursor.
+ */
 export default function CursorEffect() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    let animationId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX}px`;
-        cursorRef.current.style.top = `${e.clientY}px`;
-      }
+      mousePos.current = { x: e.clientX, y: e.clientY };
     };
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
+    const animate = () => {
+      currentPos.current.x += (mousePos.current.x - currentPos.current.x) * 0.12;
+      currentPos.current.y += (mousePos.current.y - currentPos.current.y) * 0.12;
+
+      if (glowRef.current) {
+        glowRef.current.style.transform = `translate(${currentPos.current.x - 200}px, ${currentPos.current.y - 200}px)`;
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
 
     window.addEventListener("mousemove", handleMouseMove);
-
-    const interactables = document.querySelectorAll("a, button, input, textarea, select");
-    interactables.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
-    });
+    animationId = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(animationId);
       window.removeEventListener("mousemove", handleMouseMove);
-      interactables.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      });
     };
   }, []);
 
   return (
     <div
-      ref={cursorRef}
-      className="fixed w-5 h-5 pointer-events-none z-40 hidden lg:block"
+      ref={glowRef}
+      className="fixed top-0 left-0 pointer-events-none z-[9998] hidden lg:block"
       style={{
-        transform: "translate(-50%, -50%)",
-        transition: "all 0.05s ease-out",
+        width: 400,
+        height: 400,
+        borderRadius: "50%",
+        background:
+          "radial-gradient(circle, rgba(78, 110, 148, 0.04) 0%, rgba(78, 110, 148, 0.01) 40%, transparent 70%)",
+        willChange: "transform",
       }}
-    >
-      <div
-        className={`w-full h-full border-2 rounded-full transition-all duration-200 ${
-          isHovering
-            ? "border-accent scale-125"
-            : "border-accent/50 scale-100"
-        }`}
-      />
-    </div>
+    />
   );
 }
