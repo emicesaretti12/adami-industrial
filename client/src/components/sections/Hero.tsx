@@ -53,8 +53,8 @@ export default function Hero() {
             className="font-display font-bold text-foreground leading-tight tracking-tight"
             style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)" }}
           >
-            Treinta años de excelencia en{" "}
-            <span className="text-accent">soluciones industriales</span>
+            Treinta años de{" "}
+            <span className="text-accent">excelencia industrial</span>
           </motion.h1>
 
           {/* Subtitle */}

@@ -64,7 +64,7 @@ export default function About() {
         >
           <div className="flex items-center gap-3 mb-8">
             <div className="w-6 h-0.5 bg-red-500" />
-            <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Pilares de Calidad</h3>
+            <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Estándares Corporativos</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
             {empresa.politicaCalidad.pilaresCalidad.map((pillar, i) => (

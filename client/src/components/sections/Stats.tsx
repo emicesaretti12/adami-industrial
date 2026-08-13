@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { stats } from "@/lib/adami-data";
 
-function StatItem({ value, suffix, label, index }: { value: number; suffix: string; label: string; index: number }) {
+function StatItem({ value, prefix, suffix, label, index }: { value: number; prefix?: string; suffix?: string; label: string; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
@@ -32,8 +32,9 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
       className="text-center"
     >
       <div className="font-display text-5xl lg:text-6xl font-bold tracking-tight text-accent mb-2">
+        {prefix && <span className="text-red-600">{prefix}</span>}
         <span>{count}</span>
-        <span className="text-red-600">{suffix}</span>
+        {suffix && <span className="text-red-600">{suffix}</span>}
       </div>
       <div className="font-sans text-sm text-muted-foreground font-medium">
         {label}

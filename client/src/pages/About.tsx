@@ -97,7 +97,7 @@ export default function AboutPage() {
             >
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-6 h-px bg-muted-foreground/30" />
-                <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">Pilares de Calidad</h3>
+                <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">Estándares Corporativos</h3>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {empresa.politicaCalidad.pilaresCalidad.map((pillar, i) => (

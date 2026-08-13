@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { Car, Plane, Rocket, Atom, Wheat, Tractor, Fuel } from "lucide-react";
+import { Car, Plane, Rocket, Atom, Wheat, Tractor } from "lucide-react";
 import { industrias } from "@/lib/adami-data";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,7 +12,6 @@ const iconMap: Record<string, React.ElementType> = {
   atom: Atom,
   wheat: Wheat,
   tractor: Tractor,
-  fuel: Fuel,
 };
 
 export default function IndustriesPage() {
@@ -107,9 +106,9 @@ export default function IndustriesPage() {
           <div className="container">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-12">
               {[
-                { number: "30+", label: "Años de Experiencia" },
-                { number: "500+", label: "Proyectos Completados" },
-                { number: "15+", label: "Sectores Atendidos" },
+                { number: "+30", label: "Años de Experiencia" },
+                { number: "+60", label: "Clientes Industriales" },
+                { number: "6", label: "Sectores Atendidos" },
               ].map((stat, i) => (
                 <motion.div
                   key={i}

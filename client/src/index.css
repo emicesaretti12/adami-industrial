@@ -101,6 +101,8 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
@@ -162,20 +164,45 @@
     background: rgb(186, 86, 94);
   }
 
+  .text-gradient {
+    background: linear-gradient(135deg, rgb(32, 77, 126) 0%, rgb(66, 120, 180) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* Card limpia — blanca con borde sutil */
   .card-clean {
     background: rgb(255, 255, 255);
-    border: 1px solid rgb(220, 220, 220);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgb(228, 228, 231);
+    border-radius: 0.375rem;
+    transition: box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                border-color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .card-clean:hover {
     border-color: rgb(32, 77, 126);
-    box-shadow: 0 2px 8px rgba(32, 77, 126, 0.08);
+    box-shadow: 0 4px 20px rgba(32, 77, 126, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+    transform: translateY(-2px);
   }
 
   /* Sección gris — para diferenciar bloques */
   .section-gray {
     background: rgb(242, 242, 242);
+  }
+
+  .section-divider {
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgb(32, 77, 126), transparent);
   }
 
   /* Botón primario — azul Adami */
@@ -185,7 +212,12 @@
   }
   .btn-primary:hover {
     background: rgb(26, 55, 85);
-    box-shadow: 0 4px 12px rgba(32, 77, 126, 0.15);
+    box-shadow: 0 4px 16px rgba(32, 77, 126, 0.2);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(32, 77, 126, 0.15);
   }
 
   /* Botón secundario — outline */
@@ -194,7 +226,12 @@
     border-radius: 0.25rem;
   }
   .btn-secondary:hover {
-    background: rgb(242, 242, 242);
+    background: rgba(32, 77, 126, 0.04);
+    border-color: rgb(26, 55, 85);
+    transform: translateY(-1px);
+  }
+  .btn-secondary:active {
+    transform: translateY(0);
   }
 
   /* Input industrial — underline style */

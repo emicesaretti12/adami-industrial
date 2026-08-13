@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Car, Plane, Rocket, Atom, Wheat, Tractor, Fuel } from "lucide-react";
+import { Car, Plane, Rocket, Atom, Wheat, Tractor } from "lucide-react";
 import { industrias } from "@/lib/adami-data";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -9,7 +9,6 @@ const iconMap: Record<string, React.ElementType> = {
   atom: Atom,
   wheat: Wheat,
   tractor: Tractor,
-  fuel: Fuel,
 };
 
 export default function Industries() {
