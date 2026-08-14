@@ -159,15 +159,7 @@ export default function Home() {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#e2e8f0] text-sm font-semibold text-[#4e6e94] tracking-wider mb-8 shadow-sm"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#4e6e94] animate-pulse"></span>
-              SOLUCIONES INDUSTRIALES
-            </motion.div>
+
 
             <TextReveal 
               as="h1" 
@@ -230,10 +222,10 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
-              { value: 30, suffix: "+", label: "Años de Experiencia" },
-              { value: 6, suffix: "", label: "Unidades de Negocio" },
-              { value: 100, suffix: "+", label: "Proyectos Exitosos" },
-              { value: 2, suffix: "", label: "Plantas Industriales" }
+              { value: 30, prefix: "+", suffix: "", label: "Años de Experiencia" },
+              { value: 6, prefix: "", suffix: "", label: "Unidades de Negocio" },
+              { value: 100, prefix: "+", suffix: "", label: "Proyectos Exitosos" },
+              { value: 1, prefix: "", suffix: "", label: "Planta Industrial" }
             ].map((stat, i) => (
               <motion.div 
                 key={i}
@@ -244,7 +236,7 @@ export default function Home() {
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-[#2c4a6e] mb-2 font-mono stat-number">
-                  {stat.value}{stat.suffix}
+                  {stat.prefix}{stat.value}{stat.suffix}
                 </div>
                 <div className="text-sm font-medium text-[#5a6b7c] uppercase tracking-wide">
                   {stat.label}
@@ -279,13 +271,13 @@ export default function Home() {
                 icon: Lightbulb,
                 title: "Innovación Tecnológica",
                 desc: "Soluciones avanzadas en automatización, robótica y sistemas de control para la industria 4.0.",
-                items: ["Automatización Industrial", "Robótica Aplicada", "Sistemas SCADA", "Visión Artificial"]
+                items: ["Automatización Industrial", "Sistemas SCADA", "Visión Artificial"]
               },
               {
                 icon: Factory,
                 title: "Desarrollos Metalúrgicos",
                 desc: "Ingeniería, diseño y fabricación de componentes y estructuras mecánicas de alta precisión.",
-                items: ["Mecanizado CNC", "Estructuras Pesadas", "Calderería", "Corte por Plasma"]
+                items: ["Mecanizado CNC", "Estructuras Pesadas", "Calderería"]
               },
               {
                 icon: Wrench,
@@ -345,12 +337,12 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { icon: Zap, name: "Energía" },
-              { icon: HardHat, name: "Minería" },
-              { icon: Droplets, name: "Oil & Gas" },
-              { icon: Building2, name: "Siderurgia" },
-              { icon: Truck, name: "Logística" },
-              { icon: Cpu, name: "Manufactura" }
+              { icon: Zap, name: "Aeronáutica" },
+              { icon: HardHat, name: "Automotriz" },
+              { icon: Droplets, name: "Agroindustria" },
+              { icon: Building2, name: "Aeroespacial" },
+              { icon: Truck, name: "Nuclear" },
+              { icon: Cpu, name: "Alimenticia" }
             ].map((industry, i) => (
               <motion.div
                 key={i}
@@ -397,14 +389,7 @@ export default function Home() {
             
             <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               {[
-                "Certificación ISO 9001:2015",
-                "Trazabilidad completa",
-                "Control dimensional 3D",
-                "Ensayos no destructivos (END)",
-                "Normativas de seguridad HSE",
-                "Gestión ambiental",
-                "Auditorías periódicas",
-                "Capacitación continua"
+                "HYS (Higiene y Seguridad)"
               ].map((pillar, i) => (
                 <motion.div
                   key={i}

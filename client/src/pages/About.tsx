@@ -210,7 +210,7 @@ export default function About() {
                 Presencia Regional
               </TextReveal>
               <p className="text-lg text-[#5a6b7c] mb-10 leading-relaxed">
-                Con bases estratégicas en Sudamérica, brindamos soporte y soluciones ágiles a industrias clave en toda la región.
+                Desde nuestra base en Argentina, brindamos soporte y soluciones ágiles a industrias clave.
               </p>
               
               <div className="space-y-6">
@@ -224,15 +224,7 @@ export default function About() {
                   </div>
                 </TiltCard>
                 
-                <TiltCard>
-                  <div className="flex items-start gap-4 p-6 bg-[#f5f7fa] rounded-2xl">
-                    <MapPin className="w-8 h-8 text-[#4e6e94] shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold text-[#1a2b3d] mb-2">Brasil</h3>
-                      <p className="text-[#5a6b7c]">São José dos Campos - Sede Comercial y Soporte</p>
-                    </div>
-                  </div>
-                </TiltCard>
+
               </div>
             </motion.div>
             

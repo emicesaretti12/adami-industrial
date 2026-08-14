@@ -278,7 +278,6 @@ const Services = () => {
                   {[
                     "Centros de mecanizado CNC",
                     "Tornos CNC de alta precisión",
-                    "Fresadoras y alesadoras",
                     "Corte por láser y plasma"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start">
@@ -303,7 +302,6 @@ const Services = () => {
                   {[
                     "Celdas robotizadas de soldadura",
                     "Equipos MIG/MAG y TIG",
-                    "Cabinas de pintura presurizadas",
                     "Sistemas de secado industrial"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start">
