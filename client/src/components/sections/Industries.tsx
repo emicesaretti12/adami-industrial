@@ -36,45 +36,40 @@ export default function Industries() {
         </motion.div>
 
         {/* Industry grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
           {industrias.sectores.map((sector, i) => {
             const Icon = iconMap[sector.icon] || Atom;
-            const isLarge = i === 0;
             return (
               <motion.div
                 key={sector.nombre}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className={`card-clean overflow-hidden group cursor-pointer ${
-                  isLarge ? "md:col-span-2 md:row-span-2" : ""
-                }`}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="group cursor-pointer"
               >
-                <div className={`relative overflow-hidden ${isLarge ? "h-full min-h-[280px]" : "h-44 lg:h-52"}`}>
-                  {/* Image */}
+                <div className="relative overflow-hidden rounded-xl" style={{ aspectRatio: "220 / 260" }}>
+                  {/* Image — full size, no cropping */}
                   <img 
                     src={sector.image} 
                     alt={`Industria ${sector.nombre} - ADAMI`}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/60 group-hover:via-black/20 transition-all duration-500" />
+                  {/* Dark gradient from bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-80 group-hover:opacity-65 transition-opacity duration-500" />
                   {/* Shimmer on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
-                  {/* Icon badge */}
-                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-md">
-                    <Icon className="text-accent" size={isLarge ? 20 : 16} strokeWidth={1.5} />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-[1200ms] ease-in-out pointer-events-none" />
+                  {/* Icon badge — top right */}
+                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm p-2 rounded-lg shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="text-accent" size={18} strokeWidth={1.5} />
                   </div>
-                  {/* Title */}
+                  {/* Title block — bottom */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                    <h3 className={`font-display font-bold text-white tracking-tight drop-shadow-lg ${
-                      isLarge ? "text-lg lg:text-xl" : "text-sm"
-                    }`}>
+                    <h3 className="font-display font-bold text-white text-sm lg:text-base tracking-tight drop-shadow-md">
                       {sector.nombre}
                     </h3>
-                    <div className="w-8 h-0.5 bg-accent mt-2 rounded-full group-hover:w-14 transition-all duration-500" />
+                    <div className="w-8 h-[2px] bg-accent mt-2 rounded-full group-hover:w-12 transition-all duration-500" />
                   </div>
                 </div>
               </motion.div>

@@ -335,7 +335,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { icon: Zap, name: "Aeronáutica", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg" },
               { icon: HardHat, name: "Automotriz", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg" },
@@ -346,29 +346,30 @@ export default function Home() {
             ].map((industry, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.05, y: -8 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -6 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  delay: i * 0.1, 
+                  delay: i * 0.08, 
                   duration: 0.4,
                   hover: { type: "spring", stiffness: 300 }
                 }}
-                className="bg-white rounded-xl border border-[#e2e8f0] text-center hover:border-[#4e6e94] transition-all duration-300 group shadow-sm hover:shadow-md overflow-hidden"
+                className="group cursor-pointer"
               >
-                <div className="relative h-32 overflow-hidden">
+                <div className="relative overflow-hidden rounded-xl shadow-sm group-hover:shadow-lg transition-shadow duration-300" style={{ aspectRatio: "220 / 260" }}>
                   <img 
                     src={industry.image} 
                     alt={`Industria ${industry.name}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b3d]/60 to-transparent" />
-                  <industry.icon className="absolute bottom-2 right-2 w-6 h-6 text-white/80 drop-shadow-lg" />
-                </div>
-                <div className="p-4">
-                  <h4 className="font-semibold text-[#1a2b3d] text-sm">{industry.name}</h4>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b3d]/75 via-[#1a2b3d]/15 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  <industry.icon className="absolute top-2 right-2 w-5 h-5 text-white/70 drop-shadow-md" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <h4 className="font-semibold text-white text-xs drop-shadow-md">{industry.name}</h4>
+                    <div className="w-6 h-[2px] bg-[#4e6e94] mt-1.5 rounded-full group-hover:w-10 transition-all duration-500" />
+                  </div>
                 </div>
               </motion.div>
             ))}
