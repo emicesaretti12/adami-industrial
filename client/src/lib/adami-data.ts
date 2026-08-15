@@ -4,7 +4,7 @@
 export const empresa = {
   nombre: "ADAMI",
   nombreCompleto: "Grupo Adami",
-  eslogan: "Soluciones Industriales",
+  eslogan: "",
   pais: "Argentina",
   ciudad: "Córdoba",
   sitioWeb: "https://www.adami.com.ar/es/",
@@ -33,13 +33,7 @@ export const empresa = {
       },
     ],
     pilaresCalidad: [
-      "Laboratorio de medición",
-      "Métodos definidos de trabajo",
-      "Control procesos de fabricación",
-      "Capacitación permanente del personal",
-      "Máquinas, equipos y dispositivos especiales",
-      "Ingeniería de procesos",
-      "Medios de control para asegurar la calidad de los productos",
+      "HYS (Higiene y Seguridad)",
     ],
   },
   contacto: {
@@ -120,15 +114,14 @@ export const servicios = {
 
 export const industrias = {
   descripcionGeneral:
-    "En la actualidad, estamos a cargo de medianos y grandes desarrollos para empresas de los sectores: aeronáutico, aeroespacial, automotriz, alimenticio, agroindustrial, petrolero y nuclear, entre otros. Contamos con una amplia experiencia en desarrollos de piezas simples, grandes dispositivos para la producción y complejos desarrollos tecnológicos industriales.",
+    "En la actualidad, estamos a cargo de medianos y grandes desarrollos para empresas de los sectores: aeronáutico, aeroespacial, automotriz, alimenticio, agroindustrial y nuclear. Contamos con una amplia experiencia en desarrollos de piezas simples, grandes dispositivos para la producción y complejos desarrollos tecnológicos industriales.",
   sectores: [
-    { nombre: "Automotriz", icon: "car" },
     { nombre: "Aeronáutica", icon: "plane" },
+    { nombre: "Automotriz", icon: "car" },
+    { nombre: "Agroindustria", icon: "tractor" },
     { nombre: "Aeroespacial", icon: "rocket" },
     { nombre: "Nuclear", icon: "atom" },
     { nombre: "Alimenticia", icon: "wheat" },
-    { nombre: "Agroindustrial", icon: "tractor" },
-    { nombre: "Petrolero", icon: "fuel" },
   ],
 };
 
@@ -158,8 +151,8 @@ export const clientes = {
 };
 
 export const stats = [
-  { value: 30, suffix: "+", label: "Años de trayectoria" },
-  { value: 60, suffix: "+", label: "Clientes industriales" },
-  { value: 7, suffix: "", label: "Sectores atendidos" },
-  { value: 630, suffix: " m²", label: "Planta industrial" },
+  { value: 30, prefix: "+", suffix: "", label: "Años de trayectoria" },
+  { value: 60, prefix: "+", suffix: "", label: "Clientes industriales" },
+  { value: 6, prefix: "", suffix: "", label: "Sectores atendidos" },
+  { value: 1, prefix: "", suffix: "", label: "Planta industrial" },
 ];
