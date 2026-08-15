@@ -337,12 +337,12 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { icon: Zap, name: "Aeronáutica" },
-              { icon: HardHat, name: "Automotriz" },
-              { icon: Droplets, name: "Agroindustria" },
-              { icon: Building2, name: "Aeroespacial" },
-              { icon: Truck, name: "Nuclear" },
-              { icon: Cpu, name: "Alimenticia" }
+              { icon: Zap, name: "Aeronáutica", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg" },
+              { icon: HardHat, name: "Automotriz", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg" },
+              { icon: Droplets, name: "Agroindustria", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727929/agro_ddxrha.jpg" },
+              { icon: Building2, name: "Aeroespacial", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727559/adami-industria-aeroespacial-galeria-1-220x260_trzjn4.jpg" },
+              { icon: Truck, name: "Nuclear", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-nuclear-galeria-1-220x260_onmrc7.jpg" },
+              { icon: Cpu, name: "Alimenticia", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-alimenticia-galeria-1-220x260_zyntht.jpg" }
             ].map((industry, i) => (
               <motion.div
                 key={i}
@@ -355,10 +355,21 @@ export default function Home() {
                   duration: 0.4,
                   hover: { type: "spring", stiffness: 300 }
                 }}
-                className="bg-white p-6 rounded-xl border border-[#e2e8f0] text-center hover:border-[#4e6e94] transition-all duration-300 group shadow-sm hover:shadow-md"
+                className="bg-white rounded-xl border border-[#e2e8f0] text-center hover:border-[#4e6e94] transition-all duration-300 group shadow-sm hover:shadow-md overflow-hidden"
               >
-                <industry.icon className="w-10 h-10 mx-auto text-[#6b8db5] mb-4 group-hover:text-[#4e6e94] transition-colors" />
-                <h4 className="font-semibold text-[#1a2b3d] text-sm">{industry.name}</h4>
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src={industry.image} 
+                    alt={`Industria ${industry.name}`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b3d]/60 to-transparent" />
+                  <industry.icon className="absolute bottom-2 right-2 w-6 h-6 text-white/80 drop-shadow-lg" />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-semibold text-[#1a2b3d] text-sm">{industry.name}</h4>
+                </div>
               </motion.div>
             ))}
           </div>
