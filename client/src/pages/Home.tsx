@@ -143,26 +143,32 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[100svh] flex flex-col justify-end items-center pb-8 md:pb-12 pt-28 overflow-hidden">
-        {/* Background image */}
+        {/* Background image - responsive for mobile and desktop */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
-            alt="ADAMI Soluciones Industriales"
-            className="w-full h-full object-cover object-[center_30%]"
-          />
+          <picture>
+            <source 
+              media="(max-width: 768px)" 
+              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787082940/ChatGPT_Image_18_ago_2026_16_45_50_i8ydyi.png" 
+            />
+            <img 
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
+              alt="ADAMI Soluciones Industriales"
+              className="w-full h-full object-cover object-[center_30%]"
+            />
+          </picture>
           {/* Subtle gradient overlay: dark at top for navbar and dark at bottom for text, clear in the middle for logo */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
         </div>
 
         <SparksEffect />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
 
             <TextReveal 
               as="p" 
               delay={0.3} 
-              className="text-sm sm:text-base md:text-lg text-white/90 mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal"
+              className="text-xs sm:text-base md:text-lg text-white/90 mb-5 sm:mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal px-2"
             >
               Más de 30 años de experiencia impulsando la productividad mediante soluciones tecnológicas, metalúrgicas y de servicios industriales de nivel corporativo.
             </TextReveal>
