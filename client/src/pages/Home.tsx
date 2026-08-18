@@ -142,10 +142,10 @@ export default function Home() {
       <Navbar />
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end items-center pb-8 md:pb-12 pt-28 overflow-hidden">
+      <section className="relative min-h-[100svh] bg-[#0c1a29] flex flex-col justify-end items-center pb-8 md:pb-12 pt-24 md:pt-28 overflow-hidden">
         {/* Background image - responsive for mobile and desktop */}
-        <div className="absolute inset-0 z-0">
-          <picture>
+        <div className="absolute inset-0 z-0 bg-[#0c1a29] flex items-center justify-center">
+          <picture className="w-full h-full">
             <source 
               media="(max-width: 768px)" 
               srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787082940/ChatGPT_Image_18_ago_2026_16_45_50_i8ydyi.png" 
@@ -153,11 +153,11 @@ export default function Home() {
             <img 
               src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
               alt="ADAMI Soluciones Industriales"
-              className="w-full h-full object-cover object-[center_30%]"
+              className="w-full h-full object-contain md:object-cover object-[center_35%] md:object-[center_30%]"
             />
           </picture>
-          {/* Subtle gradient overlay: dark at top for navbar and dark at bottom for text, clear in the middle for logo */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+          {/* Seamless gradient overlay: blends top and bottom on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/70 via-transparent to-[#0c1a29]/95 pointer-events-none" />
         </div>
 
         <SparksEffect />
