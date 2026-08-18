@@ -29,6 +29,8 @@ export default function Navbar() {
     setIsOpen(false);
   }, [location]);
 
+  const isDarkHeader = location === "/" && !isScrolled;
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -45,12 +47,12 @@ export default function Navbar() {
         <Link href="/">
           <span className="flex flex-col relative z-50 group cursor-pointer">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-6 bg-[#4e6e94] rounded-sm" />
-              <span className="text-2xl font-bold tracking-tight text-[#1a2b3d]">
+              <div className={`w-1.5 h-6 rounded-sm transition-colors ${isDarkHeader ? 'bg-white' : 'bg-[#4e6e94]'}`} />
+              <span className={`text-2xl font-bold tracking-tight transition-colors ${isDarkHeader ? 'text-white' : 'text-[#1a2b3d]'}`}>
                 ADAMI
               </span>
             </div>
-            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-3.5">
+            <span className={`text-[10px] uppercase tracking-widest font-medium ml-3.5 transition-colors ${isDarkHeader ? 'text-white/70' : 'text-gray-500'}`}>
               Soluciones Industriales
             </span>
           </span>
@@ -62,12 +64,16 @@ export default function Navbar() {
             const isActive = location === link.path;
             return (
               <Link key={link.path} href={link.path}>
-                <span className="relative px-1 py-2 text-sm font-medium text-[#1a2b3d] hover:text-[#4e6e94] transition-colors cursor-pointer">
+                <span className={`relative px-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                  isDarkHeader
+                    ? isActive ? 'text-white font-semibold' : 'text-white/80 hover:text-white'
+                    : isActive ? 'text-[#4e6e94] font-semibold' : 'text-[#1a2b3d] hover:text-[#4e6e94]'
+                }`}>
                   {link.name}
                   {isActive && (
                     <motion.div
                       layoutId="navbar-active-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4e6e94] rounded-full"
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-full ${isDarkHeader ? 'bg-white' : 'bg-[#4e6e94]'}`}
                       transition={{
                         type: "spring",
                         stiffness: 380,
@@ -83,7 +89,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden relative z-50 p-2 text-[#1a2b3d]"
+          className={`md:hidden relative z-50 p-2 transition-colors ${isDarkHeader ? 'text-white' : 'text-[#1a2b3d]'}`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >

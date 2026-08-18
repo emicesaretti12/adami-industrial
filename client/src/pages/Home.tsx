@@ -142,45 +142,45 @@ export default function Home() {
       <Navbar />
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-end justify-center pb-32 pt-24 overflow-hidden">
+      <section className="relative min-h-[100svh] flex flex-col justify-end items-center pb-8 md:pb-12 pt-28 overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787080368/FONDO_ADAMI_pu0jfv.jpg" 
             alt="ADAMI Soluciones Industriales"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_30%]"
           />
-          {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
+          {/* Subtle gradient overlay: dark at top for navbar and dark at bottom for text, clear in the middle for logo */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
         </div>
 
         <SparksEffect />
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center">
 
             <TextReveal 
               as="p" 
               delay={0.3} 
-              className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
+              className="text-sm sm:text-base md:text-lg text-white/90 mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal"
             >
               Más de 30 años de experiencia impulsando la productividad mediante soluciones tecnológicas, metalúrgicas y de servicios industriales de nivel corporativo.
             </TextReveal>
 
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
             >
               <MagneticButton>
-                <Link href="/servicios" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#1a2b3d] rounded-lg font-medium transition-all hover:bg-[#f5f7fa] hover:shadow-xl w-full sm:w-auto">
+                <Link href="/servicios" className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#1a2b3d] rounded-lg font-medium text-sm transition-all hover:bg-[#f5f7fa] hover:shadow-xl w-full sm:w-auto">
                   Explorar Soluciones
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </MagneticButton>
               <MagneticButton>
-                <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white border border-white/40 rounded-lg font-medium transition-all hover:bg-white/10 hover:border-white/70 w-full sm:w-auto backdrop-blur-sm">
+                <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white border border-white/30 rounded-lg font-medium text-sm transition-all hover:bg-white/20 hover:border-white/60 w-full sm:w-auto backdrop-blur-sm">
                   Contactar
                 </Link>
               </MagneticButton>
@@ -192,11 +192,11 @@ export default function Home() {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/70"
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="relative z-10 flex flex-col items-center text-white/60 hover:text-white transition-colors cursor-pointer"
         >
-          <MousePointer2 className="w-5 h-5 mb-2 animate-bounce text-white/80" />
-          <span className="text-xs uppercase tracking-widest font-semibold">Descubrir</span>
+          <MousePointer2 className="w-4 h-4 mb-1 animate-bounce text-white/75" />
+          <span className="text-[10px] uppercase tracking-widest font-semibold">Descubrir</span>
         </motion.div>
       </section>
 
