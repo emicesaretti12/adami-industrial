@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { empresa } from "@/lib/adami-data";
 
-const HERO_BG = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920&q=80";
+const HERO_BG = "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787080368/FONDO_ADAMI_pu0jfv.jpg";
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);

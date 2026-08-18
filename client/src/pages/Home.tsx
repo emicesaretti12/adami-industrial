@@ -125,9 +125,7 @@ const SparksEffect = () => {
 };
 
 export default function Home() {
-  const { scrollYProgress, scrollY } = useScroll();
-  const heroDeco1Y = useTransform(scrollY, [0, 1000], [0, 200]);
-  const heroDeco2Y = useTransform(scrollY, [0, 1000], [0, -150]);
+  const { scrollYProgress } = useScroll();
   const statsSectionY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   const sectionVariants = {
@@ -144,35 +142,27 @@ export default function Home() {
       <Navbar />
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden bg-gradient-to-b from-[#f5f7fa] to-white">
-        <SparksEffect />
-        
-        {/* Geometric decorations with parallax */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          <motion.div style={{ y: heroDeco1Y }} className="absolute top-1/4 right-[-5%] w-[40vw] h-[40vw] rounded-full border border-[#e2e8f0] opacity-30" />
-          <motion.div style={{ y: heroDeco2Y }} className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full border border-[#dce4ed] opacity-40" />
-          
-          <motion.svg style={{ y: heroDeco1Y }} className="absolute top-1/3 left-10 w-24 h-24 text-[#6b8db5] opacity-20" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
-          </motion.svg>
+      <section className="relative min-h-screen flex items-end justify-center pb-32 pt-24 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787080368/FONDO_ADAMI_pu0jfv.jpg" 
+            alt="ADAMI Soluciones Industriales"
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
         </div>
 
+        <SparksEffect />
+
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-
-
-            <TextReveal 
-              as="h1" 
-              staggerSpeed={0.05} 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-[#1a2b3d] leading-tight"
-            >
-              Ingeniería que transforma industrias
-            </TextReveal>
+          <div className="max-w-3xl mx-auto text-center">
 
             <TextReveal 
               as="p" 
-              delay={0.4} 
-              className="text-lg md:text-xl text-[#5a6b7c] mb-12 max-w-2xl mx-auto leading-relaxed"
+              delay={0.3} 
+              className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
             >
               Más de 30 años de experiencia impulsando la productividad mediante soluciones tecnológicas, metalúrgicas y de servicios industriales de nivel corporativo.
             </TextReveal>
@@ -184,13 +174,13 @@ export default function Home() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <MagneticButton>
-                <Link href="/servicios" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#4e6e94] text-white rounded-lg font-medium transition-all hover:bg-[#3a5a80] hover:shadow-lg w-full sm:w-auto">
+                <Link href="/servicios" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#1a2b3d] rounded-lg font-medium transition-all hover:bg-[#f5f7fa] hover:shadow-xl w-full sm:w-auto">
                   Explorar Soluciones
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </MagneticButton>
               <MagneticButton>
-                <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#1a2b3d] border border-[#dce4ed] rounded-lg font-medium transition-all hover:border-[#4e6e94] hover:text-[#4e6e94] hover:bg-[#f5f7fa] w-full sm:w-auto">
+                <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white border border-white/40 rounded-lg font-medium transition-all hover:bg-white/10 hover:border-white/70 w-full sm:w-auto backdrop-blur-sm">
                   Contactar
                 </Link>
               </MagneticButton>
@@ -203,9 +193,9 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-[#8a9bac]"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/70"
         >
-          <MousePointer2 className="w-5 h-5 mb-2 animate-bounce text-[#6b8db5]" />
+          <MousePointer2 className="w-5 h-5 mb-2 animate-bounce text-white/80" />
           <span className="text-xs uppercase tracking-widest font-semibold">Descubrir</span>
         </motion.div>
       </section>
