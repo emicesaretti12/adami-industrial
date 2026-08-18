@@ -146,7 +146,7 @@ export default function Home() {
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787080368/FONDO_ADAMI_pu0jfv.jpg" 
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
             alt="ADAMI Soluciones Industriales"
             className="w-full h-full object-cover object-[center_30%]"
           />
