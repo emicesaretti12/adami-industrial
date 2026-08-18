@@ -148,12 +148,12 @@ export default function Home() {
           <picture className="w-full h-full">
             <source 
               media="(max-width: 768px)" 
-              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787082940/ChatGPT_Image_18_ago_2026_16_45_50_i8ydyi.png" 
+              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787084424/ChatGPT_Image_18_ago_2026_16_45_50_xm358i.png" 
             />
             <img 
               src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
               alt="ADAMI Soluciones Industriales"
-              className="w-full h-full object-contain md:object-cover object-[center_35%] md:object-[center_30%]"
+              className="w-full h-full object-cover object-[center_28%] md:object-[center_30%]"
             />
           </picture>
           {/* Seamless gradient overlay: blends top and bottom on mobile */}
