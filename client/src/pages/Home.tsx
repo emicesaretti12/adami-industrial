@@ -305,6 +305,62 @@ export default function Home() {
         </div>
       </motion.section>
 
+      {/* 3.5 PROJECT GALLERY SECTION */}
+      <motion.section 
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="py-24 bg-[#0c1a29] relative z-10"
+      >
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-sm font-bold text-[#6b8db5] tracking-widest uppercase mb-3 block">
+              Proyectos
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Nuestros Trabajos
+            </h2>
+            <p className="text-[#8a9bb0] mt-4 max-w-2xl mx-auto">
+              Soluciones reales implementadas para la industria: celdas robotizadas, medición láser, automatización y más.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", label: "Celda Robotizada" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png", label: "Celda Robotizada" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png", label: "Medición Láser" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png", label: "Medición Láser" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png", label: "Celda Robotizada" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png", label: "Medición Inteligente" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png", label: "Robot Industrial" },
+              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png", label: "Proyecto Industrial" }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="group relative overflow-hidden rounded-xl aspect-square cursor-pointer"
+              >
+                <img 
+                  src={item.src}
+                  alt={item.label}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c1a29]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <span className="text-white text-sm font-medium">{item.label}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       {/* 4. INDUSTRIES SECTION */}
       <motion.section 
         variants={sectionVariants}
