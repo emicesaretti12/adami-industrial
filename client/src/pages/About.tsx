@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { empresa } from "@/lib/adami-data";
-import { Award, Eye, Target, CheckCircle2 } from "lucide-react";
+import { Award, CheckCircle2, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const cards = [
-  { icon: Eye, title: "Visión", description: empresa.vision },
-  { icon: Target, title: "Misión", description: empresa.mision },
-  { icon: Award, title: "Calidad", description: empresa.politicaCalidad.compromiso },
-];
+import MagneticButton from "@/components/MagneticButton";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -17,205 +13,285 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <motion.div
-      className="min-h-screen bg-background"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="min-h-screen bg-white text-[#1a2b3d] font-sans selection:bg-[#4e6e94] selection:text-white">
       <Navbar />
       <main>
-        {/* Hero with background image */}
-        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-          {/* Background image — subtle, professional */}
-          <div className="absolute inset-0">
-            <img
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
-              alt="Profesionales ADAMI en planta"
-              className="w-full h-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
-          </div>
+        {/* Hero — cinematic, full-bleed */}
+        <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-end overflow-hidden">
+          <img
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
+            alt="Equipo profesional ADAMI en planta"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0c1a29] via-[#0c1a29]/40 to-[#0c1a29]/20" />
 
-          <div className="container relative z-10">
+          <div className="relative z-10 max-w-7xl mx-auto w-full px-6 pb-14 md:pb-20 pt-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-3xl"
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-px bg-accent" />
-                <span className="font-sans text-[11px] font-medium tracking-[0.25em] text-accent uppercase">Acerca de ADAMI</span>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-8 h-px bg-white/40" />
+                <span className="text-[11px] font-semibold text-white/60 tracking-[0.25em] uppercase">Acerca de ADAMI</span>
               </div>
-              <h1 className="font-display font-semibold text-foreground leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)" }}>
-                Más de tres décadas de{" "}
-                <span className="text-gradient">excelencia industrial</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[0.95]">
+                Más de tres décadas de excelencia industrial
               </h1>
-              <p className="mt-6 text-muted-foreground leading-[1.7] max-w-2xl">
+              <p className="mt-6 text-white/50 leading-[1.7] max-w-xl">
                 Transformando desafíos productivos en soluciones tecnológicas de precisión. ADAMI es el motor industrial de Argentina.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* About content */}
-        <section className="py-20 lg:py-24 border-t border-border">
-          <div className="container">
-            {/* Description + side image */}
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-24">
+        {/* Quiénes somos — text + image side by side, no cards */}
+        <section className="py-20 md:py-28 border-b border-[#e2e8f0]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+              {/* Text */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 className="lg:w-3/5"
               >
-                <p className="text-muted-foreground leading-[1.8] text-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-6 h-px bg-[#4e6e94]" />
+                  <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Quiénes Somos</span>
+                </div>
+                <p className="text-[#5a6b7c] leading-[1.9] text-lg mb-10">
                   {empresa.quienesSomos}
                 </p>
+
+                {/* Stats inline — not a separate section */}
+                <div className="flex gap-10 md:gap-16 pt-8 border-t border-[#e2e8f0]">
+                  {[
+                    { value: "+30", label: "Años" },
+                    { value: "+100", label: "Proyectos" },
+                    { value: "ISO 9001", label: "Certificados" },
+                  ].map((stat, i) => (
+                    <div key={i}>
+                      <div className="text-2xl md:text-3xl font-bold text-[#2c4a6e] tracking-tight">{stat.value}</div>
+                      <div className="text-xs text-[#8a9bb0] mt-1 uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
+
+              {/* Image composition */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.15 }}
-                className="lg:w-2/5 relative rounded-lg overflow-hidden min-h-[240px]"
+                className="lg:w-2/5"
               >
-                <img
-                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
-                  alt="Estructura y capacidad ADAMI"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                />
+                <div className="relative">
+                  <div className="rounded-lg overflow-hidden">
+                    <img
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+                      alt="Planta industrial ADAMI — estructura y capacidad"
+                      className="w-full aspect-[4/5] object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="w-3/5 rounded-lg overflow-hidden shadow-xl -mt-20 -ml-8 relative z-10 border-4 border-white">
+                    <img
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg"
+                      alt="Proyecto industrial realizado"
+                      className="w-full aspect-[4/3] object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Visión, Misión, Calidad — NOT cards, editorial layout */}
+        <section className="py-20 md:py-28 bg-[#fafbfc] border-b border-[#e2e8f0]">
+          <div className="max-w-7xl mx-auto px-6">
+            {/* Visión + Misión side by side */}
+            <div className="flex flex-col md:flex-row gap-16 md:gap-24 mb-20">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="md:w-1/2"
+              >
+                <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Visión</span>
+                <div className="w-10 h-[2px] bg-[#4e6e94] mt-3 mb-5 rounded-full" />
+                <p className="text-[#1a2b3d] text-xl md:text-2xl leading-[1.5] font-medium tracking-tight">
+                  {empresa.vision}
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="md:w-1/2"
+              >
+                <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Misión</span>
+                <div className="w-10 h-[2px] bg-[#4e6e94] mt-3 mb-5 rounded-full" />
+                <p className="text-[#1a2b3d] text-xl md:text-2xl leading-[1.5] font-medium tracking-tight">
+                  {empresa.mision}
+                </p>
               </motion.div>
             </div>
 
-            {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-              {cards.map((card, i) => {
-                const Icon = card.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="card-clean p-8"
-                  >
-                    <div className="w-11 h-11 rounded bg-accent/10 flex items-center justify-center mb-6">
-                      <Icon className="text-accent" size={20} strokeWidth={1.5} />
-                    </div>
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-3 tracking-tight">{card.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-[1.7]">{card.description}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Quality Pillars */}
+            {/* Calidad commitment — large quote style */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="border-l-4 border-[#4e6e94] pl-8 md:pl-12 py-2"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-6 h-px bg-muted-foreground/30" />
-                <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">Estándares Corporativos</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {empresa.politicaCalidad.pilaresCalidad.map((pillar, i) => (
-                  <div key={i} className="p-5 card-clean flex items-start gap-3">
-                    <CheckCircle2 className="text-accent shrink-0 mt-0.5" size={16} />
-                    <span className="text-sm text-muted-foreground leading-relaxed">{pillar}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Certifications */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mt-20 p-8 lg:p-10 rounded border border-border bg-background/50"
-            >
-              <h3 className="font-display text-xl font-semibold text-foreground mb-6 tracking-tight">Certificaciones</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {empresa.politicaCalidad.certificaciones.map((cert, i) => (
-                  <div key={i} className="flex items-center gap-4 p-5 rounded border border-border bg-background/50">
-                    <Award className="text-accent shrink-0" size={24} />
-                    <div>
-                      <div className="font-display font-medium text-foreground">{cert.nombre}</div>
-                      <div className="text-sm text-muted-foreground">{cert.entidad}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Compromiso de Calidad</span>
+              <p className="text-[#1a2b3d] text-2xl md:text-3xl leading-[1.4] font-semibold tracking-tight mt-4 max-w-3xl">
+                &ldquo;{empresa.politicaCalidad.compromiso}&rdquo;
+              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Full-bleed Work showcase — editorial strip */}
-        <section className="relative overflow-hidden">
-          <div className="flex flex-col md:flex-row h-auto md:h-[420px]">
-            {/* Left — large feature image */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="md:w-1/2 relative min-h-[280px]"
-            >
-              <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg"
-                alt="Proyecto industrial ADAMI"
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 md:p-8">
-                <span className="text-[10px] font-semibold text-white/70 tracking-[0.2em] uppercase">Proyectos</span>
-                <h3 className="text-white font-semibold text-xl mt-1">Trabajos Realizados</h3>
-              </div>
-            </motion.div>
+        {/* Full-bleed image band — break up the text */}
+        <section className="relative h-[35vh] md:h-[45vh] overflow-hidden">
+          <img
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
+            alt="Excelencia integral en procesos industriales"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[#0c1a29]/30" />
+        </section>
 
-            {/* Right — 2×2 grid */}
-            <div className="md:w-1/2 grid grid-cols-2">
-              {[
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", label: "Celda Robotizada" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", label: "Control de Procesos" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", label: "Modelado 3D" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", label: "Maquinaria" },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="relative group overflow-hidden min-h-[140px]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.label}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors duration-300" />
-                  <div className="absolute bottom-0 left-0 p-3">
-                    <span className="text-white text-xs font-medium">{item.label}</span>
+        {/* Certificaciones + Estándares — clean, no nested borders */}
+        <section className="py-20 md:py-28 border-b border-[#e2e8f0]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+              {/* Left — certifications */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="lg:w-1/2"
+              >
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-6 h-px bg-[#4e6e94]" />
+                  <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Certificaciones</span>
+                </div>
+
+                {empresa.politicaCalidad.certificaciones.map((cert, i) => (
+                  <div key={i} className="flex items-center gap-5 py-6 border-b border-[#e2e8f0] last:border-0">
+                    <div className="w-14 h-14 rounded-lg bg-[#4e6e94]/8 flex items-center justify-center flex-shrink-0">
+                      <Award className="text-[#4e6e94]" size={24} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-[#1a2b3d] text-lg">{cert.nombre}</div>
+                      <div className="text-sm text-[#8a9bb0]">{cert.entidad}</div>
+                    </div>
                   </div>
-                </motion.div>
-              ))}
+                ))}
+              </motion.div>
+
+              {/* Right — quality pillars */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="lg:w-1/2"
+              >
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-6 h-px bg-[#4e6e94]" />
+                  <span className="text-[11px] font-semibold text-[#4e6e94] tracking-[0.25em] uppercase">Estándares Corporativos</span>
+                </div>
+
+                <div className="space-y-4">
+                  {empresa.politicaCalidad.pilaresCalidad.map((pillar, i) => (
+                    <div key={i} className="flex items-center gap-3 py-3">
+                      <CheckCircle2 className="text-[#4e6e94] flex-shrink-0" size={18} strokeWidth={1.5} />
+                      <span className="text-[#1a2b3d] font-medium">{pillar}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Policy description */}
+                <div className="mt-10 p-6 bg-[#fafbfc] rounded-lg">
+                  <p className="text-sm text-[#5a6b7c] leading-[1.8]">
+                    {empresa.politicaCalidad.descripcion}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Capacidades — horizontal image strip with content overlay */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg"
+              alt="Maquinaria ADAMI"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[#0c1a29]/85" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="lg:w-1/2"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                  Preparados para su próximo desafío
+                </h2>
+                <p className="text-white/50 leading-relaxed mb-8">
+                  Con infraestructura propia, equipamiento de última generación y un equipo multidisciplinario, convertimos cada requerimiento en una solución concreta.
+                </p>
+                <MagneticButton>
+                  <Link href="/contacto" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#1a2b3d] font-semibold rounded-md text-sm hover:bg-white/90 transition-colors">
+                    Iniciar una conversación
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </MagneticButton>
+              </motion.div>
+
+              {/* Proof images */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="lg:w-1/2 flex gap-3"
+              >
+                {[
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", alt: "Celda robotizada" },
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", alt: "Modelado 3D" },
+                ].map((img, i) => (
+                  <div key={i} className="flex-1 rounded-lg overflow-hidden border border-white/10">
+                    <img src={img.src} alt={img.alt} className="w-full aspect-[3/4] object-cover" loading="lazy" />
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </div>
         </section>
       </main>
       <Footer />
-    </motion.div>
+    </div>
   );
 }
