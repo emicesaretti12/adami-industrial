@@ -25,9 +25,19 @@ export default function AboutPage() {
     >
       <Navbar />
       <main>
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24">
-          <div className="container">
+        {/* Hero with background image */}
+        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+          {/* Background image — subtle, professional */}
+          <div className="absolute inset-0">
+            <img
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
+              alt="Profesionales ADAMI en planta"
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
+          </div>
+
+          <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -49,55 +59,37 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Visual Showcase */}
-        <section className="py-12 lg:py-16 border-t border-border">
-          <div className="container">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg", label: "Estructura y Capacidad" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg", label: "Excelencia Integral" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg", label: "Profesionales en Acción" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg", label: "Proyectos Realizados" },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="group relative overflow-hidden rounded-lg aspect-[4/3]"
-                >
-                  <img 
-                    src={item.src} 
-                    alt={item.label}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <span className="text-white text-sm font-medium">{item.label}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* About content */}
         <section className="py-20 lg:py-24 border-t border-border">
           <div className="container">
-            {/* Description */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-3xl mb-20"
-            >
-              <p className="text-muted-foreground leading-[1.8]">
-                {empresa.quienesSomos}
-              </p>
-            </motion.div>
+            {/* Description + side image */}
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-24">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="lg:w-3/5"
+              >
+                <p className="text-muted-foreground leading-[1.8] text-lg">
+                  {empresa.quienesSomos}
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="lg:w-2/5 relative rounded-lg overflow-hidden min-h-[240px]"
+              >
+                <img
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+                  alt="Estructura y capacidad ADAMI"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </motion.div>
+            </div>
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
@@ -164,43 +156,62 @@ export default function AboutPage() {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </section>
 
-            {/* Work Showcase */}
+        {/* Full-bleed Work showcase — editorial strip */}
+        <section className="relative overflow-hidden">
+          <div className="flex flex-col md:flex-row h-auto md:h-[420px]">
+            {/* Left — large feature image */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-20"
+              transition={{ duration: 0.6 }}
+              className="md:w-1/2 relative min-h-[280px]"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-6 h-px bg-muted-foreground/30" />
-                <h3 className="font-display text-xs font-medium text-muted-foreground uppercase tracking-[0.2em]">En Acción</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", label: "Celda Robotizada" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png", label: "Medición Láser" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", label: "Control de Procesos" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", label: "Modelado 3D" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png", label: "Robot Industrial" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", label: "Maquinaria" },
-                ].map((item, i) => (
-                  <div key={i} className="group relative overflow-hidden rounded-lg aspect-[4/3]">
-                    <img 
-                      src={item.src} 
-                      alt={item.label}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <span className="text-white text-sm font-medium">{item.label}</span>
-                    </div>
-                  </div>
-                ))}
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg"
+                alt="Proyecto industrial ADAMI"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 md:p-8">
+                <span className="text-[10px] font-semibold text-white/70 tracking-[0.2em] uppercase">Proyectos</span>
+                <h3 className="text-white font-semibold text-xl mt-1">Trabajos Realizados</h3>
               </div>
             </motion.div>
+
+            {/* Right — 2×2 grid */}
+            <div className="md:w-1/2 grid grid-cols-2">
+              {[
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", label: "Celda Robotizada" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", label: "Control de Procesos" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", label: "Modelado 3D" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", label: "Maquinaria" },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="relative group overflow-hidden min-h-[140px]"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors duration-300" />
+                  <div className="absolute bottom-0 left-0 p-3">
+                    <span className="text-white text-xs font-medium">{item.label}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </main>

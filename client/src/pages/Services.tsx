@@ -63,29 +63,32 @@ const Services = () => {
         </section>
 
         {/* BUSINESS UNITS */}
-        <section className="px-6 py-16 max-w-7xl mx-auto space-y-16">
+        <section className="px-6 py-16 max-w-7xl mx-auto space-y-24">
           
-          {/* Unit 1 */}
+          {/* Unit 1 — Innovación Tecnológica */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.1 }}
           >
-            <TiltCard className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#4e6e94]/5 transition-all duration-500 block">
-              <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
-                <Lightbulb size={200} />
-              </div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl bg-[#4e6e94]/10 flex items-center justify-center mb-6">
-                    <Lightbulb className="w-10 h-10 text-[#4e6e94]" />
-                  </div>
-                  <div className="text-6xl font-bold text-[#e2e8f0] mb-4">01</div>
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 items-stretch">
+              {/* Content card */}
+              <TiltCard className="group relative bg-white rounded-3xl lg:rounded-r-none border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#4e6e94]/5 transition-all duration-500 block lg:w-7/12">
+                <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+                  <Lightbulb size={200} />
                 </div>
                 
-                <div className="flex-grow">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-5 mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-[#4e6e94]/10 flex items-center justify-center flex-shrink-0">
+                      <Lightbulb className="w-8 h-8 text-[#4e6e94]" />
+                    </div>
+                    <div>
+                      <div className="text-5xl font-bold text-[#e2e8f0] leading-none">01</div>
+                    </div>
+                  </div>
+
                   <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Innovación Tecnológica</h2>
                   <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
                     Desarrollamos conceptos y soluciones de ingeniería avanzada para resolver los desafíos más complejos, apoyándonos en las últimas herramientas de diseño y simulación.
@@ -111,47 +114,84 @@ const Services = () => {
                       </motion.li>
                     ))}
                   </ul>
-                  
-                  <div className="mt-8 grid grid-cols-2 gap-3">
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg" alt="Modelado 3D" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Modelado 3D</span>
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png" alt="Robot Industrial" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Robot Industrial</span>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+              </TiltCard>
+
+              {/* Image side — stacked */}
+              <div className="lg:w-5/12 flex flex-col gap-3 lg:gap-0">
+                <div className="relative overflow-hidden rounded-xl lg:rounded-l-none lg:rounded-tr-3xl h-1/2 min-h-[180px]">
+                  <img
+                    src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg"
+                    alt="Modelado 3D y diseño CAD"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="relative overflow-hidden rounded-xl lg:rounded-l-none lg:rounded-br-3xl h-1/2 min-h-[180px]">
+                  <img
+                    src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
+                    alt="Robot industrial ADAMI"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
-            </TiltCard>
+            </div>
           </motion.div>
 
-          {/* Unit 2 */}
+          {/* Unit 2 — Desarrollos Metalúrgicos */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.2 }}
           >
-            <TiltCard className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#3a5a80]/5 transition-all duration-500 block">
-              <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
-                <Factory size={200} />
-              </div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl bg-[#3a5a80]/10 flex items-center justify-center mb-6">
-                    <Factory className="w-10 h-10 text-[#3a5a80]" />
+            <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-0 items-stretch">
+              {/* Image side — left on desktop */}
+              <div className="lg:w-5/12 relative overflow-hidden rounded-xl lg:rounded-r-none lg:rounded-l-3xl min-h-[320px]">
+                <img
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
+                  alt="Celda robotizada de soldadura"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Small overlay thumbnails */}
+                <div className="absolute bottom-4 right-4 flex gap-2">
+                  <div className="w-20 h-14 md:w-24 md:h-16 rounded-md overflow-hidden border-2 border-white/40 shadow-lg">
+                    <img
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
+                      alt="Celda robotizada"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="text-6xl font-bold text-[#e2e8f0] mb-4">02</div>
+                  <div className="w-20 h-14 md:w-24 md:h-16 rounded-md overflow-hidden border-2 border-white/40 shadow-lg">
+                    <img
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png"
+                      alt="Celda robotizada"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content card */}
+              <TiltCard className="group relative bg-white rounded-3xl lg:rounded-l-none border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#3a5a80]/5 transition-all duration-500 block lg:w-7/12">
+                <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+                  <Factory size={200} />
                 </div>
                 
-                <div className="flex-grow">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-5 mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-[#3a5a80]/10 flex items-center justify-center flex-shrink-0">
+                      <Factory className="w-8 h-8 text-[#3a5a80]" />
+                    </div>
+                    <div>
+                      <div className="text-5xl font-bold text-[#e2e8f0] leading-none">02</div>
+                    </div>
+                  </div>
+
                   <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Desarrollos Metalúrgicos</h2>
                   <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
                     Materializamos proyectos con la más alta precisión. Contamos con capacidad instalada para fabricar equipos y estructuras robustas que soportan las exigencias de la industria pesada.
@@ -177,53 +217,35 @@ const Services = () => {
                       </motion.li>
                     ))}
                   </ul>
-                  
-                  <div className="mt-8 grid grid-cols-3 gap-3">
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png" alt="Celda Robotizada" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Celda Robotizada</span>
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png" alt="Celda Robotizada" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Celda Robotizada</span>
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png" alt="Celda Robotizada" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Celda Robotizada</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </TiltCard>
+              </TiltCard>
+            </div>
           </motion.div>
 
-          {/* Unit 3 */}
+          {/* Unit 3 — Servicios Industriales */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ ...springTransition, delay: 0.3 }}
           >
-            <TiltCard className="group relative bg-white rounded-3xl border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#6b8db5]/5 transition-all duration-500 block">
-              <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
-                <Wrench size={200} />
-              </div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl bg-[#6b8db5]/10 flex items-center justify-center mb-6">
-                    <Wrench className="w-10 h-10 text-[#6b8db5]" />
-                  </div>
-                  <div className="text-6xl font-bold text-[#e2e8f0] mb-4">03</div>
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 items-stretch">
+              {/* Content card */}
+              <TiltCard className="group relative bg-white rounded-3xl lg:rounded-r-none border border-[#e2e8f0] p-8 md:p-12 overflow-hidden hover:shadow-xl hover:shadow-[#6b8db5]/5 transition-all duration-500 block lg:w-7/12">
+                <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+                  <Wrench size={200} />
                 </div>
                 
-                <div className="flex-grow">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-5 mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-[#6b8db5]/10 flex items-center justify-center flex-shrink-0">
+                      <Wrench className="w-8 h-8 text-[#6b8db5]" />
+                    </div>
+                    <div>
+                      <div className="text-5xl font-bold text-[#e2e8f0] leading-none">03</div>
+                    </div>
+                  </div>
+
                   <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a2b3d]">Servicios Industriales</h2>
                   <p className="text-[#5a6b7c] text-lg mb-8 max-w-2xl leading-relaxed">
                     Brindamos soporte integral en planta. Desde el montaje y la puesta en marcha hasta el mantenimiento y seguimiento, asegurando el óptimo rendimiento de sus instalaciones.
@@ -250,37 +272,46 @@ const Services = () => {
                       </motion.li>
                     ))}
                   </ul>
-                  
-                  <div className="mt-8 grid grid-cols-3 gap-3">
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png" alt="Medición Láser" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Medición Láser</span>
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png" alt="Medición Inteligente" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Medición Inteligente</span>
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
-                      <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png" alt="Servicio de Medición" className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
-                        <span className="text-white text-xs font-medium">Servicio de Medición</span>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+              </TiltCard>
+
+              {/* Image side — measurement services */}
+              <div className="lg:w-5/12 flex flex-col gap-3 lg:gap-0">
+                <div className="relative overflow-hidden rounded-xl lg:rounded-l-none lg:rounded-tr-3xl h-1/2 min-h-[180px]">
+                  <img
+                    src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
+                    alt="Medición láser de precisión"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="relative overflow-hidden rounded-xl lg:rounded-l-none lg:rounded-br-3xl h-1/2 min-h-[180px]">
+                  <img
+                    src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png"
+                    alt="Servicio de medición inteligente"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
-            </TiltCard>
+            </div>
           </motion.div>
 
         </section>
 
-        {/* EQUIPMENT SECTION */}
-        <section className="bg-[#f5f7fa] py-24 mt-12 border-y border-[#e2e8f0]">
-          <div className="max-w-7xl mx-auto px-6">
+        {/* EQUIPMENT SECTION — full-bleed image + overlay content */}
+        <section className="relative mt-12">
+          {/* Background image */}
+          <div className="absolute inset-0">
+            <img
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+              alt="Planta industrial ADAMI"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[#0c1a29]/85 backdrop-blur-[2px]" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-6 py-24">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -288,8 +319,8 @@ const Services = () => {
               transition={{ ...springTransition }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1a2b3d] mb-4">Capacidad Instalada</h2>
-              <p className="text-lg text-[#5a6b7c] max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Capacidad Instalada</h2>
+              <p className="text-lg text-white/60 max-w-2xl mx-auto">
                 Infraestructura y equipamiento de última generación para dar respuesta a los requerimientos más exigentes de la industria.
               </p>
             </motion.div>
@@ -301,10 +332,10 @@ const Services = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, ...springTransition }}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
+                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10"
               >
-                <Monitor className="w-8 h-8 text-[#4e6e94] mb-6" />
-                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Ingeniería y Diseño</h3>
+                <Monitor className="w-8 h-8 text-white/80 mb-6" />
+                <h3 className="text-xl font-bold text-white mb-6">Ingeniería y Diseño</h3>
                 <ul className="space-y-4">
                   {[
                     "Estaciones de trabajo de alto rendimiento",
@@ -313,8 +344,8 @@ const Services = () => {
                     "Laboratorio de medición 3D"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-[#5a6b7c] text-sm">{item}</span>
+                      <CheckCircle className="w-5 h-5 text-[#6b8db5] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-white/70 text-sm">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -326,10 +357,10 @@ const Services = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, ...springTransition }}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
+                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10"
               >
-                <Settings className="w-8 h-8 text-[#4e6e94] mb-6" />
-                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Mecanizado</h3>
+                <Settings className="w-8 h-8 text-white/80 mb-6" />
+                <h3 className="text-xl font-bold text-white mb-6">Mecanizado</h3>
                 <ul className="space-y-4">
                   {[
                     "Centros de mecanizado CNC",
@@ -337,63 +368,32 @@ const Services = () => {
                     "Corte por láser y plasma"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-[#5a6b7c] text-sm">{item}</span>
+                      <CheckCircle className="w-5 h-5 text-[#6b8db5] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-white/70 text-sm">{item}</span>
                     </li>
                   ))}
                 </ul>
               </motion.div>
             </div>
 
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="relative overflow-hidden rounded-2xl aspect-square"
-              >
-                <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg" alt="Estructura y Capacidad" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <span className="text-white text-xs font-semibold">Capacidad Instalada</span>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="relative overflow-hidden rounded-2xl aspect-square"
-              >
-                <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg" alt="Máquina" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <span className="text-white text-xs font-semibold">Maquinaria</span>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="relative overflow-hidden rounded-2xl aspect-square"
-              >
-                <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg" alt="Control de Procesos" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <span className="text-white text-xs font-semibold">Control de Procesos</span>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="relative overflow-hidden rounded-2xl aspect-square"
-              >
-                <img src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg" alt="Profesionales" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <span className="text-white text-xs font-semibold">Nuestro Equipo</span>
-                </div>
-              </motion.div>
+            {/* Inline proof strip — small curated images */}
+            <div className="mt-12 flex justify-center gap-3">
+              {[
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", alt: "Maquinaria CNC" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg", alt: "Equipo profesional" },
+              ].map((img, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden border-2 border-white/15"
+                >
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

@@ -305,63 +305,160 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* 3.5 PROJECT GALLERY SECTION */}
-      <motion.section 
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="py-24 bg-[#0c1a29] relative z-10"
-      >
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-sm font-bold text-[#6b8db5] tracking-widest uppercase mb-3 block">
-              Proyectos
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Nuestros Trabajos
-            </h2>
-            <p className="text-[#8a9bb0] mt-4 max-w-2xl mx-auto">
-              Soluciones reales implementadas para la industria: celdas robotizadas, medición láser, automatización y más.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", label: "Celda Robotizada" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png", label: "Celda Robotizada" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png", label: "Medición Láser" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png", label: "Medición Láser" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png", label: "Celda Robotizada" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png", label: "Medición Inteligente" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png", label: "Robot Industrial" },
-              { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png", label: "Proyecto Industrial" }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="group relative overflow-hidden rounded-xl aspect-square cursor-pointer"
-              >
-                <img 
-                  src={item.src}
-                  alt={item.label}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0c1a29]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="text-white text-sm font-medium">{item.label}</span>
-                </div>
-              </motion.div>
-            ))}
+      {/* 4. PROJECT SHOWCASE — Editorial Bento Layout */}
+      <section className="relative z-10 bg-[#0c1a29] overflow-hidden">
+        {/* Full-width hero image band */}
+        <div className="relative h-[40vh] md:h-[50vh]">
+          <img
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+            alt="Planta industrial ADAMI — estructura y capacidad"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/40 via-[#0c1a29]/20 to-[#0c1a29]" />
+          <div className="absolute bottom-0 left-0 right-0 container mx-auto px-6 pb-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-[11px] font-semibold text-[#6b8db5] tracking-[0.25em] uppercase">Proyectos Realizados</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mt-2 tracking-tight">
+                Ingeniería en acción
+              </h2>
+            </motion.div>
           </div>
         </div>
-      </motion.section>
 
-      {/* 4. INDUSTRIES SECTION */}
+        {/* Bento grid — asymmetric, editorial */}
+        <div className="container mx-auto px-6 py-12 md:py-16">
+          <div className="grid grid-cols-6 md:grid-cols-12 gap-3 md:gap-4 auto-rows-[140px] md:auto-rows-[180px]">
+            {/* Large featured — Celda Robotizada */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="col-span-6 md:col-span-7 row-span-2 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
+                alt="Celda de soldadura robotizada"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-5 md:p-6">
+                <span className="text-[10px] font-semibold text-[#6b8db5] tracking-[0.2em] uppercase">Robótica</span>
+                <h3 className="text-white font-semibold text-lg md:text-xl mt-1">Celda de Soldadura Robotizada</h3>
+              </div>
+            </motion.div>
+
+            {/* Medición Láser */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="col-span-3 md:col-span-5 row-span-1 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
+                alt="Medición láser de precisión"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4">
+                <span className="text-white/90 font-medium text-sm">Medición Láser</span>
+              </div>
+            </motion.div>
+
+            {/* Robot Industrial */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="col-span-3 md:col-span-5 row-span-1 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
+                alt="Robot industrial ADAMI"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4">
+                <span className="text-white/90 font-medium text-sm">Robot Industrial</span>
+              </div>
+            </motion.div>
+
+            {/* Second row */}
+            {/* Medición inteligente */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="col-span-3 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png"
+                alt="Servicio de medición inteligente"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4">
+                <span className="text-white/90 font-medium text-sm">Medición Inteligente</span>
+              </div>
+            </motion.div>
+
+            {/* Celda Robotizada 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="col-span-3 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
+                alt="Celda robotizada en operación"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4">
+                <span className="text-white/90 font-medium text-sm">Celda Robotizada</span>
+              </div>
+            </motion.div>
+
+            {/* Proyecto */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="col-span-6 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
+            >
+              <img
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png"
+                alt="Proyecto industrial completado"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4">
+                <span className="text-white/90 font-medium text-sm">Proyecto Industrial</span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. INDUSTRIES SECTION */}
       <motion.section 
         variants={sectionVariants}
         initial="hidden"
@@ -421,38 +518,45 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* 5. QUALITY SECTION */}
+      {/* 6. QUALITY + VISUAL — split layout */}
       <motion.section 
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="py-24 bg-white border-t border-[#e2e8f0] relative z-10"
+        className="relative z-10 bg-white"
       >
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-1/3">
-              <span className="text-sm font-bold text-[#4e6e94] tracking-widest uppercase mb-3 block">
-                Calidad
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a2b3d] mb-6">
-                Estándares Corporativos
-              </h2>
-              <p className="text-[#5a6b7c] leading-relaxed mb-8">
-                Nuestro compromiso con la excelencia se refleja en cada proceso. Operamos bajo las normativas más estrictas de la industria para garantizar resultados superiores, seguros y sostenibles.
-              </p>
-            </div>
-            
-            <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+        <div className="flex flex-col lg:flex-row">
+          {/* Left — Image */}
+          <div className="lg:w-5/12 relative min-h-[300px] lg:min-h-0">
+            <img
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
+              alt="Excelencia integral en procesos industriales ADAMI"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[#1a2b3d]/20" />
+          </div>
+          {/* Right — Content */}
+          <div className="lg:w-7/12 py-16 lg:py-24 px-6 lg:px-16">
+            <span className="text-sm font-bold text-[#4e6e94] tracking-widest uppercase mb-3 block">
+              Calidad
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2b3d] mb-6">
+              Estándares Corporativos
+            </h2>
+            <p className="text-[#5a6b7c] leading-relaxed mb-10 max-w-xl">
+              Nuestro compromiso con la excelencia se refleja en cada proceso. Operamos bajo las normativas más estrictas de la industria para garantizar resultados superiores, seguros y sostenibles.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
               {[
                 "HYS (Higiene y Seguridad)"
               ].map((pillar, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.8, x: -20 }}
-                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
+                  transition={{ delay: i * 0.08, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
                   <CheckCircle className="w-5 h-5 text-[#4e6e94] flex-shrink-0" />
@@ -464,7 +568,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* 6. CTA SECTION */}
+      {/* 7. CTA SECTION */}
       <motion.section 
         variants={sectionVariants}
         initial="hidden"
