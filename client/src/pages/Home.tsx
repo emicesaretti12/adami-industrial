@@ -153,11 +153,11 @@ export default function Home() {
             <img 
               src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
               alt="ADAMI Soluciones Industriales"
-              className="w-full h-full object-cover object-[center_28%] md:object-[center_30%]"
+              className="w-full h-full object-cover object-[center_20%] md:object-[center_30%]"
             />
           </picture>
-          {/* Seamless gradient overlay: blends top and bottom on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/70 via-transparent to-[#0c1a29]/95 pointer-events-none" />
+          {/* Gradient overlay: stronger bottom to cover logo in background image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/70 via-[#0c1a29]/30 to-[#0c1a29] pointer-events-none" />
         </div>
 
         <SparksEffect />
@@ -168,7 +168,7 @@ export default function Home() {
             <TextReveal 
               as="p" 
               delay={0.3} 
-              className="text-xs sm:text-base md:text-lg text-white/90 mb-5 sm:mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal px-2"
+              className="text-[13px] sm:text-[16px] md:text-[18px] text-white/90 mb-5 sm:mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal px-2"
             >
               Más de 30 años de experiencia impulsando la productividad mediante soluciones tecnológicas, metalúrgicas y de servicios industriales de nivel corporativo.
             </TextReveal>
