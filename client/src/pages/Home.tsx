@@ -148,10 +148,10 @@ export default function Home() {
           <picture className="w-full h-full">
             <source 
               media="(max-width: 768px)" 
-              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787084424/ChatGPT_Image_18_ago_2026_16_45_50_xm358i.png" 
+              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787669775/ChatGPT_Image_25_ago_2026_11_51_49_a.m._btlmfx.png" 
             />
             <img 
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787669771/ChatGPT_Image_25_ago_2026_11_50_24_a.m._qo8hvw.png" 
               alt="ADAMI Soluciones Industriales"
               className="w-full h-full object-cover object-[center_28%] md:object-[center_30%]"
             />
