@@ -219,7 +219,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
               { value: 30, prefix: "+", suffix: "", label: "Años de Experiencia" },
-              { value: 6, prefix: "", suffix: "", label: "Unidades de Negocio" },
+              { value: 3, prefix: "", suffix: "", label: "Unidades de Negocio" },
               { value: 100, prefix: "+", suffix: "", label: "Proyectos Exitosos" },
               { value: 1, prefix: "", suffix: "", label: "Planta Industrial" }
             ].map((stat, i) => (
@@ -324,7 +324,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1a2b3d]">
-              Industrias que Servimos
+              Industrias que Proveemos
             </h2>
             <p className="text-[#5a6b7c] mt-4 max-w-2xl mx-auto">
               Adaptamos nuestra experiencia tecnológica a los requerimientos específicos de los sectores más exigentes.
@@ -353,18 +353,18 @@ export default function Home() {
                 }}
                 className="group cursor-pointer"
               >
-                <div className="relative overflow-hidden rounded-xl shadow-sm group-hover:shadow-lg transition-shadow duration-300" style={{ aspectRatio: "220 / 260" }}>
+                <div className="relative overflow-hidden rounded-xl shadow-sm group-hover:shadow-lg transition-shadow duration-300 aspect-[3/4] md:aspect-[220/260]">
                   <img 
                     src={industry.image} 
                     alt={`Industria ${industry.name}`}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b3d]/75 via-[#1a2b3d]/15 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
-                  <industry.icon className="absolute top-2 right-2 w-5 h-5 text-white/70 drop-shadow-md" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <h4 className="font-semibold text-white text-xs drop-shadow-md">{industry.name}</h4>
-                    <div className="w-6 h-[2px] bg-[#4e6e94] mt-1.5 rounded-full group-hover:w-10 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b3d]/80 via-[#1a2b3d]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  <industry.icon className="absolute top-2 right-2 w-4 h-4 md:w-5 md:h-5 text-white/70 drop-shadow-md" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
+                    <h4 className="font-semibold text-white text-[10px] md:text-xs drop-shadow-md leading-tight">{industry.name}</h4>
+                    <div className="w-5 md:w-6 h-[2px] bg-[#4e6e94] mt-1 md:mt-1.5 rounded-full group-hover:w-10 transition-all duration-500" />
                   </div>
                 </div>
               </motion.div>

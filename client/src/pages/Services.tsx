@@ -7,7 +7,6 @@ import {
   CheckCircle, 
   Monitor, 
   Settings, 
-  Shield, 
   ArrowRight 
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -238,7 +237,7 @@ const Services = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {/* Column 1 */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -279,30 +278,6 @@ const Services = () => {
                     "Centros de mecanizado CNC",
                     "Tornos CNC de alta precisión",
                     "Corte por láser y plasma"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-[#5a6b7c] text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Column 3 */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, ...springTransition }}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]"
-              >
-                <Shield className="w-8 h-8 text-[#4e6e94] mb-6" />
-                <h3 className="text-xl font-bold text-[#1a2b3d] mb-6">Soldadura y Pintura</h3>
-                <ul className="space-y-4">
-                  {[
-                    "Celdas robotizadas de soldadura",
-                    "Equipos MIG/MAG y TIG",
-                    "Sistemas de secado industrial"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-[#4e6e94] mr-3 mt-0.5 flex-shrink-0" />
