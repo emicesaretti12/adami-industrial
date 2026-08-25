@@ -153,27 +153,17 @@ export default function Home() {
             <img 
               src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
               alt="ADAMI Soluciones Industriales"
-              className="w-full h-full object-cover object-[center_15%] md:object-[center_30%]"
+              className="w-full h-full object-cover object-[center_28%] md:object-[center_30%]"
             />
           </picture>
-          {/* Top fade */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/80 via-transparent to-transparent pointer-events-none" />
-          {/* Bottom solid cover — hides the logo in background image */}
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 35%, rgba(12,26,41,0.6) 50%, rgba(12,26,41,0.95) 60%, #0c1a29 68%)' }} />
+          {/* Seamless gradient overlay: blends top and bottom on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/70 via-transparent to-[#0c1a29]/95 pointer-events-none" />
         </div>
 
         <SparksEffect />
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
-
-            <TextReveal 
-              as="p" 
-              delay={0.3} 
-              className="text-[13px] sm:text-[16px] md:text-[18px] text-white/90 mb-5 sm:mb-6 max-w-xl mx-auto leading-relaxed drop-shadow-md font-normal px-2"
-            >
-              Más de 30 años de experiencia impulsando la productividad mediante soluciones tecnológicas, metalúrgicas y de servicios industriales de nivel corporativo.
-            </TextReveal>
 
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
