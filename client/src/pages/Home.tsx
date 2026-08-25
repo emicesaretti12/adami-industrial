@@ -153,11 +153,13 @@ export default function Home() {
             <img 
               src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787081586/FONDO_ADAMI_imgupscaler.ai_Beta_2K_m3kd0b.jpg" 
               alt="ADAMI Soluciones Industriales"
-              className="w-full h-full object-cover object-[center_20%] md:object-[center_30%]"
+              className="w-full h-full object-cover object-[center_15%] md:object-[center_30%]"
             />
           </picture>
-          {/* Gradient overlay: stronger bottom to cover logo in background image */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/70 via-[#0c1a29]/30 to-[#0c1a29] pointer-events-none" />
+          {/* Top fade */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a29]/80 via-transparent to-transparent pointer-events-none" />
+          {/* Bottom solid cover — hides the logo in background image */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 35%, rgba(12,26,41,0.6) 50%, rgba(12,26,41,0.95) 60%, #0c1a29 68%)' }} />
         </div>
 
         <SparksEffect />
