@@ -44,6 +44,8 @@
   --font-display: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  /* Grotesca industrial con eje de ancho: los titulares grandes usan la versión expandida */
+  --font-industrial: "Archivo", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -380,13 +382,110 @@
 }
 
 @media (max-width: 640px) {
-  h1 {
+  /* Los titulares display (.type-display*) manejan su propio tamaño fluido */
+  h1:not(.type-display):not(.type-display-md) {
     font-size: 1.75rem;
   }
-  h2 {
+  h2:not(.type-display):not(.type-display-md) {
     font-size: 1.5rem;
   }
-  h3 {
+  h3:not(.type-display):not(.type-display-md) {
     font-size: 1.25rem;
   }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Tipografía display — titulares grandes de las secciones
+   Tracking negativo y leading corto a medida que crece el tamaño
+   ────────────────────────────────────────────────────────────── */
+.type-display {
+  font-family: var(--font-industrial);
+  font-stretch: 112%;
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.type-display-md {
+  font-family: var(--font-industrial);
+  font-stretch: 108%;
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ──────────────────────────────────────────────────────────────
+   Reveals al entrar en pantalla (una sola vez).
+   CSS transitions: corren en el compositor aunque la página esté cargando.
+   El atributo data-visible lo pone useReveal() con IntersectionObserver.
+   ────────────────────────────────────────────────────────────── */
+.rv-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+[data-visible] .rv-up,
+.rv-up[data-visible] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Línea de texto que sube desde una máscara */
+.rv-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.rv-line > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 900ms var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+[data-visible] .rv-line > span {
+  transform: none;
+}
+
+/* Imagen que se descubre de abajo hacia arriba mientras se asienta la escala */
+.rv-clip {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1000ms var(--ease-in-out);
+  transition-delay: var(--d, 0ms);
+}
+.rv-clip img {
+  transform: scale(1.14);
+  transition: transform 1600ms var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+[data-visible] .rv-clip,
+.rv-clip[data-visible] {
+  clip-path: inset(0 0 0 0);
+}
+[data-visible] .rv-clip img,
+.rv-clip[data-visible] img {
+  transform: scale(1);
+}
+
+/* Regla de medición que se traza */
+.rv-rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1200ms var(--ease-in-out);
+  transition-delay: var(--d, 0ms);
+}
+[data-visible] .rv-rule {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Menos movimiento, no cero: se conservan los fundidos de opacidad */
+  .rv-up { transform: none; transition: opacity 400ms ease; }
+  .rv-line > span { transform: none; }
+  .rv-clip { clip-path: none; }
+  .rv-clip img { transform: none; }
+  .rv-rule { transform: none; }
 }

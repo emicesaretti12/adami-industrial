@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import MagneticButton from '@/components/MagneticButton';
+import ClosingCTA from '@/components/ClosingCTA';
 
 const Services = () => {
   return (
@@ -393,30 +393,7 @@ const Services = () => {
           </div>
         </section>
 
-        {/* CTA — clean */}
-        <section className="py-24 md:py-32 bg-white">
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1a2b3d] mb-6 tracking-tight">
-                ¿Listo para transformar su proceso productivo?
-              </h2>
-              <p className="text-[#5a6b7c] text-lg mb-10 max-w-xl mx-auto">
-                Nuestro equipo de expertos está preparado para analizar sus necesidades y desarrollar una solución a medida.
-              </p>
-              <MagneticButton>
-                <Link href="/contacto" className="inline-flex items-center justify-center px-8 py-4 bg-[#4e6e94] text-white font-semibold rounded-lg text-lg hover:bg-[#3a5a80] transition-colors">
-                  Contactar con un Especialista
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </MagneticButton>
-            </motion.div>
-          </div>
-        </section>
+        <ClosingCTA />
       </main>
 
       <Footer />
