@@ -1,5 +1,6 @@
-import { useRef, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { useRef, type ReactNode } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useFinePointer } from "@/hooks/useFinePointer";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -8,46 +9,45 @@ interface MagneticButtonProps {
 }
 
 /**
- * Magnetic button that subtly pulls toward cursor on hover.
- * Creates premium interactive feel.
+ * El botón se acerca levemente al cursor.
+ * Usa motion values (sin re-render de React por cada mousemove)
+ * y se desactiva en touch y con prefers-reduced-motion.
  */
 export default function MagneticButton({
   children,
   className = "",
   strength = 0.3,
 }: MagneticButtonProps) {
-  const btnRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const ref = useRef<HTMLDivElement>(null);
+  const enabled = useFinePointer();
+  const spring = { stiffness: 150, damping: 15, mass: 0.1 };
+  const x = useSpring(useMotionValue(0), spring);
+  const y = useSpring(useMotionValue(0), spring);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const btn = btnRef.current;
-    if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    setPosition({
-      x: (e.clientX - centerX) * strength,
-      y: (e.clientY - centerY) * strength,
-    });
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    x.set((e.clientX - (rect.left + rect.width / 2)) * strength);
+    y.set((e.clientY - (rect.top + rect.height / 2)) * strength);
   };
 
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+  const reset = () => {
+    x.set(0);
+    y.set(0);
   };
+
+  if (!enabled) {
+    return <div className={`inline-block ${className}`}>{children}</div>;
+  }
 
   return (
     <motion.div
-      ref={btnRef}
+      ref={ref}
       className={`inline-block ${className}`}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={position}
-      transition={{
-        type: "spring",
-        stiffness: 150,
-        damping: 15,
-        mass: 0.1,
-      }}
+      onMouseLeave={reset}
+      style={{ x, y }}
     >
       {children}
     </motion.div>

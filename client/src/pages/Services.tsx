@@ -22,7 +22,7 @@ const Services = () => {
         {/* HERO — full-bleed image with overlaid text */}
         <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-end overflow-hidden">
           <img
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
             alt="Planta industrial ADAMI — capacidad instalada"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -102,7 +102,7 @@ const Services = () => {
                   {/* Main image */}
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg"
                       alt="Modelado 3D y diseño CAD"
                       className="w-full aspect-[4/3] object-cover"
                       loading="lazy"
@@ -111,7 +111,7 @@ const Services = () => {
                   {/* Secondary — offset, overlapping */}
                   <div className="w-3/5 rounded-lg overflow-hidden shadow-xl -mt-16 ml-auto mr-4 relative z-10 border-4 border-white">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
                       alt="Robot industrial"
                       className="w-full aspect-[3/2] object-cover"
                       loading="lazy"
@@ -138,7 +138,7 @@ const Services = () => {
                 <div className="relative">
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
                       alt="Celda de soldadura robotizada"
                       className="w-full aspect-[4/3] object-cover"
                       loading="lazy"
@@ -148,7 +148,7 @@ const Services = () => {
                   <div className="flex gap-3 -mt-12 px-4 relative z-10">
                     <div className="w-1/2 rounded-lg overflow-hidden shadow-xl border-4 border-white">
                       <img
-                        src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
+                        src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
                         alt="Celda robotizada en operación"
                         className="w-full aspect-[3/2] object-cover"
                         loading="lazy"
@@ -156,7 +156,7 @@ const Services = () => {
                     </div>
                     <div className="w-1/2 rounded-lg overflow-hidden shadow-xl border-4 border-white">
                       <img
-                        src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png"
+                        src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670536/2f074e0b-29f2-46e7-ae3a-8f63f05294dc.png"
                         alt="Celda robotizada"
                         className="w-full aspect-[3/2] object-cover"
                         loading="lazy"
@@ -259,7 +259,7 @@ const Services = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-lg overflow-hidden col-span-2">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
                       alt="Medición láser de precisión"
                       className="w-full aspect-[16/9] object-cover"
                       loading="lazy"
@@ -267,7 +267,7 @@ const Services = () => {
                   </div>
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png"
                       alt="Medición inteligente"
                       className="w-full aspect-square object-cover"
                       loading="lazy"
@@ -275,7 +275,7 @@ const Services = () => {
                   </div>
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670564/226d354a-bd1f-4678-a3f3-01c711623963.png"
                       alt="Servicio de medición"
                       className="w-full aspect-square object-cover"
                       loading="lazy"
@@ -291,7 +291,7 @@ const Services = () => {
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
               alt="Equipo profesional ADAMI"
               className="w-full h-full object-cover"
             />
@@ -380,10 +380,10 @@ const Services = () => {
               className="mt-16 flex gap-4 overflow-x-auto pb-2 -mx-6 px-6 scrollbar-hide"
             >
               {[
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", alt: "Maquinaria" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png", alt: "Proyecto" },
-                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg", alt: "Trabajo realizado" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg", alt: "Maquinaria" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png", alt: "Proyecto" },
+                { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg", alt: "Trabajo realizado" },
               ].map((img, i) => (
                 <div key={i} className="flex-shrink-0 w-52 h-36 md:w-64 md:h-44 rounded-lg overflow-hidden border border-white/10">
                   <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />

@@ -40,7 +40,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Lato", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  /* Lato nunca se cargaba: se veía Inter en casi todos lados y Lato solo donde estaba instalada localmente */
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -50,6 +51,10 @@
      Paleta: Blanco + Azul Adami + Rojo Acento
      Inspirado en confianza empresarial, claridad técnica, profesionalismo */
   --radius: 0.25rem;
+
+  /* Curvas de movimiento — las nativas de CSS son demasiado blandas */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Background: Blanco puro y gris claro para secciones */
   --background: rgb(255, 255, 255);
@@ -95,6 +100,24 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Tap inmediato (sin delay de doble-tap) y sin selección accidental del texto del botón */
+  button,
+  a[href],
+  [role="button"] {
+    touch-action: manipulation;
+  }
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(78, 110, 148);
+    outline-offset: 3px;
   }
   body {
     @apply bg-background text-foreground;
@@ -182,10 +205,12 @@
                 border-color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .card-clean:hover {
-    border-color: rgb(32, 77, 126);
-    box-shadow: 0 4px 20px rgba(32, 77, 126, 0.08), 0 1px 3px rgba(0,0,0,0.04);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .card-clean:hover {
+      border-color: rgb(32, 77, 126);
+      box-shadow: 0 4px 20px rgba(32, 77, 126, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
+    }
   }
 
   /* Sección gris — para diferenciar bloques */
@@ -209,31 +234,44 @@
 
   /* Botón primario — azul Adami */
   .btn-primary {
-    @apply px-6 py-3 bg-accent text-white font-medium transition-all duration-200;
+    @apply px-6 py-3 bg-accent text-white font-medium;
     border-radius: 0.25rem;
+    transition: background-color 200ms ease, box-shadow 200ms ease, transform 160ms var(--ease-out);
   }
-  .btn-primary:hover {
-    background: rgb(26, 55, 85);
-    box-shadow: 0 4px 16px rgba(32, 77, 126, 0.2);
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: rgb(26, 55, 85);
+      box-shadow: 0 4px 16px rgba(32, 77, 126, 0.2);
+    }
   }
   .btn-primary:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(32, 77, 126, 0.15);
+    transform: scale(0.97);
   }
 
   /* Botón secundario — outline */
   .btn-secondary {
-    @apply px-6 py-3 border border-accent text-accent font-medium transition-all duration-200;
+    @apply px-6 py-3 border border-accent text-accent font-medium;
     border-radius: 0.25rem;
+    transition: background-color 200ms ease, border-color 200ms ease, transform 160ms var(--ease-out);
   }
-  .btn-secondary:hover {
-    background: rgba(32, 77, 126, 0.04);
-    border-color: rgb(26, 55, 85);
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-secondary:hover {
+      background: rgba(32, 77, 126, 0.04);
+      border-color: rgb(26, 55, 85);
+    }
   }
   .btn-secondary:active {
-    transform: translateY(0);
+    transform: scale(0.97);
+  }
+
+  /* Feedback al presionar para cualquier CTA — se siente en touch, donde no hay hover */
+  .press {
+    transition-property: color, background-color, border-color, box-shadow, transform, translate;
+    transition-duration: 200ms, 200ms, 200ms, 200ms, 160ms, 250ms;
+    transition-timing-function: ease, ease, ease, ease, var(--ease-out), var(--ease-out);
+  }
+  .press:active {
+    transform: scale(0.97);
   }
 
   /* Input industrial — underline style */
@@ -260,8 +298,10 @@
     background: rgb(135, 134, 138);
     border-radius: 4px;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(32, 77, 126);
+  @media (hover: hover) {
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgb(32, 77, 126);
+    }
   }
 
   /* Selection */
@@ -331,6 +371,11 @@
   }
   html {
     scroll-behavior: auto;
+  }
+  .press:active,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: none;
   }
 }
 

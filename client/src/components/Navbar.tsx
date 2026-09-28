@@ -20,7 +20,8 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -29,17 +30,36 @@ export default function Navbar() {
     setIsOpen(false);
   }, [location]);
 
-  const isDarkHeader = location === "/" && !isScrolled;
+  // Menú mobile abierto: bloquear el scroll de fondo y cerrar con Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen]);
+
+  // Con el menú abierto el fondo es blanco: logo e ícono tienen que pasar a oscuro
+  const isDarkHeader = location === "/" && !isScrolled && !isOpen;
+
+  // Barra de estado del celular del mismo color que el header
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    meta?.setAttribute("content", isDarkHeader ? "#0c1a29" : "#ffffff");
+  }, [isDarkHeader]);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 h-16 md:h-20"
-          : "bg-transparent h-16 md:h-20"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-16 md:h-20 pt-[env(safe-area-inset-top)] box-content transition-[background-color,box-shadow,border-color] duration-300 ${
+        isScrolled && !isOpen
+          ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="container mx-auto px-4 h-full flex items-center justify-between max-w-7xl">
@@ -89,9 +109,11 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden relative z-50 p-2 transition-colors ${isDarkHeader ? 'text-white' : 'text-[#1a2b3d]'}`}
+          className={`md:hidden relative z-50 p-2 -mr-2 transition-colors ${isDarkHeader ? 'text-white' : 'text-[#1a2b3d]'}`}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -101,11 +123,12 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            id="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white md:hidden pt-24 px-6 pb-6 flex flex-col h-screen"
+            exit={{ opacity: 0, y: -8, transition: { duration: 0.15 } }}
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+            className="fixed inset-0 z-40 bg-white md:hidden pt-[calc(6rem+env(safe-area-inset-top))] px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] flex flex-col h-[100dvh] overscroll-contain"
           >
             <nav className="flex flex-col gap-6 mt-8">
               {NAV_LINKS.map((link, index) => {
@@ -113,9 +136,9 @@ export default function Navbar() {
                 return (
                   <motion.div
                     key={link.path}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.04, duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
                   >
                     <Link href={link.path}>
                       <span className={`text-3xl font-bold tracking-tight cursor-pointer ${isActive ? 'text-[#4e6e94]' : 'text-[#1a2b3d]'}`}>
@@ -129,6 +152,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

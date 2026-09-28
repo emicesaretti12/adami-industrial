@@ -1,52 +1,57 @@
-import { useRef, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { useRef, type ReactNode } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useFinePointer } from "@/hooks/useFinePointer";
 
 interface TiltCardProps {
   children: ReactNode;
   className?: string;
   tiltStrength?: number;
-  glareEnabled?: boolean;
 }
 
+/**
+ * Inclinación 3D sutil que sigue al cursor.
+ * Motion values en lugar de useState: no re-renderiza la card en cada mousemove.
+ * En touch o con reduced-motion renderiza un div normal.
+ * Importante: no combinar con `transition-all`/`transition-transform`,
+ * porque la transición CSS pelea con el transform que maneja Framer.
+ */
 export default function TiltCard({
   children,
   className = "",
   tiltStrength = 6,
-  glareEnabled = false,
 }: TiltCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const enabled = useFinePointer();
+  const spring = { stiffness: 400, damping: 25 };
+  const rotateX = useSpring(useMotionValue(0), spring);
+  const rotateY = useSpring(useMotionValue(0), spring);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const percentX = (e.clientX - centerX) / (rect.width / 2);
-    const percentY = (e.clientY - centerY) / (rect.height / 2);
-    setRotateX(-percentY * tiltStrength);
-    setRotateY(percentX * tiltStrength);
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+    const py = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+    rotateX.set(-py * tiltStrength);
+    rotateY.set(px * tiltStrength);
   };
 
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setIsHovering(false);
+  const reset = () => {
+    rotateX.set(0);
+    rotateY.set(0);
   };
+
+  if (!enabled) {
+    return <div className={`relative ${className}`}>{children}</div>;
+  }
 
   return (
     <motion.div
-      ref={cardRef}
+      ref={ref}
       className={`relative ${className}`}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={handleMouseLeave}
-      animate={{ rotateX, rotateY }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+      onMouseLeave={reset}
+      style={{ rotateX, rotateY, transformPerspective: 1000 }}
     >
       {children}
     </motion.div>

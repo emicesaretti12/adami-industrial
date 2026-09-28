@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
 interface TextRevealProps {
@@ -34,7 +34,7 @@ export default function TextReveal({
 
   if (words.length === 0) return null;
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -44,7 +44,7 @@ export default function TextReveal({
     },
   };
 
-  const wordVariants = {
+  const wordVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

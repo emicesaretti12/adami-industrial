@@ -19,7 +19,7 @@ export default function AboutPage() {
         {/* Hero — cinematic, full-bleed */}
         <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-end overflow-hidden">
           <img
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.12_PM_wztmub.jpg"
             alt="Equipo profesional ADAMI en planta"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -92,7 +92,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
                       alt="Planta industrial ADAMI — estructura y capacidad"
                       className="w-full aspect-[4/5] object-cover"
                       loading="lazy"
@@ -100,7 +100,7 @@ export default function AboutPage() {
                   </div>
                   <div className="w-3/5 rounded-lg overflow-hidden shadow-xl -mt-20 -ml-8 relative z-10 border-4 border-white">
                     <img
-                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg"
+                      src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686342/WhatsApp_Image_2026-08-25_at_12.18.10_PM_wbo9z6.jpg"
                       alt="Proyecto industrial realizado"
                       className="w-full aspect-[4/3] object-cover"
                       loading="lazy"
@@ -165,7 +165,7 @@ export default function AboutPage() {
         {/* Full-bleed image band — break up the text */}
         <section className="relative h-[35vh] md:h-[45vh] overflow-hidden">
           <img
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
             alt="Excelencia integral en procesos industriales"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -239,7 +239,7 @@ export default function AboutPage() {
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg"
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686364/WhatsApp_Image_2026-08-25_at_12.18.35_PM_1_asrkgp.jpg"
               alt="Maquinaria ADAMI"
               className="w-full h-full object-cover"
             />
@@ -278,9 +278,9 @@ export default function AboutPage() {
                 className="lg:w-1/2 flex gap-3"
               >
                 {[
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", alt: "Celda robotizada" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
-                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", alt: "Modelado 3D" },
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png", alt: "Celda robotizada" },
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg", alt: "Control de procesos" },
+                  { src: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686344/WhatsApp_Image_2026-08-25_at_12.18.11_PM_1_uehk0n.jpg", alt: "Modelado 3D" },
                 ].map((img, i) => (
                   <div key={i} className="flex-1 rounded-lg overflow-hidden border border-white/10">
                     <img src={img.src} alt={img.alt} className="w-full aspect-[3/4] object-cover" loading="lazy" />

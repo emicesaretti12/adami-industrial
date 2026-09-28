@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Send, MapPin, Phone, Mail, Globe, CheckCircle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TextReveal from '@/components/TextReveal';
 import TiltCard from '@/components/TiltCard';
 import MagneticButton from '@/components/MagneticButton';
+import { CONTACT, buildLeadUrl } from '@/lib/contact';
 
 // Theme Colors:
 // Brand Blue #4e6e94 (Tailwind: text-[#4e6e94], bg-[#4e6e94], border-[#4e6e94])
@@ -25,22 +26,25 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const channel = CONTACT.whatsapp ? 'WhatsApp' : 'email';
 
+  // Antes el envío era simulado: mostraba "Mensaje Enviado" pero la consulta no llegaba a nadie.
+  // Ahora abre WhatsApp (o el correo) con la consulta ya redactada.
+  // Se abre en el mismo evento del submit para que el navegador no lo bloquee como popup.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-        setFormData({ name: '', email: '', company: '', phone: '', message: '' });
-      }, 3000);
-    }, 1500);
+    const url = buildLeadUrl(formData);
+    if (CONTACT.whatsapp) {
+      const win = window.open(url, '_blank', 'noopener');
+      if (!win) window.location.href = url;
+    } else {
+      window.location.href = url;
+    }
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    // Los datos no se borran: si la app no se abrió, la persona no pierde lo que escribió
+    setTimeout(() => setIsSuccess(false), 4000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -48,7 +52,7 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -56,7 +60,7 @@ export default function Contact() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
@@ -122,6 +126,7 @@ export default function Contact() {
                   <input
                     type="text"
                     id="name"
+                    autoComplete="name"
                     name="name"
                     required
                     value={formData.name}
@@ -129,10 +134,10 @@ export default function Contact() {
                     className="w-full bg-transparent border-b border-[#e2e8f0] py-3 text-[#1a2b3d] placeholder-transparent focus:outline-none transition-colors peer"
                     placeholder="Nombre"
                   />
-                  <label htmlFor="name" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
+                  <label htmlFor="name" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-[top,font-size,color] duration-200 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
                     Nombre Completo *
                   </label>
-                  <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-[#4e6e94] -translate-x-1/2 transition-all duration-300 peer-focus:w-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4e6e94] scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] peer-focus:scale-x-100" />
                 </motion.div>
 
                 {/* Email */}
@@ -140,6 +145,7 @@ export default function Contact() {
                   <input
                     type="email"
                     id="email"
+                    autoComplete="email"
                     name="email"
                     required
                     value={formData.email}
@@ -147,10 +153,10 @@ export default function Contact() {
                     className="w-full bg-transparent border-b border-[#e2e8f0] py-3 text-[#1a2b3d] placeholder-transparent focus:outline-none transition-colors peer"
                     placeholder="Email"
                   />
-                  <label htmlFor="email" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
+                  <label htmlFor="email" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-[top,font-size,color] duration-200 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
                     Correo Electrónico *
                   </label>
-                  <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-[#4e6e94] -translate-x-1/2 transition-all duration-300 peer-focus:w-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4e6e94] scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] peer-focus:scale-x-100" />
                 </motion.div>
 
                 {/* Empresa */}
@@ -158,16 +164,17 @@ export default function Contact() {
                   <input
                     type="text"
                     id="company"
+                    autoComplete="organization"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
                     className="w-full bg-transparent border-b border-[#e2e8f0] py-3 text-[#1a2b3d] placeholder-transparent focus:outline-none transition-colors peer"
                     placeholder="Empresa"
                   />
-                  <label htmlFor="company" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
+                  <label htmlFor="company" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-[top,font-size,color] duration-200 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
                     Empresa
                   </label>
-                  <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-[#4e6e94] -translate-x-1/2 transition-all duration-300 peer-focus:w-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4e6e94] scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] peer-focus:scale-x-100" />
                 </motion.div>
 
                 {/* Teléfono */}
@@ -175,16 +182,17 @@ export default function Contact() {
                   <input
                     type="tel"
                     id="phone"
+                    autoComplete="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full bg-transparent border-b border-[#e2e8f0] py-3 text-[#1a2b3d] placeholder-transparent focus:outline-none transition-colors peer"
                     placeholder="Teléfono"
                   />
-                  <label htmlFor="phone" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
+                  <label htmlFor="phone" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-[top,font-size,color] duration-200 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-4 peer-valid:text-xs">
                     Teléfono
                   </label>
-                  <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-[#4e6e94] -translate-x-1/2 transition-all duration-300 peer-focus:w-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4e6e94] scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] peer-focus:scale-x-100" />
                 </motion.div>
               </div>
 
@@ -200,19 +208,19 @@ export default function Contact() {
                   className="w-full bg-transparent border-b border-[#e2e8f0] py-3 text-[#1a2b3d] placeholder-transparent focus:outline-none transition-colors peer resize-none"
                   placeholder="Mensaje"
                 />
-                <label htmlFor="message" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-all duration-300 peer-focus:-top-6 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-6 peer-valid:text-xs">
+                <label htmlFor="message" className="absolute left-0 top-3 text-[#5a6b7c] text-base transition-[top,font-size,color] duration-200 peer-focus:-top-6 peer-focus:text-xs peer-focus:text-[#4e6e94] peer-valid:-top-6 peer-valid:text-xs">
                   Mensaje *
                 </label>
-                <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-[#4e6e94] -translate-x-1/2 transition-all duration-300 peer-focus:w-full" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4e6e94] scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] peer-focus:scale-x-100" />
               </motion.div>
 
               {/* Submit Button */}
               <motion.div variants={itemVariants} className="pt-6">
-                <MagneticButton>
+                <MagneticButton className="w-full sm:w-auto">
                   <button
                     type="submit"
                     disabled={isSubmitting || isSuccess}
-                    className="relative overflow-hidden group bg-[#4e6e94] text-white px-8 py-4 flex items-center justify-center gap-3 w-full sm:w-auto min-w-[200px] hover:bg-[#3a5a80] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-sm"
+                    className="press relative overflow-hidden group bg-[#4e6e94] text-white px-8 py-4 flex items-center justify-center gap-3 w-full sm:w-auto min-w-[200px] hover:bg-[#3a5a80] disabled:opacity-70 disabled:cursor-not-allowed rounded-sm"
                   >
                     <AnimatePresence mode="wait">
                       {isSubmitting ? (
@@ -224,19 +232,19 @@ export default function Contact() {
                           className="flex items-center gap-2"
                         >
                           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          <span>Enviando...</span>
+                          <span>Abriendo {channel}...</span>
                         </motion.div>
                       ) : isSuccess ? (
                         <motion.div
                           key="success"
-                          initial={{ opacity: 0, scale: 0.5 }}
+                          initial={{ opacity: 0, scale: 0.95 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0 }}
-                          transition={{ type: 'spring', bounce: 0.5 }}
+                          transition={{ type: 'spring', duration: 0.4, bounce: 0.2 }}
                           className="flex items-center gap-2"
                         >
                           <CheckCircle className="w-5 h-5" />
-                          <span>Mensaje Enviado</span>
+                          <span>Completá el envío en {channel}</span>
                         </motion.div>
                       ) : (
                         <motion.div
@@ -246,7 +254,7 @@ export default function Contact() {
                           exit={{ opacity: 0 }}
                           className="flex items-center gap-2 relative z-10"
                         >
-                          <span>Enviar Mensaje</span>
+                          <span>Enviar por {channel}</span>
                           <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                         </motion.div>
                       )}
@@ -277,7 +285,7 @@ export default function Contact() {
                     <p>Leopoldo Casavega 2949, Villa Aspacia<br/>Córdoba, Argentina</p>
                     <div className="flex items-center gap-2 pt-2">
                       <Phone className="w-4 h-4 text-[#4e6e94]" />
-                      <a href="tel:+543514666050" className="hover:text-[#4e6e94] transition-colors">+54 351 4666050</a>
+                      <a href={CONTACT.phoneHref} className="hover:text-[#4e6e94] transition-colors">{CONTACT.phoneDisplay}</a>
                     </div>
                   </div>
                 </div>
@@ -287,7 +295,7 @@ export default function Contact() {
             {/* Brazil Office */}
             <motion.div variants={itemVariants}>
               <TiltCard>
-                <div className="bg-[#f5f7fa] p-8 rounded-sm border-l-4 border-[#e2e8f0] hover:border-[#4e6e94] shadow-sm hover:shadow-md transition-all duration-300 h-full">
+                <div className="bg-[#f5f7fa] p-8 rounded-sm border-l-4 border-[#e2e8f0] hover:border-[#4e6e94] shadow-sm hover:shadow-md transition-[border-color,box-shadow] duration-300 h-full">
                   <h3 className="text-xl font-bold text-[#1a2b3d] mb-4 flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-[#5a6b7c]" />
                     Sede Brasil
@@ -343,7 +351,8 @@ export default function Contact() {
                 allowFullScreen={false} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                title="Ubicación de ADAMI en Córdoba"
+                className="w-full h-full grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-500"
               ></iframe>
             </motion.div>
           </motion.div>

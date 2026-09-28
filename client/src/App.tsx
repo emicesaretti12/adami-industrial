@@ -1,29 +1,34 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import CursorEffect from "./components/CursorEffect";
-import PageTransition from "./components/sections/PageTransition";
 import ScrollProgress from "./components/ScrollProgress";
-import Services from "./pages/Services";
-import Industries from "./pages/Industries";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
+import Home from "./pages/Home";
+
+// La home carga directo (es la landing); el resto se descarga al navegar
+const Services = lazy(() => import("./pages/Services"));
+const Industries = lazy(() => import("./pages/Industries"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function Router() {
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/servicios"} component={Services} />
-      <Route path={"/industrias"} component={Industries} />
-      <Route path={"/empresa"} component={About} />
-      <Route path={"/contacto"} component={Contact} />
-      <Route path={"/404"} component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<div className="min-h-[100svh] bg-white" />}>
+      <Switch>
+        <Route path={"/"} component={Home} />
+        <Route path={"/servicios"} component={Services} />
+        <Route path={"/industrias"} component={Industries} />
+        <Route path={"/empresa"} component={About} />
+        <Route path={"/contacto"} component={Contact} />
+        <Route path={"/404"} component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
@@ -34,9 +39,9 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <ScrollProgress />
-          <CursorEffect />
-          <PageTransition />
+          <ScrollToTop />
           <Router />
+          <WhatsAppButton />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

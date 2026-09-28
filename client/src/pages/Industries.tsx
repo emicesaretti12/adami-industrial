@@ -33,7 +33,7 @@ export default function IndustriesPage() {
         {/* Hero — cinematic with real image */}
         <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-end overflow-hidden">
           <img
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
             alt="Excelencia industrial ADAMI"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -122,7 +122,7 @@ export default function IndustriesPage() {
                         <h3 className="font-display font-semibold text-white text-xl md:text-2xl tracking-tight">
                           {sector.nombre}
                         </h3>
-                        <div className="w-10 h-[2px] bg-accent mt-3 rounded-full group-hover:w-20 transition-all duration-500" />
+                        <div className="w-10 h-[2px] bg-accent mt-3 rounded-full origin-left group-hover:scale-x-200 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
                       </div>
                     </div>
                   </motion.div>
@@ -158,7 +158,7 @@ export default function IndustriesPage() {
                         <h3 className="font-display font-semibold text-white text-sm md:text-base tracking-tight">
                           {sector.nombre}
                         </h3>
-                        <div className="w-8 h-[2px] bg-accent mt-2 rounded-full group-hover:w-14 transition-all duration-500" />
+                        <div className="w-8 h-[2px] bg-accent mt-2 rounded-full origin-left group-hover:scale-x-175 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
                       </div>
                     </div>
                   </motion.div>
@@ -201,7 +201,7 @@ export default function IndustriesPage() {
             <div className="md:w-7/12 grid grid-cols-2 min-h-[320px]">
               <div className="relative overflow-hidden">
                 <img
-                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
                   alt="Celda robotizada"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
@@ -209,7 +209,7 @@ export default function IndustriesPage() {
               </div>
               <div className="relative overflow-hidden">
                 <img
-                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
                   alt="Medición láser"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
@@ -217,7 +217,7 @@ export default function IndustriesPage() {
               </div>
               <div className="relative overflow-hidden">
                 <img
-                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg"
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686354/WhatsApp_Image_2026-08-25_at_12.18.28_PM_dkoxnh.jpg"
                   alt="Control de procesos"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
@@ -225,7 +225,7 @@ export default function IndustriesPage() {
               </div>
               <div className="relative overflow-hidden">
                 <img
-                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
+                  src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
                   alt="Robot industrial"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"

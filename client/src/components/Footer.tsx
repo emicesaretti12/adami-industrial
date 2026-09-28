@@ -144,7 +144,7 @@ export default function Footer() {
               className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors text-sm font-medium group cursor-pointer"
             >
               <span>Volver arriba</span>
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:-translate-y-1 transition-all">
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:-translate-y-1 transition-[background-color,translate] duration-200">
                 <ArrowUp className="w-4 h-4" />
               </div>
             </button>

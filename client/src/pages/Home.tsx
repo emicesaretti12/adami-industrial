@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import {
   ArrowRight,
@@ -21,120 +21,122 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import TextReveal from "@/components/TextReveal";
 import TiltCard from "@/components/TiltCard";
 import MagneticButton from "@/components/MagneticButton";
 
-// Custom hook for numbers
-function useCounter(endValue: number, duration: number = 2) {
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    let startTimestamp: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-      
-      const easeProgress = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeProgress * endValue));
-      
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  }, [endValue, duration]);
-
-  return count;
-}
-
+/**
+ * Partículas sutiles en el hero.
+ * - Se cancela el requestAnimationFrame al desmontar (antes quedaba corriendo
+ *   para siempre y se acumulaba un loop nuevo cada vez que se volvía a la home).
+ * - Se pausa cuando el hero sale de pantalla o la pestaña está oculta.
+ * - No corre con prefers-reduced-motion.
+ * - Canvas del tamaño del hero (no de la ventana) y nítido en pantallas retina.
+ */
 const SparksEffect = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    let width = 0;
+    let height = 0;
+    let rafId = 0;
+    let visible = true;
 
-    const particles: {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-    }[] = [];
-
-    const createParticle = () => {
-      return {
-        x: Math.random() * canvas.width,
-        y: canvas.height + 10,
-        size: Math.random() * 2 + 0.5,
-        speedX: Math.random() * 2 - 1,
-        speedY: Math.random() * -1.5 - 0.5,
-        opacity: Math.random() * 0.4 + 0.1
-      };
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
+    resize();
 
-    for (let i = 0; i < 30; i++) {
-      particles.push(createParticle());
-    }
+    const createParticle = (startAnywhere = false) => ({
+      x: Math.random() * width,
+      y: startAnywhere ? Math.random() * height : height + 10,
+      size: Math.random() * 2 + 0.5,
+      speedX: Math.random() * 2 - 1,
+      speedY: Math.random() * -1.5 - 0.5,
+      opacity: Math.random() * 0.4 + 0.1,
+    });
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach((p, i) => {
+    const particles = Array.from({ length: 30 }, () => createParticle(true));
+
+    const tick = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.x += p.speedX;
         p.y += p.speedY;
-        
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(78, 110, 148, ${p.opacity})`; // #4e6e94 brand blue
         ctx.fill();
-
-        if (p.y < -10) {
-          particles[i] = createParticle();
-        }
-      });
-
-      requestAnimationFrame(animate);
+        if (p.y < -10) particles[i] = createParticle();
+      }
+      rafId = requestAnimationFrame(tick);
     };
 
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    const start = () => {
+      if (!rafId && visible && !document.hidden) rafId = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      cancelAnimationFrame(rafId);
+      rafId = 0;
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      visible ? start() : stop();
+    });
+    observer.observe(canvas);
+
+    const onVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVisibility);
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(canvas);
+
+    start();
+
+    return () => {
+      stop();
+      observer.disconnect();
+      resizeObserver.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="absolute inset-0 z-0 pointer-events-none opacity-50"
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-50"
     />
   );
 };
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const statsSectionY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-
-  const sectionVariants = {
+  const sectionVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      transition: { duration: 0.5, ease: "easeOut" }
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] }
     }
+  };
+
+  const scrollToContent = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("stats")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
@@ -148,11 +150,13 @@ export default function Home() {
           <picture className="w-full h-full">
             <source 
               media="(max-width: 768px)" 
-              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787669775/ChatGPT_Image_25_ago_2026_11_51_49_a.m._btlmfx.png" 
+              srcSet="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787669775/ChatGPT_Image_25_ago_2026_11_51_49_a.m._btlmfx.png" 
             />
             <img 
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787669771/ChatGPT_Image_25_ago_2026_11_50_24_a.m._qo8hvw.png" 
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787669771/ChatGPT_Image_25_ago_2026_11_50_24_a.m._qo8hvw.png" 
               alt="ADAMI Soluciones Industriales"
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover object-[center_28%] md:object-[center_30%]"
             />
           </picture>
@@ -171,14 +175,14 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
             >
-              <MagneticButton>
-                <Link href="/servicios" className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#1a2b3d] rounded-lg font-medium text-sm transition-all hover:bg-[#f5f7fa] hover:shadow-xl w-full sm:w-auto">
+              <MagneticButton className="w-full sm:w-auto">
+                <Link href="/servicios" className="press group inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#1a2b3d] rounded-lg font-medium text-sm hover:bg-[#f5f7fa] hover:shadow-xl w-full sm:w-auto">
                   Explorar Soluciones
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </MagneticButton>
-              <MagneticButton>
-                <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white border border-white/30 rounded-lg font-medium text-sm transition-all hover:bg-white/20 hover:border-white/60 w-full sm:w-auto backdrop-blur-sm">
+              <MagneticButton className="w-full sm:w-auto">
+                <Link href="/contacto" className="press inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white border border-white/30 rounded-lg font-medium text-sm hover:bg-white/20 hover:border-white/60 w-full sm:w-auto backdrop-blur-sm">
                   Contactar
                 </Link>
               </MagneticButton>
@@ -187,20 +191,22 @@ export default function Home() {
         </div>
 
         {/* Animated scroll indicator */}
-        <motion.div 
+        <motion.button
+          type="button"
+          onClick={scrollToContent}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="relative z-10 flex flex-col items-center text-white/60 hover:text-white transition-colors cursor-pointer"
+          className="relative z-10 flex flex-col items-center p-2 text-white/60 hover:text-white transition-colors"
         >
-          <MousePointer2 className="w-4 h-4 mb-1 animate-bounce text-white/75" />
+          <MousePointer2 className="w-4 h-4 mb-1 animate-bounce text-white/75" aria-hidden="true" />
           <span className="text-[10px] uppercase tracking-widest font-semibold">Descubrir</span>
-        </motion.div>
+        </motion.button>
       </section>
 
       {/* 2. STATS SECTION */}
       <motion.section 
-        style={{ y: statsSectionY }}
+        id="stats"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
@@ -282,7 +288,7 @@ export default function Home() {
                 transition={{ delay: i * 0.2, duration: 0.6 }}
                 className="h-full"
               >
-                <TiltCard className="h-full bg-white border border-[#e2e8f0] rounded-xl p-8 hover:shadow-xl hover:border-[#dce4ed] transition-all duration-300 group card-glass">
+                <TiltCard className="h-full bg-white border border-[#e2e8f0] rounded-xl p-8 hover:shadow-xl hover:border-[#dce4ed] transition-[box-shadow,border-color] duration-300 group">
                   <div className="w-14 h-14 bg-[#f5f7fa] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#4e6e94] transition-colors duration-300 icon-box-blue">
                     <service.icon className="w-7 h-7 text-[#4e6e94] group-hover:text-white transition-colors duration-300" />
                   </div>
@@ -310,7 +316,7 @@ export default function Home() {
         {/* Full-width hero image band */}
         <div className="relative h-[40vh] md:h-[50vh]">
           <img
-            src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
+            src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686345/WhatsApp_Image_2026-08-25_at_12.18.11_PM_xaxsdb.jpg"
             alt="Planta industrial ADAMI — estructura y capacidad"
             className="w-full h-full object-cover"
           />
@@ -342,7 +348,7 @@ export default function Home() {
               className="col-span-6 md:col-span-7 row-span-2 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670454/b6231ce4-2dc6-4afd-92a6-8ca61478e0cc.png"
                 alt="Celda de soldadura robotizada"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -363,7 +369,7 @@ export default function Home() {
               className="col-span-3 md:col-span-5 row-span-1 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670476/b6ff62bf-25a2-40c5-9136-f406165c8499.png"
                 alt="Medición láser de precisión"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -383,7 +389,7 @@ export default function Home() {
               className="col-span-3 md:col-span-5 row-span-1 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670625/6cfdf9c1-a1e5-4d02-bc6c-83dd4a4792da.png"
                 alt="Robot industrial ADAMI"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -404,7 +410,7 @@ export default function Home() {
               className="col-span-3 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670549/6cfdf6d7-b576-454e-9217-ee63a100ffd0.png"
                 alt="Servicio de medición inteligente"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -424,7 +430,7 @@ export default function Home() {
               className="col-span-3 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670470/3a2c97e8-f291-4cd6-91e1-fb81cc012387.png"
                 alt="Celda robotizada en operación"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -444,7 +450,7 @@ export default function Home() {
               className="col-span-6 md:col-span-4 row-span-1 relative rounded-lg overflow-hidden group"
             >
               <img
-                src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png"
+                src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787670957/71fcdcab-4994-41a1-a357-84bc06c4a0fa.png"
                 alt="Proyecto industrial completado"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -478,26 +484,21 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
-              { icon: Zap, name: "Aeronáutica", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg" },
-              { icon: HardHat, name: "Automotriz", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg" },
-              { icon: Droplets, name: "Agroindustria", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727929/agro_ddxrha.jpg" },
-              { icon: Building2, name: "Aeroespacial", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727559/adami-industria-aeroespacial-galeria-1-220x260_trzjn4.jpg" },
-              { icon: Truck, name: "Nuclear", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-nuclear-galeria-1-220x260_onmrc7.jpg" },
-              { icon: Cpu, name: "Alimenticia", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/v1786727560/adami-industria-alimenticia-galeria-1-220x260_zyntht.jpg" }
+              { icon: Zap, name: "Aeronáutica", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg" },
+              { icon: HardHat, name: "Automotriz", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg" },
+              { icon: Droplets, name: "Agroindustria", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727929/agro_ddxrha.jpg" },
+              { icon: Building2, name: "Aeroespacial", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727559/adami-industria-aeroespacial-galeria-1-220x260_trzjn4.jpg" },
+              { icon: Truck, name: "Nuclear", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-nuclear-galeria-1-220x260_onmrc7.jpg" },
+              { icon: Cpu, name: "Alimenticia", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-alimenticia-galeria-1-220x260_zyntht.jpg" }
             ].map((industry, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -6 }}
                 viewport={{ once: true }}
-                transition={{ 
-                  delay: i * 0.08, 
-                  duration: 0.4,
-                  hover: { type: "spring", stiffness: 300 }
-                }}
-                className="group cursor-pointer"
+                transition={{ delay: i * 0.06, duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               >
+                <Link href="/industrias" className="press group block rounded-xl md:hover:-translate-y-1.5">
                 <div className="relative overflow-hidden rounded-xl shadow-sm group-hover:shadow-lg transition-shadow duration-300 aspect-[3/4] md:aspect-[220/260]">
                   <img 
                     src={industry.image} 
@@ -509,9 +510,10 @@ export default function Home() {
                   <industry.icon className="absolute top-2 right-2 w-4 h-4 md:w-5 md:h-5 text-white/70 drop-shadow-md" />
                   <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
                     <h4 className="font-semibold text-white text-[10px] md:text-xs drop-shadow-md leading-tight">{industry.name}</h4>
-                    <div className="w-5 md:w-6 h-[2px] bg-[#4e6e94] mt-1 md:mt-1.5 rounded-full group-hover:w-10 transition-all duration-500" />
+                    <div className="w-6 h-[2px] bg-[#4e6e94] mt-1 md:mt-1.5 rounded-full origin-left scale-x-[0.84] md:scale-x-100 group-hover:scale-x-[1.66] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
                   </div>
                 </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -530,7 +532,7 @@ export default function Home() {
           {/* Left — Image */}
           <div className="lg:w-5/12 relative min-h-[300px] lg:min-h-0">
             <img
-              src="https://res.cloudinary.com/di9j6zwyz/image/upload/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
+              src="https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg"
               alt="Excelencia integral en procesos industriales ADAMI"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -590,7 +592,7 @@ export default function Home() {
             Hablemos sobre cómo nuestras soluciones integrales pueden optimizar sus operaciones y aumentar su competitividad.
           </p>
           <MagneticButton>
-            <Link href="/contacto" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#4e6e94] rounded-lg font-bold transition-all hover:bg-[#f5f7fa] hover:shadow-xl hover:-translate-y-1">
+            <Link href="/contacto" className="press inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#4e6e94] rounded-lg font-bold hover:bg-[#f5f7fa] hover:shadow-xl">
               Iniciar Proyecto
               <ArrowRight className="w-5 h-5" />
             </Link>
