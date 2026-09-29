@@ -489,3 +489,43 @@
   .rv-clip img { transform: none; }
   .rv-rule { transform: none; }
 }
+
+
+/* ── Sección Industrias: pictogramas técnicos que se dibujan y se mueven ── */
+.dr {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  animation: dr-draw 1.15s var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 55ms + 300ms);
+}
+@keyframes dr-draw { to { stroke-dashoffset: 0; } }
+
+.picto-late { opacity: 0; animation: picto-in 700ms ease 1.5s forwards; }
+@keyframes picto-in { to { opacity: 1; } }
+
+.picto-spin { transform-origin: 120px 120px; animation: picto-spin 18s linear infinite; }
+@keyframes picto-spin { to { transform: rotate(360deg); } }
+
+.picto-flame { transform-origin: 120px 178px; animation: picto-flame 450ms ease-in-out infinite alternate; }
+@keyframes picto-flame { from { transform: scaleY(0.86); } to { transform: scaleY(1.12); } }
+
+.picto-belt { stroke-dasharray: 3 8; animation: picto-belt 1.1s linear infinite; }
+@keyframes picto-belt { to { stroke-dashoffset: -11; } }
+
+.picto-drop {
+  opacity: 0;
+  animation: picto-drop 1.5s cubic-bezier(0.5, 0, 1, 0.6) infinite;
+  animation-delay: calc(var(--i, 0) * 500ms + 1.8s);
+}
+@keyframes picto-drop {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(16px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dr { animation: none; stroke-dashoffset: 0; }
+  .picto-late { animation: none; opacity: 1; }
+  .picto-spin, .picto-flame, .picto-belt, .picto-drop { animation: none; }
+  .picto-drop { opacity: 0; }
+}
