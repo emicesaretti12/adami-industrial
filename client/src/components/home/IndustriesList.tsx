@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
+import SplitHeading from "@/components/motion/SplitHeading";
 import { useFinePointer } from "@/hooks/useFinePointer";
 
 const CLD = "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto";
@@ -42,10 +43,7 @@ export default function IndustriesList() {
     <section className="relative z-10 bg-white">
       <div className="container mx-auto px-6 py-24 md:py-32">
         <div ref={headRef} className="mb-10 md:mb-14 grid md:grid-cols-12 gap-6 items-end">
-          <h2 className="md:col-span-7 type-display text-[#1a2b3d] text-[clamp(2.4rem,6.5vw,5.5rem)]">
-            <span className="rv-line"><span>Industrias</span></span>
-            <span className="rv-line"><span style={{ "--d": "90ms" } as React.CSSProperties}>que proveemos.</span></span>
-          </h2>
+          <SplitHeading lines={["Industrias", "que proveemos."]} className="md:col-span-7 type-display text-[#1a2b3d] text-[clamp(2.4rem,6.5vw,5.5rem)]" />
           <p className="rv-up md:col-span-5 text-[#5a6b7c] leading-relaxed max-w-[44ch]" style={{ "--d": "200ms" } as React.CSSProperties}>
             Medianos y grandes desarrollos para sectores donde la precisión y la trazabilidad no son negociables.
           </p>

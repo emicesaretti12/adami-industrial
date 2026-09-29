@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
+import SplitHeading from "@/components/motion/SplitHeading";
 import { CONTACT } from "@/lib/contact";
 
 /**
@@ -29,10 +30,7 @@ export default function ClosingCTA() {
       />
 
       <div ref={ref} className="relative container mx-auto px-6 py-24 md:py-36">
-        <h2 className="type-display text-white text-[clamp(2.6rem,7.5vw,6.5rem)] max-w-[14ch]">
-          <span className="rv-line"><span>Cuéntenos qué</span></span>
-          <span className="rv-line"><span style={{ "--d": "90ms" } as React.CSSProperties}>necesita su planta.</span></span>
-        </h2>
+        <SplitHeading lines={["Cuéntenos qué", "necesita su planta."]} className="type-display text-white text-[clamp(2.6rem,7.5vw,6.5rem)] max-w-[14ch]" />
 
         <div className="mt-10 md:mt-14 grid md:grid-cols-12 gap-8 items-end">
           <p className="rv-up md:col-span-6 text-white/70 text-lg leading-relaxed max-w-[46ch]" style={{ "--d": "200ms" } as React.CSSProperties}>

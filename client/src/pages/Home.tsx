@@ -11,6 +11,7 @@ import ProcessStack from "@/components/home/ProcessStack";
 import ProjectsShowcase from "@/components/home/ProjectsShowcase";
 import IndustriesList from "@/components/home/IndustriesList";
 import PrecisionSection from "@/components/home/PrecisionSection";
+import ScanSection from "@/components/home/ScanSection";
 import ClosingCTA from "@/components/ClosingCTA";
 
 /**
@@ -189,6 +190,7 @@ export default function Home() {
       <ProcessStack />
       <ProjectsShowcase />
       <IndustriesList />
+      <ScanSection />
       <PrecisionSection />
       <ClosingCTA />
 

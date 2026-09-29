@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
+import SplitHeading from "@/components/motion/SplitHeading";
 
 const CLD = "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto,c_limit,w_1600";
 
@@ -117,10 +118,7 @@ export default function ProcessStack() {
     <section className="relative z-10 bg-[#f5f7fa]">
       <div className="container mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-16 md:pb-24">
         <div ref={headRef} className="px-2 sm:px-0 mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <h2 className="type-display text-[#1a2b3d] text-[clamp(2.4rem,6.5vw,5.5rem)]">
-            <span className="rv-line"><span>Del plano</span></span>
-            <span className="rv-line"><span style={{ "--d": "90ms" } as React.CSSProperties}>a la planta.</span></span>
-          </h2>
+          <SplitHeading lines={["Del plano", "a la planta."]} className="type-display text-[#1a2b3d] text-[clamp(2.4rem,6.5vw,5.5rem)]" />
           <div className="rv-up max-w-[40ch]" style={{ "--d": "200ms" } as React.CSSProperties}>
             <p className="text-[#5a6b7c] leading-relaxed">
               Cada proyecto recorre nuestras tres unidades de negocio. Un solo equipo responsable desde el análisis

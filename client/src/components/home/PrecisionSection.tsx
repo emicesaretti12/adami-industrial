@@ -1,4 +1,5 @@
 import { useReveal } from "@/hooks/useReveal";
+import SplitHeading from "@/components/motion/SplitHeading";
 
 const IMG =
   "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto,c_limit,w_1400/v1787686363/WhatsApp_Image_2026-08-25_at_12.18.35_PM_v7otru.jpg";
@@ -42,13 +43,10 @@ export default function PrecisionSection() {
         {/* Contenido */}
         <div className="lg:col-span-7 flex flex-col">
           <div ref={textRef}>
-            <h2 className="type-display text-[#1a2b3d] text-[clamp(2.4rem,6vw,5rem)]">
-              <span className="rv-line"><span>Medimos lo</span></span>
-              <span className="rv-line"><span style={{ "--d": "90ms" } as React.CSSProperties}>que fabricamos.</span></span>
-            </h2>
+            <SplitHeading lines={["Calidad que se", "puede verificar."]} className="type-display text-[#1a2b3d] text-[clamp(2.4rem,6vw,5rem)]" />
             <p className="rv-up mt-6 text-[#5a6b7c] leading-relaxed max-w-[54ch]" style={{ "--d": "180ms" } as React.CSSProperties}>
-              Dos dispositivos de medición inteligente y software de última generación nos permiten brindar metrología
-              dimensional de primer orden, y verificar cada pieza antes de que llegue a su planta.
+              Metrología dimensional de primer orden con equipos propios, y un sistema de gestión de calidad certificado
+              que respalda cada entrega.
             </p>
 
             <div className="mt-10" style={{ "--d": "200ms" } as React.CSSProperties}>

@@ -20,6 +20,8 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    // Three.js va en un chunk aparte que solo se descarga al acercarse a la escena 3D
+    chunkSizeWarningLimit: 700,
   },
   server: {
     port: 3000,

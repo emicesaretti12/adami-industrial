@@ -1,15 +1,18 @@
 /**
  * Datos y canal de contacto de ADAMI.
  *
- * WhatsApp es el canal comercial principal. Para activarlo, definir en Vercel:
- *   VITE_WHATSAPP_NUMBER=5493511234567   (solo dígitos, con código de país, sin + ni espacios)
- * Mientras no esté definido, el formulario arma un email a info@adami.com.ar.
+ * WhatsApp es el canal comercial principal: +54 9 3513 27-8310.
+ * Se puede reemplazar sin tocar código con VITE_WHATSAPP_NUMBER en Vercel
+ * (solo dígitos, con código de país, sin + ni espacios).
  */
+const DEFAULT_WHATSAPP = "5493513278310";
+
 export const CONTACT = {
   email: "info@adami.com.ar",
   phoneDisplay: "+54 351 4666050",
   phoneHref: "tel:+543514666050",
-  whatsapp: (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined)?.replace(/\D/g, "") || undefined,
+  whatsapp: (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined)?.replace(/\D/g, "") || DEFAULT_WHATSAPP,
+  whatsappDisplay: "+54 9 3513 27-8310",
 };
 
 export interface LeadData {
