@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import SplitHeading from "@/components/motion/SplitHeading";
 import { CONTACT } from "@/lib/contact";
+import ClosingGears from "@/components/home/ClosingGears";
 
 /**
  * Cierre de página con la oferta de entrada: presupuesto y cotización sin cargo.
@@ -28,6 +29,8 @@ export default function ClosingCTA() {
           WebkitMaskImage: "radial-gradient(ellipse at 30% 40%, black 30%, transparent 75%)",
         }}
       />
+
+      <ClosingGears />
 
       <div ref={ref} className="relative container mx-auto px-6 py-24 md:py-36">
         <SplitHeading lines={["Cuéntenos qué", "necesita su planta."]} className="type-display text-white text-[clamp(2.6rem,7.5vw,6.5rem)] max-w-[14ch]" />

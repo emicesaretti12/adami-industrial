@@ -93,13 +93,13 @@ export function meshRotation(rotA: number, nA: number, dir: number, nB: number) 
 }
 
 /* ── Utilidades de geometría ── */
-const hole = (x: number, y: number, r: number) => {
+export const hole = (x: number, y: number, r: number) => {
   const p = new THREE.Path();
   p.absarc(x, y, r, 0, TAU, true);
   return p;
 };
 
-function extrude(shape: THREE.Shape, depth: number, curveSegments = 28) {
+export function extrude(shape: THREE.Shape, depth: number, curveSegments = 28) {
   const g = new THREE.ExtrudeGeometry(shape, {
     depth,
     steps: 1,

@@ -51,7 +51,12 @@ function StepCard({
   const start = index / total;
   const targetScale = 1 - (total - 1 - index) * 0.045;
   const scale = useTransform(progress, [start, 1], [1, targetScale]);
-  const transform = useTransform(scale, (s) => `scale(${s})`);
+  // Además de achicarse, se inclina hacia atrás (pivotea sobre su borde superior) con perspectiva real
+  const tilt = useTransform(progress, [start, 1], [0, -(total - 1 - index) * 2.2]);
+  const transform = useTransform(
+    [scale, tilt],
+    ([s, r]: number[]) => `perspective(1400px) rotateX(${r.toFixed(2)}deg) scale(${s.toFixed(4)})`,
+  );
   const dim = useTransform(progress, [start, 1], [0, (total - 1 - index) * 0.18]);
 
   return (
