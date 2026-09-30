@@ -180,3 +180,55 @@ export function Atom() {
     </Frame>
   );
 }
+
+/** Minería: vagoneta cargada sobre rieles; ruedas que giran y durmientes que pasan */
+export function MineCart() {
+  const wheel = (cx: number) => (
+    <g className="picto-spin-local">
+      <L d={circ(cx, 170, 12)} i={9} />
+      <L d={`M${cx - 12} 170H${cx + 12}M${cx} 158V182`} i={10} />
+      <L d={circ(cx, 170, 3)} i={10} />
+    </g>
+  );
+  return (
+    <Frame>
+      <L d="M60 106H180" i={2} />
+      <L d="M66 106L78 158H162L174 106" i={3} />
+      <L d="M72 132H168M84 106L90 158M150 106L144 158" i={4} className="opacity-60" />
+      <L d="M70 106L82 88L96 96L110 80L126 92L140 82L154 94L170 106" i={5} />
+      <L d="M96 96L104 106M126 92L120 106M140 82L146 94" i={6} className="opacity-60" />
+      <L d="M40 184H200" i={7} />
+      <L d="M40 190H200" i={8} className="opacity-70" />
+      {wheel(100)}
+      {wheel(140)}
+      <g className="picto-late">
+        <path d="M36 197H204" className="picto-ties" opacity={0.6} />
+      </g>
+      <L d="M178 40L206 68M170 56Q186 34 204 36Q196 50 190 60" i={11} className="opacity-70" />
+    </Frame>
+  );
+}
+
+/** Petróleo: bomba de balancín (cigüeñal girando, balancín que cabecea y vástago que sube y baja) */
+export function PumpJack() {
+  return (
+    <Frame>
+      <L d="M36 196H204" i={2} />
+      <L d="M104 196L120 90L136 196M110 158H130" i={3} />
+      <L d="M44 176H62V196H44ZM40 184H66" i={4} />
+      <L d="M156 168H186V196H156Z" i={5} />
+      <g className="pj-crank" style={{ transformOrigin: "171px 168px" }}>
+        <L d="M171 168L171 146M171 146a9 9 0 1 0 0.01 0" i={6} />
+      </g>
+      <g className="pj-rod">
+        <L d="M53 116V188" i={7} />
+      </g>
+      <g className="pj-beam" style={{ transformOrigin: "120px 88px" }}>
+        <L d="M60 84H178V92H60Z" i={8} />
+        <L d="M60 80H52Q40 98 52 118H60Z" i={9} />
+        <L d="M172 92L171 146" i={10} />
+        <L d={circ(120, 88, 4)} i={11} />
+      </g>
+    </Frame>
+  );
+}

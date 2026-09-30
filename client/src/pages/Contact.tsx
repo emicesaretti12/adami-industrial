@@ -292,21 +292,6 @@ export default function Contact() {
               </TiltCard>
             </motion.div>
 
-            {/* Brazil Office */}
-            <motion.div variants={itemVariants}>
-              <TiltCard>
-                <div className="bg-[#f5f7fa] p-8 rounded-sm border-l-4 border-[#e2e8f0] hover:border-[#4e6e94] shadow-sm hover:shadow-md transition-[border-color,box-shadow] duration-300 h-full">
-                  <h3 className="text-xl font-bold text-[#1a2b3d] mb-4 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#5a6b7c]" />
-                    Sede Brasil
-                  </h3>
-                  <div className="space-y-3 text-[#5a6b7c] ml-7">
-                    <p>Av. Nove de Julho, 765<br/>São José dos Campos - SP</p>
-                  </div>
-                </div>
-              </TiltCard>
-            </motion.div>
-
             {/* Direct Contact */}
             <motion.div variants={itemVariants}>
               <TiltCard>

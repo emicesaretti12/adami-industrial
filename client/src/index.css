@@ -529,3 +529,16 @@
   .picto-spin, .picto-flame, .picto-belt, .picto-drop { animation: none; }
   .picto-drop { opacity: 0; }
 }
+
+/* Industrias: minería y petróleo */
+.picto-spin-local { transform-box: fill-box; transform-origin: center; animation: picto-spin 1.6s linear infinite; }
+.picto-ties { stroke-dasharray: 2 12; animation: picto-ties 0.9s linear infinite; }
+@keyframes picto-ties { to { stroke-dashoffset: 14; } }
+.pj-beam { animation: pj-beam 1.4s ease-in-out infinite alternate; }
+@keyframes pj-beam { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+.pj-rod { animation: pj-rod 1.4s ease-in-out infinite alternate; }
+@keyframes pj-rod { from { transform: translateY(8px); } to { transform: translateY(-8px); } }
+.pj-crank { animation: picto-spin 2.8s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .picto-spin-local, .picto-ties, .pj-beam, .pj-rod, .pj-crank { animation: none; }
+}

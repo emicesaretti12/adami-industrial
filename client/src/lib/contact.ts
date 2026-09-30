@@ -9,8 +9,8 @@ const DEFAULT_WHATSAPP = "5493513278310";
 
 export const CONTACT = {
   email: "info@adami.com.ar",
-  phoneDisplay: "+54 351 4666050",
-  phoneHref: "tel:+543514666050",
+  phoneDisplay: "+54 351 225-0295",
+  phoneHref: "tel:+543512250295",
   whatsapp: (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined)?.replace(/\D/g, "") || DEFAULT_WHATSAPP,
   whatsappDisplay: "+54 9 3513 27-8310",
 };

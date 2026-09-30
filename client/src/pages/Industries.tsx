@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { Car, Plane, Rocket, Atom, Wheat, Tractor, ArrowRight } from "lucide-react";
+import { Car, Plane, Rocket, Atom, Wheat, Tractor, Pickaxe, Fuel, ArrowRight } from "lucide-react";
+import { MineCart, PumpJack } from "@/components/home/industries/pictos";
 import { industrias } from "@/lib/adami-data";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,7 +15,38 @@ const iconMap: Record<string, React.ElementType> = {
   atom: Atom,
   wheat: Wheat,
   tractor: Tractor,
+  pickaxe: Pickaxe,
+  fuel: Fuel,
 };
+
+/** Sectores sin foto propia: tarjeta oscura con el pictograma técnico animado */
+const pictoMap: Record<string, React.ElementType> = {
+  pickaxe: MineCart,
+  fuel: PumpJack,
+};
+
+function SectorVisual({ sector }: { sector: { nombre: string; icon: string; image: string } }) {
+  if (sector.image) {
+    return (
+      <img
+        src={sector.image}
+        alt={`Industria ${sector.nombre} - ADAMI`}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+    );
+  }
+  const Picto = pictoMap[sector.icon];
+  return (
+    <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_20%,#1d4368_0%,#0f2238_50%,#0a1522_100%)]">
+      {Picto && (
+        <div className="absolute inset-0 flex items-center justify-center p-[14%] pb-[26%] text-[#7fe0ff] transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+          <Picto />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function IndustriesPage() {
   useEffect(() => {
@@ -77,7 +109,7 @@ export default function IndustriesPage() {
                 {[
                   { number: "+30", label: "Años" },
                   { number: "+60", label: "Clientes" },
-                  { number: "6", label: "Sectores" },
+                  { number: String(industrias.sectores.length), label: "Sectores" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="font-display text-3xl lg:text-4xl font-semibold text-accent tracking-tight">
@@ -108,12 +140,7 @@ export default function IndustriesPage() {
                     className="group"
                   >
                     <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "16 / 10" }}>
-                      <img 
-                        src={sector.image} 
-                        alt={`Industria ${sector.nombre} - ADAMI`}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
+                      <SectorVisual sector={sector} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
                       <div className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center">
                         <Icon className="text-accent" size={18} strokeWidth={1.5} />
@@ -130,8 +157,8 @@ export default function IndustriesPage() {
               })}
             </div>
 
-            {/* Bottom row — 4 smaller */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {/* Bottom row — 6 smaller (2 filas de 3) */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
               {industrias.sectores.slice(2).map((sector, i) => {
                 const Icon = iconMap[sector.icon] || Atom;
                 return (
@@ -144,12 +171,7 @@ export default function IndustriesPage() {
                     className="group"
                   >
                     <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "3 / 4" }}>
-                      <img 
-                        src={sector.image} 
-                        alt={`Industria ${sector.nombre} - ADAMI`}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
+                      <SectorVisual sector={sector} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
                       <div className="absolute top-3 right-3 w-9 h-9 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center">
                         <Icon className="text-accent" size={16} strokeWidth={1.5} />

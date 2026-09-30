@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Globe, ArrowUp } from "lucide-react";
+import { CONTACT } from "@/lib/contact";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -93,6 +94,8 @@ export default function Footer() {
                 { name: "Aeroespacial", path: "/industrias" },
                 { name: "Nuclear", path: "/industrias" },
                 { name: "Alimenticia", path: "/industrias" },
+                { name: "Minería", path: "/industrias" },
+                { name: "Petróleo", path: "/industrias" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link href={item.path}>
@@ -113,13 +116,9 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 shrink-0 mt-0.5 text-white/90" />
                 <span className="text-sm">Leopoldo Casavega 2949,<br/>Villa Aspacia, Córdoba (Argentina)</span>
               </li>
-              <li className="flex items-start space-x-3 text-white/70">
-                <MapPin className="w-5 h-5 shrink-0 mt-0.5 text-white/90" />
-                <span className="text-sm">Av. Nove de Julho, 765,<br/>São José dos Campos - SP (Brasil)</span>
-              </li>
               <li className="flex items-center space-x-3 text-white/70">
                 <Phone className="w-5 h-5 shrink-0 text-white/90" />
-                <span className="text-sm">+54 351 4666050</span>
+                <a href={CONTACT.phoneHref} className="text-sm hover:text-white transition-colors">{CONTACT.phoneDisplay}</a>
               </li>
               <li className="flex items-center space-x-3 text-white/70">
                 <Mail className="w-5 h-5 shrink-0 text-white/90" />
