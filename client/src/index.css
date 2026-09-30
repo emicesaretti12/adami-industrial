@@ -542,3 +542,6 @@
 @media (prefers-reduced-motion: reduce) {
   .picto-spin-local, .picto-ties, .pj-beam, .pj-rod, .pj-crank { animation: none; }
 }
+
+/* Pictogramas fuera de pantalla: animaciones en pausa */
+.picto-paused, .picto-paused * { animation-play-state: paused !important; }

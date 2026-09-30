@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { Car, Plane, Rocket, Atom, Wheat, Tractor, Pickaxe, Fuel, ArrowRight } from "lucide-react";
-import { MineCart, PumpJack } from "@/components/home/industries/pictos";
+import { Atom as AtomPicto, Bottling, MineCart, PumpJack, Rocket as RocketPicto, Silo, Turbofan, Wheel } from "@/components/home/industries/pictos";
 import { industrias } from "@/lib/adami-data";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -19,28 +19,51 @@ const iconMap: Record<string, React.ElementType> = {
   fuel: Fuel,
 };
 
-/** Sectores sin foto propia: tarjeta oscura con el pictograma técnico animado */
+/** Pictograma técnico animado de cada sector (el mismo que usa la home) */
 const pictoMap: Record<string, React.ElementType> = {
+  plane: Turbofan,
+  car: Wheel,
+  tractor: Silo,
+  rocket: RocketPicto,
+  atom: AtomPicto,
+  wheat: Bottling,
   pickaxe: MineCart,
   fuel: PumpJack,
 };
 
-function SectorVisual({ sector }: { sector: { nombre: string; icon: string; image: string } }) {
-  if (sector.image) {
-    return (
-      <img
-        src={sector.image}
-        alt={`Industria ${sector.nombre} - ADAMI`}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        loading="lazy"
-      />
-    );
-  }
+/**
+ * Tarjeta oscura con el pictograma del sector.
+ * - Se monta al entrar en pantalla, así el trazo se dibuja cuando el usuario lo ve (no al cargar la página).
+ * - Fuera de pantalla sus animaciones CSS quedan en pausa.
+ */
+function SectorVisual({ sector }: { sector: { nombre: string; icon: string } }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const seen = useInView(ref, { once: true, margin: "-40px" });
+  const visible = useInView(ref, { margin: "80px" });
   const Picto = pictoMap[sector.icon];
   return (
-    <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_20%,#1d4368_0%,#0f2238_50%,#0a1522_100%)]">
-      {Picto && (
-        <div className="absolute inset-0 flex items-center justify-center p-[14%] pb-[26%] text-[#7fe0ff] transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+    <div
+      ref={ref}
+      role="img"
+      aria-label={`Industria ${sector.nombre} - ADAMI`}
+      className={`absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_20%,#1d4368_0%,#0f2238_50%,#0a1522_100%)] ${visible ? "" : "picto-paused"}`}
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-[0.1]"
+        style={{
+          backgroundImage: "linear-gradient(to right,#8fb0d4 1px,transparent 1px),linear-gradient(to bottom,#8fb0d4 1px,transparent 1px)",
+          backgroundSize: "24px 24px",
+          maskImage: "radial-gradient(ellipse at 50% 42%, black 20%, transparent 72%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 50% 42%, black 20%, transparent 72%)",
+        }}
+      />
+      <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(127,224,255,0.14),transparent)]" />
+      {Picto && seen && (
+        <div
+          aria-hidden="true"
+          className="absolute left-[8%] right-[8%] top-[10%] bottom-[30%] flex items-center justify-center text-[#7fe0ff] transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+        >
           <Picto />
         </div>
       )}
@@ -141,7 +164,7 @@ export default function IndustriesPage() {
                   >
                     <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "16 / 10" }}>
                       <SectorVisual sector={sector} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a1522]/85 via-transparent to-transparent" />
                       <div className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center">
                         <Icon className="text-accent" size={18} strokeWidth={1.5} />
                       </div>
@@ -172,7 +195,7 @@ export default function IndustriesPage() {
                   >
                     <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "3 / 4" }}>
                       <SectorVisual sector={sector} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a1522]/85 via-transparent to-transparent" />
                       <div className="absolute top-3 right-3 w-9 h-9 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center">
                         <Icon className="text-accent" size={16} strokeWidth={1.5} />
                       </div>

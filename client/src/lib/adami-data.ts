@@ -116,15 +116,15 @@ export const industrias = {
   descripcionGeneral:
     "En la actualidad, estamos a cargo de medianos y grandes desarrollos para empresas de los sectores: aeronáutico, aeroespacial, automotriz, alimenticio, agroindustrial, nuclear, minero y petrolero. Contamos con una amplia experiencia en desarrollos de piezas simples, grandes dispositivos para la producción y complejos desarrollos tecnológicos industriales.",
   sectores: [
-    { nombre: "Aeronáutica", icon: "plane", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg" },
-    { nombre: "Automotriz", icon: "car", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg" },
-    { nombre: "Agroindustria", icon: "tractor", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727929/agro_ddxrha.jpg" },
-    { nombre: "Aeroespacial", icon: "rocket", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727559/adami-industria-aeroespacial-galeria-1-220x260_trzjn4.jpg" },
-    { nombre: "Nuclear", icon: "atom", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-nuclear-galeria-1-220x260_onmrc7.jpg" },
-    { nombre: "Alimenticia", icon: "wheat", image: "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto/v1786727560/adami-industria-alimenticia-galeria-1-220x260_zyntht.jpg" },
-    // Sin foto propia todavía: la página muestra el pictograma técnico del sector
-    { nombre: "Minería", icon: "pickaxe", image: "" },
-    { nombre: "Petróleo", icon: "fuel", image: "" },
+    { nombre: "Aeronáutica", icon: "plane" },
+    { nombre: "Automotriz", icon: "car" },
+    { nombre: "Agroindustria", icon: "tractor" },
+    { nombre: "Aeroespacial", icon: "rocket" },
+    { nombre: "Nuclear", icon: "atom" },
+    { nombre: "Alimenticia", icon: "wheat" },
+    // Cada sector se ilustra con su pictograma técnico animado (ver components/home/industries/pictos.tsx)
+    { nombre: "Minería", icon: "pickaxe" },
+    { nombre: "Petróleo", icon: "fuel" },
   ],
 };
 

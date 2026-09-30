@@ -16,18 +16,16 @@ import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import SplitHeading from "@/components/motion/SplitHeading";
 import { Atom, Bottling, MineCart, PumpJack, Rocket, Silo, Turbofan, Wheel } from "./industries/pictos";
 
-const CLD = "https://res.cloudinary.com/di9j6zwyz/image/upload/f_auto,q_auto";
-
-/** Los sectores y su adjetivo salen del texto del sitio. Minería y petróleo todavía no tienen foto: el escenario muestra solo el pictograma. */
+/** Los sectores y su adjetivo salen del texto del sitio; cada uno se ilustra con su pictograma técnico animado. */
 const SECTORS = [
-  { name: "Agroindustria", sector: "agroindustrial", img: `${CLD}/v1786727929/agro_ddxrha.jpg`, Picto: Silo },
-  { name: "Alimenticia", sector: "alimenticio", img: `${CLD}/v1786727560/adami-industria-alimenticia-galeria-1-220x260_zyntht.jpg`, Picto: Bottling },
-  { name: "Aeroespacial", sector: "aeroespacial", img: `${CLD}/v1786727559/adami-industria-aeroespacial-galeria-1-220x260_trzjn4.jpg`, Picto: Rocket },
-  { name: "Aeronáutica", sector: "aeronáutico", img: `${CLD}/v1786727559/adami-industria-aeronautica-galeria-1-220x260_fswnsi.jpg`, Picto: Turbofan },
-  { name: "Automotriz", sector: "automotriz", img: `${CLD}/v1786727560/adami-industria-automotriz-galeria-1-220x260_ksphlp.jpg`, Picto: Wheel },
-  { name: "Nuclear", sector: "nuclear", img: `${CLD}/v1786727560/adami-industria-nuclear-galeria-1-220x260_onmrc7.jpg`, Picto: Atom },
-  { name: "Minería", sector: "minero", img: "", Picto: MineCart },
-  { name: "Petróleo", sector: "petrolero", img: "", Picto: PumpJack },
+  { name: "Agroindustria", sector: "agroindustrial", Picto: Silo },
+  { name: "Alimenticia", sector: "alimenticio", Picto: Bottling },
+  { name: "Aeroespacial", sector: "aeroespacial", Picto: Rocket },
+  { name: "Aeronáutica", sector: "aeronáutico", Picto: Turbofan },
+  { name: "Automotriz", sector: "automotriz", Picto: Wheel },
+  { name: "Nuclear", sector: "nuclear", Picto: Atom },
+  { name: "Minería", sector: "minero", Picto: MineCart },
+  { name: "Petróleo", sector: "petrolero", Picto: PumpJack },
 ];
 const blurb = (sector: string) => `Desarrollos para empresas del sector ${sector}.`;
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -54,8 +52,8 @@ const activeReducer = (s: Active, n: number): Active => (n === s.i ? s : { i: n,
 
 /**
  * Industrias: una lista tipográfica que gobierna un escenario.
- *   Escenario → cada sector se revela con un barrido cian (como un escáner): foto en duotono que se asienta
- *   y un pictograma técnico que se dibuja solo y tiene movimiento propio.
+ *   Escenario → cada sector se revela con un barrido cian (como un escáner) y un pictograma técnico
+ *   que se dibuja solo y tiene movimiento propio.
  *   Con mouse   → el sector activo lo marca el hover / el foco de teclado; el escenario se inclina apenas con el cursor.
  *   En touch    → el escenario queda fijo arriba y el sector activo lo marca el scroll (ScrollTrigger).
  * Todo el texto sale del sitio; no se inventan datos por sector.
@@ -92,26 +90,6 @@ export default function IndustriesList() {
     py.set(0);
     setHovering(false);
   };
-
-  // Precarga de las fotos: al pasar de un sector a otro ya están en caché
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        SECTORS.filter((s) => s.img).forEach((s) => {
-          const im = new Image();
-          im.decoding = "async";
-          im.src = s.img;
-        });
-        io.disconnect();
-      },
-      { rootMargin: "700px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   // En touch, el sector activo lo decide el scroll: cada fila se activa al cruzar una línea bajo el escenario fijo
   useGSAP(
@@ -195,16 +173,6 @@ export default function IndustriesList() {
 
               <AnimatePresence initial={false} custom={dir}>
                 <motion.div key={active} custom={dir} variants={layer} initial="enter" animate="center" exit="exit" className="absolute inset-0">
-                  {cur.img && (
-                  <motion.img
-                    src={cur.img}
-                    alt=""
-                    decoding="async"
-                    initial={{ scale: reduce ? 1 : 1.22 }}
-                    animate={{ scale: 1, transition: { duration: 1.8, ease: OUT } }}
-                    className="absolute inset-0 h-full w-full object-cover opacity-40 mix-blend-luminosity grayscale"
-                  />
-                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a1522] via-[#0a1522]/45 to-[#0a1522]/20" />
                   <div className="absolute left-1/2 top-[46%] h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(127,224,255,0.16),transparent)]" />
                   <div className="absolute inset-0 flex items-center justify-center p-[9%] pb-[17%] text-[#7fe0ff]">
