@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mi Ahorro</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#f4f6f3"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0c110e"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Lleva tus cuentas, tus gastos y tus metas de ahorro. Tus datos se quedan en tu teléfono."
+    />
+
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Mi Ahorro" />
+
+    <!-- Aplica la apariencia elegida antes de pintar para evitar el parpadeo -->
+    <script>
+      try {
+        var saved = JSON.parse(localStorage.getItem("mi-ahorro:v1"));
+        var theme = saved && saved.settings && saved.settings.theme;
+        if (theme === "light" || theme === "dark")
+          document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <main id="view" class="view" tabindex="-1"></main>
+      <nav id="tabbar" class="tabbar" aria-label="Principal"></nav>
+    </div>
+    <div id="sheets"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <noscript>Mi Ahorro necesita JavaScript para funcionar.</noscript>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
