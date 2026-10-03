@@ -2,7 +2,7 @@
 // internet. La lista de archivos y la versión las genera tools/stamp-sw.mjs;
 // no se editan a mano.
 
-const VERSION = "mi-ahorro-4ebdac7910";
+const VERSION = "mi-ahorro-e747c9a488";
 /* BEGIN ASSETS */
 const ASSETS = [
   "./",

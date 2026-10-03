@@ -82,7 +82,7 @@ export function openWelcomeSheet() {
     if (e.target.closest("[data-demo]")) {
       replaceAll(buildDemo(currency));
       sheet.close();
-      toast("Datos de ejemplo cargados. Bórralos en Ajustes cuando quieras.");
+      toast("Datos de ejemplo cargados");
     }
   });
   root.addEventListener("keydown", e => {

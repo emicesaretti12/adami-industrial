@@ -26,6 +26,14 @@ function notice(s) {
       <span>Este navegador no permite guardar datos. Lo que anotes se perderá al cerrar.</span>
     </div>`;
   }
+  if (s.meta.demo) {
+    return html`<div class="notice">
+      <span>Estás viendo datos de ejemplo.</span>
+      <button type="button" class="btn btn-sm" data-act="exit-demo">
+        Empezar con los míos
+      </button>
+    </div>`;
+  }
   const moves = s.transactions.length;
   if (!isStandalone() && !s.meta.installDismissed && moves >= 2) {
     if (canPromptInstall()) {

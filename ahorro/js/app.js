@@ -7,8 +7,9 @@ import { openContributeSheet, openGoalSheet } from "./sheets/goal.js";
 import { openMovementSheet } from "./sheets/movement.js";
 import { openMonthGoalSheet, openSettingsSheet } from "./sheets/settings.js";
 import { openWelcomeSheet } from "./sheets/welcome.js";
-import { getState, load, setMeta, subscribe } from "./state.js";
+import { getState, load, resetAll, setMeta, subscribe } from "./state.js";
 import { bindActions, onChange, onClick } from "./ui/actions.js";
+import { confirmSheet } from "./ui/sheet.js";
 import { animateMeters, rollNumbers } from "./ui/fx.js";
 import { initInstall, isStandalone, promptInstall } from "./ui/install.js";
 import { applyTheme } from "./ui/theme.js";
@@ -118,6 +119,18 @@ onClick("install-app", async () => {
   render();
 });
 onClick("backup-now", () => exportBackup());
+onClick("exit-demo", async () => {
+  const ok = await confirmSheet({
+    title: "¿Borrar los datos de ejemplo?",
+    message:
+      "Se eliminan las cuentas, movimientos y metas de ejemplo y empiezas desde cero con tus propios datos.",
+    confirmLabel: "Borrar y empezar",
+    danger: true,
+  });
+  if (!ok) return;
+  resetAll();
+  openWelcomeSheet();
+});
 
 // Atajos de la pantalla de inicio de Android: ./?new=expense | ./?new=income
 function launchShortcut() {

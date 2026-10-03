@@ -19,23 +19,40 @@ function pump() {
   const op = ops.shift();
   if (!op) return;
   if (op.push) {
-    history.pushState({ sheet: op.push }, "");
+    try {
+      history.pushState({ sheet: op.push.id }, "");
+      op.push.pushed = true;
+    } catch {
+      // Sin acceso al historial (iframe, navegador restringido): la hoja
+      // funciona igual, solo que "atrás" no la cierra.
+    }
     pump();
     return;
   }
+  if (!op.back.pushed) {
+    pump(); // su entrada nunca se agregó: no hay nada que quitar
+    return;
+  }
+  op.back.pushed = false;
   inFlight = setTimeout(() => {
     inFlight = null; // por si el navegador no avisa
     pump();
   }, 1500);
-  history.back();
+  try {
+    history.back();
+  } catch {
+    clearTimeout(inFlight);
+    inFlight = null;
+    pump();
+  }
 }
 
-const pushEntry = id => {
-  ops.push({ push: id });
+const pushEntry = entry => {
+  ops.push({ push: entry });
   pump();
 };
-const popEntry = () => {
-  ops.push({ back: true });
+const popEntry = entry => {
+  ops.push({ back: entry });
   pump();
 };
 
@@ -79,7 +96,7 @@ export function openSheet({
   stack.push(entry);
   hideToast(); // un "Deshacer" viejo no debe quedar activo debajo de la hoja
   document.getElementById("sheets").append(layer);
-  pushEntry(entry.id);
+  pushEntry(entry);
   updateInert();
 
   void layer.offsetHeight; // fija el estado inicial antes de animar la entrada
@@ -102,7 +119,7 @@ export function openSheet({
 
 function close(entry) {
   if (entry.closing) return;
-  popEntry();
+  popEntry(entry);
   finish(entry);
 }
 
@@ -148,9 +165,10 @@ window.addEventListener("popstate", () => {
   const top = topOpen();
   if (!top) return;
   if (!top.dismissible) {
-    pushEntry(top.id); // la bienvenida no se cierra con "atrás"
+    pushEntry(top); // la bienvenida no se cierra con "atrás"
     return;
   }
+  top.pushed = false; // el usuario ya quitó su entrada con "atrás"
   finish(top);
 });
 

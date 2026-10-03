@@ -23,6 +23,7 @@ export function buildDemo(currency) {
   const s = emptyState();
   s.settings.currency = currency;
   s.onboarded = true;
+  s.meta.demo = true;
   const k = SCALE[currency] ?? 1;
 
   // Redondea a 2 cifras significativas y devuelve centavos.

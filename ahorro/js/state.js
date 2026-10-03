@@ -19,7 +19,12 @@ export function emptyState() {
     accounts: [],
     transactions: [],
     goals: [],
-    meta: { createdAt: Date.now(), lastBackup: 0, installDismissed: false },
+    meta: {
+      createdAt: Date.now(),
+      lastBackup: 0,
+      installDismissed: false,
+      demo: false, // datos de ejemplo cargados
+    },
   };
 }
 
@@ -73,6 +78,7 @@ export function sanitize(input) {
   out.meta.createdAt = int(meta.createdAt) || out.meta.createdAt;
   out.meta.lastBackup = Math.max(0, int(meta.lastBackup));
   out.meta.installDismissed = meta.installDismissed === true;
+  out.meta.demo = meta.demo === true;
 
   const accountIds = new Set();
   for (const a of list(input.accounts).slice(0, 100)) {
