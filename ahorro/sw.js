@@ -2,11 +2,10 @@
 // internet. La lista de archivos y la versión las genera tools/stamp-sw.mjs;
 // no se editan a mano.
 
-const VERSION = "mi-ahorro-e747c9a488";
+const VERSION = "mi-ahorro-771a7924d0";
 /* BEGIN ASSETS */
 const ASSETS = [
   "./",
-  "./.prettierrc",
   "./css/app.css",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",

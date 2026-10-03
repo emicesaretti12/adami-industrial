@@ -1085,6 +1085,7 @@ textarea {
   flex-direction: column;
   width: 100%;
   max-width: 520px;
+  max-height: calc(100vh - var(--safe-top) - 10px);
   max-height: calc(100dvh - var(--safe-top) - 10px);
   border-radius: 28px 28px 0 0;
   background: var(--surface);
@@ -1096,6 +1097,7 @@ textarea {
   will-change: transform;
 }
 .sheet--tall {
+  height: calc(100vh - var(--safe-top) - 10px);
   height: calc(100dvh - var(--safe-top) - 10px);
   max-height: 820px;
 }
@@ -1127,6 +1129,7 @@ textarea {
       opacity 220ms ease;
   }
   .sheet--tall {
+    height: min(780px, calc(100vh - 80px));
     height: min(780px, calc(100dvh - 80px));
   }
   .sheet-layer[data-state="open"] .sheet {
@@ -1660,6 +1663,7 @@ textarea {
 @media (max-height: 520px) {
   .sheet--tall {
     height: auto;
+    max-height: calc(100vh - var(--safe-top) - 10px);
     max-height: calc(100dvh - var(--safe-top) - 10px);
     overflow-y: auto;
   }

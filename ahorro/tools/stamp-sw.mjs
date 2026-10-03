@@ -10,8 +10,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKIP_FILES = new Set(["sw.js", "README.md"]);
 const SKIP_DIRS = new Set(["tools"]);
 
+// Archivos de punto (.prettierrc, .DS_Store…) no son parte de la app y algunos
+// hostings no los sirven: un solo 404 haría fallar la instalación del caché.
 function walk(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    if (entry.name.startsWith(".")) return [];
     const path = join(dir, entry.name);
     if (entry.isDirectory()) return SKIP_DIRS.has(entry.name) ? [] : walk(path);
     return SKIP_FILES.has(entry.name)
