@@ -30,15 +30,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Mi Ahorro" />
 
-    <!-- Aplica la apariencia elegida antes de pintar para evitar el parpadeo -->
-    <script>
-      try {
-        var saved = JSON.parse(localStorage.getItem("mi-ahorro:v1"));
-        var theme = saved && saved.settings && saved.settings.theme;
-        if (theme === "light" || theme === "dark")
-          document.documentElement.dataset.theme = theme;
-      } catch (e) {}
-    </script>
+    <script src="js/early-theme.js"></script>
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>

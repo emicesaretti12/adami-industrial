@@ -59,7 +59,11 @@ Es un sitio 100 % estático: sirve cualquier hosting con HTTPS (Vercel, Netlify,
 GitHub Pages, Cloudflare Pages…). Hay que servir el contenido de `ahorro/`:
 
 - **Vercel**: nuevo proyecto con _Root Directory_ `ahorro`, _Framework_ “Other”,
-  sin comando de build ni carpeta de salida.
+  sin comando de build ni carpeta de salida. `ahorro/vercel.json` ya trae las
+  cabeceras de seguridad (política CSP estricta: solo código y estilos propios,
+  sin conexiones a otros sitios; no indexar; sin ser embebida en otras
+  páginas). Si algún día agregas scripts en línea o recursos externos, hay que
+  permitirlos ahí.
 - **Netlify / Cloudflare Pages**: _Publish directory_ `ahorro`.
 
 Antes de publicar una versión nueva ejecuta:
