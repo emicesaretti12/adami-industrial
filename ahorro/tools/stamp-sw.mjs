@@ -7,7 +7,8 @@ import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SKIP_FILES = new Set(["sw.js", "README.md"]);
+// Archivos que no hacen falta para que la app funcione (y que un hosting podría no servir).
+const SKIP_FILES = new Set(["sw.js", "README.md", "vercel.json"]);
 const SKIP_DIRS = new Set(["tools"]);
 
 // Archivos de punto (.prettierrc, .DS_Store…) no son parte de la app y algunos

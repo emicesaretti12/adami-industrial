@@ -2,7 +2,7 @@
 // internet. La lista de archivos y la versión las genera tools/stamp-sw.mjs;
 // no se editan a mano.
 
-const VERSION = "mi-ahorro-c167c477dd";
+const VERSION = "mi-ahorro-7997c68373";
 /* BEGIN ASSETS */
 const ASSETS = [
   "./",
@@ -44,7 +44,6 @@ const ASSETS = [
   "./js/views/shared.js",
   "./js/views/summary.js",
   "./manifest.webmanifest",
-  "./vercel.json",
 ];
 /* END ASSETS */
 
